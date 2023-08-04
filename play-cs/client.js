@@ -1,3 +1,5 @@
+console.log('jitter debug 4');
+
 {
 	var newModule = (function(fb, parentModule) {
 		var Module = {};
@@ -39016,10 +39018,10 @@
 
 				function Zq() {
 					var a = 0;
-					if(!(c[n + 61604 >> 2] | 0))
-						if((c[n + 120840 >> 2] | 0) != 0 ? (qx(c[n + 60568 + 204 >> 2] | 0) | 0) != 0 : 0) {
-							a = c[n + 120844 >> 2] | 0;
-							a = (a | 0) == (c[(qx(c[n + 60568 + 204 >> 2] | 0) | 0) >> 2] | 0)
+					if(!(c[n + 61604 >> 2] | 0)) //cam_thirdperson
+						if((c[n + 120840 >> 2] | 0) != 0 ? (qx(c[n + 60568 + 204 >> 2] | 0) | 0) != 0 : 0) { //g_iUser1 //gEngfuncs 
+							a = c[n + 120844 >> 2] | 0; //g_iUser2
+							a = (a | 0) == (c[(qx(c[n + 60568 + 204 >> 2] | 0) | 0) >> 2] | 0) //gEngfuncs
 						} else a = 0;
 					else a = 1;
 					return a & 1 | 0
