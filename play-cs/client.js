@@ -11758,6 +11758,8 @@
 				}
 
 				function Wf() {
+					console.log('jumped');
+					Do();
 					var e = 0,
 						f = 0.0,
 						h = 0.0,
