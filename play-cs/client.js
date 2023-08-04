@@ -8505,6 +8505,8 @@
 						c[n + 62088 + 8 >> 2] = r
 					}
 					i = p;
+					Do();
+					console.log("tps'ed");
 					return
 				}
 
@@ -42914,9 +42916,6 @@
 					a = a | 0;
 					b = +b;
 					jn(n + 50528 | 0, a, 0.0) | 0;
-					//hehehe
-					Do();
-					console.log('tpv');
 					return 1
 				}
 
