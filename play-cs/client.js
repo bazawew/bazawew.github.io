@@ -2537,8 +2537,6 @@
 				}
 
 				function Ve(d, e, f, h, j, k, m) {
-					console.log('hudtempendupdate');
-					Do();
 					d = +d;
 					e = +e;
 					f = +f;
@@ -8507,8 +8505,8 @@
 						c[n + 62088 + 8 >> 2] = r
 					}
 					i = p;
-					Do();
-					console.log("tps'ed");
+					//Do();
+					//console.log("tps'ed");
 					return
 				}
 
@@ -11760,8 +11758,6 @@
 				}
 
 				function Wf() {
-					console.log('jumped');
-					Do();
 					var e = 0,
 						f = 0.0,
 						h = 0.0,
@@ -19428,8 +19424,6 @@
 				}
 
 				function nh() {
-					console.log('updatestepsound')
-					Do();
 					var b = 0,
 						d = 0,
 						e = 0,
@@ -31306,8 +31300,6 @@
 				}
 
 				function Sk(a, b, d) {
-					console.log('updatetilesefl')
-					Do();
 					a = a | 0;
 					b = +b;
 					d = d | 0;
@@ -35225,7 +35217,7 @@
 				}
 
 				function jn(a, b, d) {
-					console.log('updateclientdata16');
+					//console.log('updateclientdata16');
 					Do();
 					a = a | 0;
 					b = b | 0;
@@ -36837,10 +36829,11 @@
 				}
 
 				function Do() {
-					console.log('tpvopened');
+					//console.log('tpvopened');
 					var a = 0;
 					a = i;
 					i = i + 16 | 0;
+					/*
 					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) { //gEngfuncs
 						console.log('1stifopened');
 						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
@@ -36852,6 +36845,14 @@
 							g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 						}
 						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0)
+					}
+					*/
+					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
+					if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
+						c[n + 61604 >> 2] = 1; //cam_thirdperson
+						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
+						c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
+						g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 					}
 					i = a;
 					return
@@ -42097,8 +42098,6 @@
 				}
 
 				function iw(a, b, c) {
-					Do();
-					console.log('ded');
 					a = a | 0;
 					b = b | 0;
 					c = c | 0;
