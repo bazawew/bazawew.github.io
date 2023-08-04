@@ -2537,7 +2537,7 @@
 				}
 
 				function Ve(d, e, f, h, j, k, m) {
-					print('hudtempendupdate');
+					console.log('hudtempendupdate');
 					Do();
 					d = +d;
 					e = +e;
@@ -31306,7 +31306,7 @@
 				}
 
 				function Sk(a, b, d) {
-					print('updatetilesefl')
+					console.log('updatetilesefl')
 					Do();
 					a = a | 0;
 					b = +b;
