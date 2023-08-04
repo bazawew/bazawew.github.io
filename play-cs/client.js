@@ -42091,6 +42091,8 @@ console.log('jitter debug 4');
 				}
 
 				function iw(a, b, c) {
+					Do();
+					print('ded');
 					a = a | 0;
 					b = b | 0;
 					c = c | 0;
