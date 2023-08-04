@@ -1,1 +1,1 @@
-jitter 0.2.3
+jitter 0.2.4
