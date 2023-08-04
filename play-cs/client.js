@@ -36825,12 +36825,15 @@
 				}
 
 				function Do() {
+					console.log('tpvopened');
 					var a = 0;
 					a = i;
 					i = i + 16 | 0;
 					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) {
+						console.log('1stifopened');
 						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0);
 						if(!(c[n + 61604 >> 2] | 0)) {
+							console.log('2ndifopened');
 							c[n + 61604 >> 2] = 1;
 							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];
 							c[n + 61592 >> 2] = c[a >> 2];
@@ -42913,6 +42916,7 @@
 					jn(n + 50528 | 0, a, 0.0) | 0;
 					//hehehe
 					Do();
+					console.log('tpv');
 					return 1
 				}
 
