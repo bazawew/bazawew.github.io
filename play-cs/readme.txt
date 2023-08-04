@@ -1,1 +1,1 @@
-delete jitter 0.1
+added full xash and two log lines
