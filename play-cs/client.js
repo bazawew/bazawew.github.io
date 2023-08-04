@@ -1,5 +1,3 @@
-console.log('jitter debug 4');
-
 {
 	var newModule = (function(fb, parentModule) {
 		var Module = {};
@@ -2539,6 +2537,8 @@ console.log('jitter debug 4');
 				}
 
 				function Ve(d, e, f, h, j, k, m) {
+					print('hudtempendupdate');
+					Do();
 					d = +d;
 					e = +e;
 					f = +f;
@@ -5803,7 +5803,7 @@ console.log('jitter debug 4');
 					return 1
 				}
 
-				function ff() {
+				function ff() { //_CAM_Think
 					var a = 0,
 						b = 0.0,
 						d = 0,
@@ -8383,7 +8383,7 @@ console.log('jitter debug 4');
 					return
 				}
 
-				function vf(d, e, f) {
+				function vf(d, e, f) { //_CL_CreateMove
 					d = +d;
 					e = e | 0;
 					f = f | 0;
@@ -19428,6 +19428,8 @@ console.log('jitter debug 4');
 				}
 
 				function nh() {
+					console.log('updatestepsound')
+					Do();
 					var b = 0,
 						d = 0,
 						e = 0,
@@ -31304,6 +31306,8 @@ console.log('jitter debug 4');
 				}
 
 				function Sk(a, b, d) {
+					print('updatetilesefl')
+					Do();
 					a = a | 0;
 					b = +b;
 					d = d | 0;
@@ -35221,6 +35225,8 @@ console.log('jitter debug 4');
 				}
 
 				function jn(a, b, d) {
+					console.log('updateclientdata16');
+					Do();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
@@ -36835,15 +36841,15 @@ console.log('jitter debug 4');
 					var a = 0;
 					a = i;
 					i = i + 16 | 0;
-					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) {
+					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) { //gEngfuncs
 						console.log('1stifopened');
-						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0);
-						if(!(c[n + 61604 >> 2] | 0)) {
+						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
+						if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
 							console.log('2ndifopened');
-							c[n + 61604 >> 2] = 1;
-							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];
-							c[n + 61592 >> 2] = c[a >> 2];
-							g[n + 61592 + 8 >> 2] = 30.0
+							c[n + 61604 >> 2] = 1; //cam_thirdperson
+							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
+							c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
+							g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 						}
 						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0)
 					}
@@ -42092,7 +42098,7 @@ console.log('jitter debug 4');
 
 				function iw(a, b, c) {
 					Do();
-					print('ded');
+					console.log('ded');
 					a = a | 0;
 					b = b | 0;
 					c = c | 0;
@@ -45889,7 +45895,7 @@ console.log('jitter debug 4');
 					__ZN10CFiveSeven13PrimaryAttackEv: am,
 					__Z17PM_GetPhysEntInfoi: ou,
 					__ZN8CHudMenu7VidInitEv: xC,
-					__ZN17CBasePlayerWeapon6ReloadEv: FC,
+					__ZN17CBasePlayerWeapon6ReloadEv: FC,_CL_CreateMove
 					__ZN10CHudHealth11UpdateTilesEfl: Sk,
 					__ZN8CHudAmmo13UserCmd_RebuyEv: tl,
 					_HUD_PlayerMoveTexture: AA,
