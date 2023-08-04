@@ -1,1 +1,1 @@
-added full xash and two log lines
+console.log instead of drawer1
