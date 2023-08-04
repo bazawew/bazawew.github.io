@@ -1,1 +1,1 @@
-jitter 0.1 fixed
+delete jitter 0.1
