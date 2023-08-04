@@ -45895,7 +45895,7 @@
 					__ZN10CFiveSeven13PrimaryAttackEv: am,
 					__Z17PM_GetPhysEntInfoi: ou,
 					__ZN8CHudMenu7VidInitEv: xC,
-					__ZN17CBasePlayerWeapon6ReloadEv: FC,_CL_CreateMove
+					__ZN17CBasePlayerWeapon6ReloadEv: FC,
 					__ZN10CHudHealth11UpdateTilesEfl: Sk,
 					__ZN8CHudAmmo13UserCmd_RebuyEv: tl,
 					_HUD_PlayerMoveTexture: AA,
