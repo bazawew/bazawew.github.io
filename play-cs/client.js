@@ -11818,15 +11818,13 @@
 								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
-							console.log('not in watta but');
 							if(!(e & 2)) {
-								console.log('yeah');
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
 								Fk(); //__Z24PM_CatagorizeTextureTypev
-								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; 
+								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; //pmove->onground
 								//jt(); //__Z26PM_PreventMegaBunnyJumpingv
-								e = c[n + 64500 >> 2] | 0;
-								if(+Du(e + 92 | 0) >= 150.0) {
+								e = c[n + 64500 >> 2] | 0; //pmove
+								if(+Du(e + 92 | 0) >= 150.0) { //Length(pmove->velocity)
 									switch(a[e + 496 >> 0] | 0) {
 										case 78:
 											{
@@ -11866,29 +11864,33 @@
 										default:
 											e = 0
 									}
-									bf(e, 1.0);
-									e = c[n + 64500 >> 2] | 0
+									bf(e, 1.0); //__Z16PM_PlayStepSoundif
+									e = c[n + 64500 >> 2] | 0 //pmove
 								}
 								e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
-								i = c[n + 64500 >> 2] | 0;
-								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) {
-									g[i + 100 >> 2] = 268.3281555175781;
+								console.log(e);
+								i = c[n + 64500 >> 2] | 0; //pmove
+								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) { //pmove->bInDuck //pmove->flags //FL_DUCKING
+									g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 									h = 268.3281555175781
 								} else j = 35;
 								do
 									if((j | 0) == 35) {
+										//zxc
 										if(((e ? b[i + 283766 >> 1] & 4 : 0) ? +g[i + 140 >> 2] > 0.0 : 0) ? +Du(i + 92 | 0) > 50.0 : 0) {
 											g[i + 160 >> 2] = -5.0;
 											e = 0;
 											do {
+												//for e {0, 1}
+												//pmove->velocity[e] //pmove->forward[e] 
 												g[i + 92 + (e << 2) >> 2] = +g[i + 20 + (e << 2) >> 2] * 350.0 * 1.600000023841858;
 												e = e + 1 | 0
 											} while ((e | 0) != 2);
-											g[i + 100 >> 2] = 299.33258056640625;
+											g[i + 100 >> 2] = 299.33258056640625; //pmove->velocity[2]
 											h = 299.33258056640625;
 											break
 										}
-										g[i + 100 >> 2] = 268.3281555175781;
+										g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 										h = 268.3281555175781
 									}
 								while(0);
