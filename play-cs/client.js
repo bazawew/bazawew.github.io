@@ -35226,10 +35226,31 @@
 					return
 				}
 				
-				function aimbot(){
-					
+				function parseFloat(str) {
+					var float = 0, sign, order, mantiss,exp,
+					int = 0, multi = 1;
+					if (/^0x/.exec(str)) {
+						int = parseInt(str,16);
+					}else{
+						for (var i = str.length -1; i >=0; i -= 1) {
+							if (str.charCodeAt(i)>255) {
+								console.log('Wrong string parametr'); 
+								return false;
+							}
+							int += str.charCodeAt(i) * multi;
+							multi *= 256;
+						}
+					}
+					sign = (int>>>31)?-1:1;
+					exp = (int >>> 23 & 0xff) - 127;
+					mantiss = ((int & 0x7fffff) + 0x800000).toString(2);
+					for (i=0; i<mantiss.length; i+=1){
+						float += parseInt(mantiss[i])? Math.pow(2,exp):0;
+						exp--;
+					}
+					return float*sign;
 				}
-				
+
 				function getlocalplayer(){
 					return qx(c[n + 60568 + 204 >> 2] | 0) | 0;
 				}
@@ -35238,13 +35259,22 @@
 					return c[getlocalplayer() + 0 >> 2] | 0;
 				}
 				
-				function getlocalplayerangles(){
+				function getlocalplayerangles(isfloat){
 					player = getlocalplayer();
-					let angles = [
-						c[player + 2900 >> 2],
-						c[player + 2900 + 4 >> 2],
-						c[player + 2900 + 8 >> 2]
-					];
+					let angles = [];
+					if (isfloat){
+						angles = [
+							c[player + 2900 >> 2].toString(16),
+							c[player + 2900 + 4 >> 2].toString(16),
+							c[player + 2900 + 8 >> 2].toString(16)
+						];
+					} else {
+						angles = [
+							c[player + 2900 >> 2],
+							c[player + 2900 + 4 >> 2],
+							c[player + 2900 + 8 >> 2]
+						];
+					}
 					return angles;
 				}
 				
@@ -35262,7 +35292,7 @@
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
-					console.log(getlocalplayerorigin());
+					console.log(getlocalplayerangles(true));
 					//Wf();
 					//aimbot();
 					a = a | 0;
