@@ -11902,8 +11902,8 @@
 								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01; //pmove->velocity[2]
 								g[i + 528 >> 2] = 1315.7894287109375; //pmove->fuser2
 								Lr(); //__Z23PM_FixupGravityVelocityv
-								//j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
-								//c[j >> 2] = c[j >> 2] | 2
+								j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
+								c[j >> 2] = c[j >> 2] | 2
 							}
 						} else {
 							c[i + 200 >> 2] = c[i + 200 >> 2] | 2; //pmove->oldbuttons (if dead no jumps)
