@@ -11867,7 +11867,8 @@
 									bf(e, 1.0); //__Z16PM_PlayStepSoundif
 									e = c[n + 64500 >> 2] | 0 //pmove
 								}
-								e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
+								//e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
+								e = true;
 								console.log(e);
 								i = c[n + 64500 >> 2] | 0; //pmove
 								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) { //pmove->bInDuck //pmove->flags //FL_DUCKING
