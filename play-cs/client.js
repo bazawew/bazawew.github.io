@@ -11757,7 +11757,7 @@
 					return e + 20 | 0
 				}
 
-				function Wf() {
+				function Wf() { //__Z7PM_Jumpv
 					var e = 0,
 						f = 0.0,
 						h = 0.0,
@@ -11765,28 +11765,28 @@
 						j = 0;
 					i = c[n + 64500 >> 2] | 0; //pmove
 					a: do
-						if(!(c[i + 208 >> 2] | 0)) {
-							f = +g[i + 204 >> 2];
+						if(!(c[i + 208 >> 2] | 0)) { //pmove->dead
+							f = +g[i + 204 >> 2]; //pmove->waterjumptime
 							if(f != 0.0) {
-								h = f - +(d[i + 283738 >> 0] | 0);
-								g[i + 204 >> 2] = h;
+								h = f - +(d[i + 283738 >> 0] | 0); //pmove->cmd.msec
+								g[i + 204 >> 2] = h; //?
 								if(!(h < 0.0)) break;
-								g[i + 204 >> 2] = 0.0;
+								g[i + 204 >> 2] = 0.0; //pmove->waterjumptime
 								break
 							}
-							if((c[i + 228 >> 2] | 0) > 1) {
-								c[i + 224 >> 2] = -1;
-								e = c[i + 232 >> 2] | 0;
+							if((c[i + 228 >> 2] | 0) > 1) { //pmove->waterlevel
+								c[i + 224 >> 2] = -1; //pmove->onground
+								e = c[i + 232 >> 2] | 0; //pmove->watertype
 								do
 									if((e | 0) != -3)
-										if((e | 0) == -4) {
-											g[i + 100 >> 2] = 80.0;
+										if((e | 0) == -4) { //CONTENTS_SLIME
+											g[i + 100 >> 2] = 80.0; //pmove->velocity[2]
 											break
-										} else {
-											g[i + 100 >> 2] = 50.0;
+										} else { //LAVA
+											g[i + 100 >> 2] = 50.0; //pmove->velocity[2]
 											break
-										} else g[i + 100 >> 2] = 100.0; while (0);
-								if(!(+g[i + 172 >> 2] <= 0.0)) break;
+										} else g[i + 100 >> 2] = 100.0; while (0); //CONTENTS_WATER //pmove->velocity[2]
+								if(!(+g[i + 172 >> 2] <= 0.0)) break; //pmove->flSwimTime
 								g[i + 172 >> 2] = 1.0e3;
 								switch(Ou(c[i + 325e3 >> 2] | 0, 0, 3) | 0) {
 									case 0:
@@ -11813,16 +11813,18 @@
 										break a
 								}
 							}
-							e = c[i + 200 >> 2] | 0;
-							if((c[i + 224 >> 2] | 0) == -1) {
-								c[i + 200 >> 2] = e | 2;
+							e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
+							if((c[i + 224 >> 2] | 0) == -1) { //pmove->onground
+								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
+							print('not in watta but');
 							if(!(e & 2)) {
-								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break;
-								Fk();
-								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1;
-								//jt();
+								print('yeah');
+								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
+								Fk(); //__Z24PM_CatagorizeTextureTypev
+								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; 
+								//jt(); //__Z26PM_PreventMegaBunnyJumpingv
 								e = c[n + 64500 >> 2] | 0;
 								if(+Du(e + 92 | 0) >= 150.0) {
 									switch(a[e + 496 >> 0] | 0) {
@@ -35216,7 +35218,7 @@
 					return
 				}
 				
-				function getselfplayerid(){
+				function getlocalplayerid(){
 					player = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
 					return c[player >> 2] | 0;
 				}
@@ -35224,8 +35226,8 @@
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
-					console.log(getselfplayerid());
-					//Wf();
+					//console.log(getlocalplayerid());
+					Wf();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
