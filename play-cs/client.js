@@ -11815,8 +11815,8 @@
 							}
 							e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
 							if((c[i + 224 >> 2] | 0) == -1) { //pmove->onground
-								//c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
-								//break
+								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
+								break
 							}
 							//if(!(e & 2)) {
 							if(true) {
@@ -11872,6 +11872,7 @@
 								e = true;
 								i = c[n + 64500 >> 2] | 0; //pmove
 								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) { //pmove->bInDuck //pmove->flags //FL_DUCKING
+									console.log('normal jump');
 									g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 									h = 268.3281555175781
 								} else j = 35;
@@ -11905,7 +11906,7 @@
 								//c[j >> 2] = c[j >> 2] | 2
 							}
 						} else {
-							//c[i + 200 >> 2] = c[i + 200 >> 2] | 2;
+							c[i + 200 >> 2] = c[i + 200 >> 2] | 2; //pmove->oldbuttons (if dead no jumps)
 						}
 					while(0);
 					return
