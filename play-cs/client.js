@@ -8199,7 +8199,7 @@
 					return 1
 				}
 
-				function uf(a) {
+				function uf(a) { //__Z13PM_PlayerMovei
 					a = a | 0;
 					var e = 0,
 						f = 0,
@@ -11763,7 +11763,7 @@
 						h = 0.0,
 						i = 0,
 						j = 0;
-					i = c[n + 64500 >> 2] | 0;
+					i = c[n + 64500 >> 2] | 0; //pmove
 					a: do
 						if(!(c[i + 208 >> 2] | 0)) {
 							f = +g[i + 204 >> 2];
@@ -11822,7 +11822,7 @@
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break;
 								Fk();
 								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1;
-								jt();
+								//jt();
 								e = c[n + 64500 >> 2] | 0;
 								if(+Du(e + 92 | 0) >= 150.0) {
 									switch(a[e + 496 >> 0] | 0) {
@@ -21989,7 +21989,7 @@
 					return
 				}
 
-				function Uh(d, e) {
+				function Uh(d, e) { //_HUD_ProcessPlayerState
 					d = d | 0;
 					e = e | 0;
 					var f = 0,
@@ -22035,10 +22035,10 @@
 					c[d + 168 >> 2] = c[e + 168 >> 2];
 					c[d + 164 >> 2] = c[e + 164 >> 2];
 					c[d + 52 >> 2] = c[e + 52 >> 2];
-					g = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
-					f = c[d + 4 >> 2] | 0;
-					if((f | 0) == (c[g >> 2] | 0)) {
-						c[n + 120852 >> 2] = b[n + 116852 + (f * 92 | 0) + 6 >> 1];
+					g = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //GetLocalPlayer
+					f = c[d + 4 >> 2] | 0; //dst->number
+					if((f | 0) == (c[g >> 2] | 0)) { //player->index
+						c[n + 120852 >> 2] = b[n + 116852 + (f * 92 | 0) + 6 >> 1]; //g_iTeamNumber //g_PlayerExtraInfo[dst->number].teamnumber
 						g = c[e + 260 >> 2] | 0;
 						c[n + 120840 >> 2] = g;
 						c[d + 260 >> 2] = g;
@@ -25183,7 +25183,7 @@
 					return
 				}
 
-				function Hi(a, d, e, f) {
+				function Hi(a, d, e, f) { //__Z16V_GetChaseOriginPfS_fS_
 					a = a | 0;
 					d = d | 0;
 					e = +e;
@@ -25217,20 +25217,20 @@
 					g[k + 36 + 4 >> 2] = m;
 					g[k + 36 + 8 >> 2] = e;
 					a = -1;
-					j = 8;
+					j = 8; //maxLoops
 					while(1) {
-						h = Tr(c[n + 60568 + 236 >> 2] | 0, k + 48 | 0, k + 36 | 0, 0, 2, a | 0) | 0;
-						a = c[h + 48 >> 2] | 0;
+						h = Tr(c[n + 60568 + 236 >> 2] | 0, k + 48 | 0, k + 36 | 0, 0, 2, a | 0) | 0; //PM_TraceLine
+						a = c[h + 48 >> 2] | 0; //trace->ent 
 						if((a | 0) < 1) break;
-						q = c[n + 60568 + 212 >> 2] | 0;
-						a = Kv(q | 0, ou(a) | 0) | 0;
+						q = c[n + 60568 + 212 >> 2] | 0; //GetEntityByIndex
+						a = Kv(q | 0, ou(a) | 0) | 0; //__Z17PM_GetPhysEntInfoi
 						if(!a) break;
-						if((b[a + 746 >> 1] | 0) == 4 ? (c[a + 4 >> 2] | 0) == 0 : 0) break;
-						if(+g[h + 16 >> 2] < 1.0) break;
-						a = c[h + 48 >> 2] | 0;
-						c[k + 48 >> 2] = c[h + 20 >> 2];
-						c[k + 48 + 4 >> 2] = c[h + 20 + 4 >> 2];
-						c[k + 48 + 8 >> 2] = c[h + 20 + 8 >> 2];
+						if((b[a + 746 >> 1] | 0) == 4 ? (c[a + 4 >> 2] | 0) == 0 : 0) break; //ent->curstate.solid //ent->player
+						if(+g[h + 16 >> 2] < 1.0) break; //trace->fraction
+						a = c[h + 48 >> 2] | 0; //trace->ent
+						c[k + 48 >> 2] = c[h + 20 >> 2]; //vecStart.x //trace->endpos.x
+						c[k + 48 + 4 >> 2] = c[h + 20 + 4 >> 2]; //vecStart.y //trace->endpos.y
+						c[k + 48 + 8 >> 2] = c[h + 20 + 8 >> 2]; //vecStart.z //trace->endpos.z
 						if((j | 0) <= 1) break;
 						else j = j + -1 | 0
 					}
@@ -35215,10 +35215,17 @@
 					while(0);
 					return
 				}
+				
+				function getselfplayerid(){
+					player = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
+					return c[player >> 2] | 0;
+				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
+					console.log(getselfplayerid());
+					//Wf();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
@@ -40498,7 +40505,7 @@
 					var a = 0,
 						b = 0.0,
 						d = 0.0;
-					a = c[n + 64500 >> 2] | 0;
+					a = c[n + 64500 >> 2] | 0; //pmove
 					d = +g[a + 500 >> 2] * 1.2000000476837158;
 					if(!(d <= 0.0) ? (b = +Du(a + 92 | 0), !(b <= d)) : 0) Xu(a + 92 | 0, d / b * .8, a + 92 | 0);
 					return
@@ -43037,8 +43044,8 @@
 				}
 
 				function xy() {
-					El(n + 61952 | 0);
-					yi(n + 50528 + 536 | 0, 2);
+					El(n + 61952 | 0); //in_jump
+					yi(n + 50528 + 536 | 0, 2); //gHUD
 					return
 				}
 
@@ -44159,7 +44166,7 @@
 				}
 
 				function SB() {
-					kn(n + 61952 | 0);
+					kn(n + 61952 | 0); //in_jump
 					return
 				}
 
