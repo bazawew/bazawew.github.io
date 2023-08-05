@@ -11818,15 +11818,14 @@
 								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
-							console.log('not in watta but');
-							if(!(e & 2)) {
-								console.log('yeah');
+							//if(!(e & 2)) {
+							if(true) {
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
 								Fk(); //__Z24PM_CatagorizeTextureTypev
-								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; 
+								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; //pmove->onground
 								//jt(); //__Z26PM_PreventMegaBunnyJumpingv
-								e = c[n + 64500 >> 2] | 0;
-								if(+Du(e + 92 | 0) >= 150.0) {
+								e = c[n + 64500 >> 2] | 0; //pmove
+								if(+Du(e + 92 | 0) >= 150.0) { //Length(pmove->velocity)
 									switch(a[e + 496 >> 0] | 0) {
 										case 78:
 											{
@@ -11866,40 +11865,49 @@
 										default:
 											e = 0
 									}
-									bf(e, 1.0);
-									e = c[n + 64500 >> 2] | 0
+									bf(e, 1.0); //__Z16PM_PlayStepSoundif
+									e = c[n + 64500 >> 2] | 0 //pmove
 								}
-								e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
-								i = c[n + 64500 >> 2] | 0;
-								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) {
-									g[i + 100 >> 2] = 268.3281555175781;
+								//e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
+								e = true;
+								i = c[n + 64500 >> 2] | 0; //pmove
+								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) { //pmove->bInDuck //pmove->flags //FL_DUCKING
+									console.log('normal jump');
+									g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 									h = 268.3281555175781
 								} else j = 35;
 								do
 									if((j | 0) == 35) {
+										//pmove->cmd.buttons //pmove->flDuckTime //Length(pmove->velocity)
 										if(((e ? b[i + 283766 >> 1] & 4 : 0) ? +g[i + 140 >> 2] > 0.0 : 0) ? +Du(i + 92 | 0) > 50.0 : 0) {
+											console.log('long jump');
 											g[i + 160 >> 2] = -5.0;
 											e = 0;
 											do {
+												//for e {0, 1}
+												//pmove->velocity[e] //pmove->forward[e] 
 												g[i + 92 + (e << 2) >> 2] = +g[i + 20 + (e << 2) >> 2] * 350.0 * 1.600000023841858;
 												e = e + 1 | 0
 											} while ((e | 0) != 2);
-											g[i + 100 >> 2] = 299.33258056640625;
+											g[i + 100 >> 2] = 299.33258056640625; //pmove->velocity[2]
 											h = 299.33258056640625;
 											break
 										}
-										g[i + 100 >> 2] = 268.3281555175781;
+										console.log('short jump');
+										g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 										h = 268.3281555175781
 									}
 								while(0);
-								f = +g[i + 528 >> 2];
-								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01;
-								g[i + 528 >> 2] = 1315.7894287109375;
-								Lr();
-								j = (c[n + 64500 >> 2] | 0) + 200 | 0;
+								f = +g[i + 528 >> 2]; //pmove->fuser2
+								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01; //pmove->velocity[2]
+								g[i + 528 >> 2] = 1315.7894287109375; //pmove->fuser2
+								Lr(); //__Z23PM_FixupGravityVelocityv
+								j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
 								c[j >> 2] = c[j >> 2] | 2
 							}
-						} else c[i + 200 >> 2] = c[i + 200 >> 2] | 2;
+						} else {
+							c[i + 200 >> 2] = c[i + 200 >> 2] | 2; //pmove->oldbuttons (if dead no jumps)
+						}
 					while(0);
 					return
 				}
@@ -35227,7 +35235,7 @@
 					//console.log('updateclientdata16');
 					Do();
 					//console.log(getlocalplayerid());
-					Wf();
+					//Wf();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
