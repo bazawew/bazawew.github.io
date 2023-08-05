@@ -11818,9 +11818,9 @@
 								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
-							print('not in watta but');
+							console.log('not in watta but');
 							if(!(e & 2)) {
-								print('yeah');
+								console.log('yeah');
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
 								Fk(); //__Z24PM_CatagorizeTextureTypev
 								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; 
