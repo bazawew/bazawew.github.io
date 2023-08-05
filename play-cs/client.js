@@ -11813,12 +11813,13 @@
 										break a
 								}
 							}
-							//e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
+							e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
 							if((c[i + 224 >> 2] | 0) == -1) { //pmove->onground
 								//c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
-								break
+								//break
 							}
-							if(!(e & 2)) {
+							//if(!(e & 2)) {
+							if(true) {
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
 								Fk(); //__Z24PM_CatagorizeTextureTypev
 								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; //pmove->onground
@@ -11891,6 +11892,7 @@
 											h = 299.33258056640625;
 											break
 										}
+										console.log('short jump');
 										g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
 										h = 268.3281555175781
 									}
@@ -35232,7 +35234,7 @@
 					//console.log('updateclientdata16');
 					Do();
 					//console.log(getlocalplayerid());
-					Wf();
+					//Wf();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
