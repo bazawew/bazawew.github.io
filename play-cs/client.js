@@ -35247,13 +35247,24 @@
 					];
 					return angles;
 				}
+				
+				function getlocalplayerorigin(){
+					player = getlocalplayer();
+					let origin = [
+						c[player + 2888 >> 2],
+						c[player + 2888 + 4 >> 2],
+						c[player + 2888 + 8 >> 2]
+					];
+					return origin;
+				}
+				
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
-					console.log(getlocalplayerangles());
+					console.log(getlocalplayerorigin());
 					//Wf();
-					aimbot();
+					//aimbot();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
