@@ -11813,9 +11813,9 @@
 										break a
 								}
 							}
-							e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
+							//e = c[i + 200 >> 2] | 0; //pmove->oldbuttons
 							if((c[i + 224 >> 2] | 0) == -1) { //pmove->onground
-								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
+								//c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
 							if(!(e & 2)) {
@@ -11869,7 +11869,6 @@
 								}
 								//e = (a[(Ou(c[e + 324948 >> 2] | 0, e + 324592 | 0, n + 36011 | 0) | 0) >> 0] | 0) == 49;
 								e = true;
-								console.log(e);
 								i = c[n + 64500 >> 2] | 0; //pmove
 								if((c[i + 144 >> 2] | 0) == 0 ? (c[i + 184 >> 2] & 16384 | 0) == 0 : 0) { //pmove->bInDuck //pmove->flags //FL_DUCKING
 									g[i + 100 >> 2] = 268.3281555175781; //pmove->velocity[2]
@@ -11877,8 +11876,9 @@
 								} else j = 35;
 								do
 									if((j | 0) == 35) {
-										//zxc
+										//pmove->cmd.buttons //pmove->flDuckTime //Length(pmove->velocity)
 										if(((e ? b[i + 283766 >> 1] & 4 : 0) ? +g[i + 140 >> 2] > 0.0 : 0) ? +Du(i + 92 | 0) > 50.0 : 0) {
+											console.log('long jump');
 											g[i + 160 >> 2] = -5.0;
 											e = 0;
 											do {
@@ -11895,14 +11895,16 @@
 										h = 268.3281555175781
 									}
 								while(0);
-								f = +g[i + 528 >> 2];
-								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01;
-								g[i + 528 >> 2] = 1315.7894287109375;
-								Lr();
-								j = (c[n + 64500 >> 2] | 0) + 200 | 0;
-								c[j >> 2] = c[j >> 2] | 2
+								f = +g[i + 528 >> 2]; //pmove->fuser2
+								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01; //pmove->velocity[2]
+								g[i + 528 >> 2] = 1315.7894287109375; //pmove->fuser2
+								Lr(); //__Z23PM_FixupGravityVelocityv
+								//j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
+								//c[j >> 2] = c[j >> 2] | 2
 							}
-						} else c[i + 200 >> 2] = c[i + 200 >> 2] | 2;
+						} else {
+							//c[i + 200 >> 2] = c[i + 200 >> 2] | 2;
+						}
 					while(0);
 					return
 				}
