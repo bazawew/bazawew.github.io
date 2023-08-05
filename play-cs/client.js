@@ -35343,7 +35343,8 @@
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
-					console.log(getlocalplayerangles(true));
+					let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
+					console.log(buff);
 					//Wf();
 					//aimbot();
 					a = a | 0;
