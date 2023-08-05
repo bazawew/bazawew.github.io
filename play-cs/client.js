@@ -35226,29 +35226,71 @@
 					return
 				}
 				
-				function parseFloat(str) {
-					var float = 0, sign, order, mantiss,exp,
-					int = 0, multi = 1;
-					if (/^0x/.exec(str)) {
-						int = parseInt(str,16);
-					}else{
-						for (var i = str.length -1; i >=0; i -= 1) {
-							if (str.charCodeAt(i)>255) {
-								console.log('Wrong string parametr'); 
-								return false;
-							}
-							int += str.charCodeAt(i) * multi;
-							multi *= 256;
-						}
+				/*
+				function htoi32(str){
+					let a = parseInt(str, 16);
+					if (a >= 0x80000000) {
+					   a = a - 0x100000000;
 					}
-					sign = (int>>>31)?-1:1;
-					exp = (int >>> 23 & 0xff) - 127;
-					mantiss = ((int & 0x7fffff) + 0x800000).toString(2);
-					for (i=0; i<mantiss.length; i+=1){
-						float += parseInt(mantiss[i])? Math.pow(2,exp):0;
+					return a;
+				}
+				
+				function i32toh(a){
+					if (a < 0) {
+						a = 0x100000000 + a;
+					}
+					let str = a.toString(16)
+					return '0x' + '0'.repeat(8 - str.length) + str;
+				}
+				*/
+				
+				/*
+				function htof(str) {
+					let f = 0, sign, mantissa, exp, i;
+					i = parseInt(str,16);
+					sign = (i>>>31)?-1:1;
+					exp = (i>>>23 & 0xff);
+					mantissa = (i & 0x7fffff).toString(2);
+					mantissa = '0'.repeat(23 - mantissa.length) + mantissa;
+					if (exp === 0) { 
+						if (mantissa.includes('1')) { //denormalized
+							exp = -126;
+							mantissa = '0' + mantissa;
+						} else {
+							return sign * 0;
+						}
+					} else if (exp === 255) {
+						if (mantissa.includes('1')) { 
+							return NaN;
+						} else {
+							return sign * Infinity;
+						}
+					} else {
+						exp -= 127;
+						mantissa = '1' + mantissa;
+					}
+					for (i=0; i<mantissa.length; i+=1){
+						f += parseInt(mantissa[i])?Math.pow(2,exp):0;
 						exp--;
 					}
-					return float*sign;
+					return f*sign;
+				}
+				*/
+				
+				function itof(a) {
+					let buffer = new ArrayBuffer(4);
+					let floatView = new Float32Array(buffer);
+					let intView = new Int32Array(buffer);
+					intView[0] = a;
+					return floatView[0];
+				}
+				
+				function ftoi(a) {
+					let buffer = new ArrayBuffer(4);
+					let floatView = new Float32Array(buffer);
+					let intView = new Int32Array(buffer);
+					floatView[0] = a;
+					return intView[0];
 				}
 
 				function getlocalplayer(){
@@ -35264,9 +35306,9 @@
 					let angles = [];
 					if (isfloat){
 						angles = [
-							c[player + 2900 >> 2].toString(16),
-							c[player + 2900 + 4 >> 2].toString(16),
-							c[player + 2900 + 8 >> 2].toString(16)
+							itof(c[player + 2900 >> 2]),
+							itof(c[player + 2900 + 4 >> 2]),
+							itof(c[player + 2900 + 8 >> 2])
 						];
 					} else {
 						angles = [
@@ -35278,13 +35320,22 @@
 					return angles;
 				}
 				
-				function getlocalplayerorigin(){
+				function getlocalplayerorigin(isfloat){
 					player = getlocalplayer();
-					let origin = [
-						c[player + 2888 >> 2],
-						c[player + 2888 + 4 >> 2],
-						c[player + 2888 + 8 >> 2]
-					];
+					let origin = [];
+					if (isfloat){
+						origin = [
+							itof(c[player + 2900 >> 2]),
+							itof(c[player + 2900 + 4 >> 2]),
+							itof(c[player + 2900 + 8 >> 2])
+						];
+					} else {
+						origin = [
+							c[player + 2900 >> 2],
+							c[player + 2900 + 4 >> 2],
+							c[player + 2900 + 8 >> 2]
+						];
+					}
 					return origin;
 				}
 				
