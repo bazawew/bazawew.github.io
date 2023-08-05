@@ -3151,16 +3151,16 @@
 						c[n + 145444 + 116 >> 2] = ~~+g[b + 792 >> 2];
 						c[n + 145444 + 124 >> 2] = ~~+g[b + 796 >> 2];
 						c[n + 145444 + 132 >> 2] = ~~+g[b + 800 >> 2];
-						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
+						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //GetLocalPlayer()
 						if(k | 0) {
-							o = c[n + 145444 + 4 >> 2] | 0;
-							c[o + 8 >> 2] = c[f + 340 >> 2];
+							o = c[n + 145444 + 4 >> 2] | 0; //player.pev
+							c[o + 8 >> 2] = c[f + 340 >> 2]; 
 							c[o + 8 + 4 >> 2] = c[f + 340 + 4 >> 2];
 							c[o + 8 + 8 >> 2] = c[f + 340 + 8 >> 2];
-							c[o + 80 >> 2] = c[k + 2900 >> 2];
-							c[o + 80 + 4 >> 2] = c[k + 2900 + 4 >> 2];
-							c[o + 80 + 8 >> 2] = c[k + 2900 + 8 >> 2];
-							c[o + 116 >> 2] = c[n + 62268 >> 2];
+							c[o + 80 >> 2] = c[k + 2900 >> 2]; //player.pev->angles.x //pplayer->angles.x
+							c[o + 80 + 4 >> 2] = c[k + 2900 + 4 >> 2]; //player.pev->angles.y //pplayer->angles.y
+							c[o + 80 + 8 >> 2] = c[k + 2900 + 8 >> 2]; //player.pev->angles.z //pplayer->angles.z
+							c[o + 116 >> 2] = c[n + 62268 >> 2]; //
 							c[o + 116 + 4 >> 2] = c[n + 62268 + 4 >> 2];
 							c[o + 116 + 8 >> 2] = c[n + 62268 + 8 >> 2]
 						}
@@ -35226,16 +35226,34 @@
 					return
 				}
 				
+				function aimbot(){
+					
+				}
+				
+				function getlocalplayer(){
+					return qx(c[n + 60568 + 204 >> 2] | 0) | 0;
+				}
+				
 				function getlocalplayerid(){
-					player = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
-					return c[player >> 2] | 0;
+					return c[getlocalplayer() + 0 >> 2] | 0;
+				}
+				
+				function getlocalplayerangles(){
+					player = getlocalplayer();
+					let angles = [
+						c[player + 2900 >> 2],
+						c[player + 2900 + 4 >> 2],
+						c[player + 2900 + 8 >> 2]
+					];
+					return angles;
 				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					Do();
-					//console.log(getlocalplayerid());
+					console.log(getlocalplayerangles());
 					//Wf();
+					aimbot();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
