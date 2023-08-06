@@ -3151,16 +3151,16 @@
 						c[n + 145444 + 116 >> 2] = ~~+g[b + 792 >> 2];
 						c[n + 145444 + 124 >> 2] = ~~+g[b + 796 >> 2];
 						c[n + 145444 + 132 >> 2] = ~~+g[b + 800 >> 2];
-						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
+						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //GetLocalPlayer()
 						if(k | 0) {
-							o = c[n + 145444 + 4 >> 2] | 0;
-							c[o + 8 >> 2] = c[f + 340 >> 2];
+							o = c[n + 145444 + 4 >> 2] | 0; //player.pev
+							c[o + 8 >> 2] = c[f + 340 >> 2]; 
 							c[o + 8 + 4 >> 2] = c[f + 340 + 4 >> 2];
 							c[o + 8 + 8 >> 2] = c[f + 340 + 8 >> 2];
-							c[o + 80 >> 2] = c[k + 2900 >> 2];
-							c[o + 80 + 4 >> 2] = c[k + 2900 + 4 >> 2];
-							c[o + 80 + 8 >> 2] = c[k + 2900 + 8 >> 2];
-							c[o + 116 >> 2] = c[n + 62268 >> 2];
+							c[o + 80 >> 2] = c[k + 2900 >> 2]; //player.pev->angles.x //pplayer->angles.x
+							c[o + 80 + 4 >> 2] = c[k + 2900 + 4 >> 2]; //player.pev->angles.y //pplayer->angles.y
+							c[o + 80 + 8 >> 2] = c[k + 2900 + 8 >> 2]; //player.pev->angles.z //pplayer->angles.z
+							c[o + 116 >> 2] = c[n + 62268 >> 2]; //
 							c[o + 116 + 4 >> 2] = c[n + 62268 + 4 >> 2];
 							c[o + 116 + 8 >> 2] = c[n + 62268 + 8 >> 2]
 						}
@@ -11818,8 +11818,8 @@
 								c[i + 200 >> 2] = e | 2; //pmove->oldbuttons
 								break
 							}
-							//if(!(e & 2)) {
-							if(true) {
+							if(!(e & 2)) {
+							//if(true) {
 								if(c[i + 144 >> 2] | 0 ? c[i + 184 >> 2] & 16384 | 0 : 0) break; 
 								Fk(); //__Z24PM_CatagorizeTextureTypev
 								c[(c[n + 64500 >> 2] | 0) + 224 >> 2] = -1; //pmove->onground
@@ -11902,8 +11902,8 @@
 								if(f > 0.0) g[i + 100 >> 2] = h * (100.0 - f * .001 * 19.0) * .01; //pmove->velocity[2]
 								g[i + 528 >> 2] = 1315.7894287109375; //pmove->fuser2
 								Lr(); //__Z23PM_FixupGravityVelocityv
-								j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
-								c[j >> 2] = c[j >> 2] | 2
+								//j = (c[n + 64500 >> 2] | 0) + 200 | 0; //pmove->oldbuttons
+								//c[j >> 2] = c[j >> 2] | 2
 							}
 						} else {
 							c[i + 200 >> 2] = c[i + 200 >> 2] | 2; //pmove->oldbuttons (if dead no jumps)
@@ -35226,16 +35226,162 @@
 					return
 				}
 				
+				/*
+				function htoi32(str){
+					let a = parseInt(str, 16);
+					if (a >= 0x80000000) {
+					   a = a - 0x100000000;
+					}
+					return a;
+				}
+				
+				function i32toh(a){
+					if (a < 0) {
+						a = 0x100000000 + a;
+					}
+					let str = a.toString(16)
+					return '0x' + '0'.repeat(8 - str.length) + str;
+				}
+				*/
+				
+				/*
+				function htof(str) {
+					let f = 0, sign, mantissa, exp, i;
+					i = parseInt(str,16);
+					sign = (i>>>31)?-1:1;
+					exp = (i>>>23 & 0xff);
+					mantissa = (i & 0x7fffff).toString(2);
+					mantissa = '0'.repeat(23 - mantissa.length) + mantissa;
+					if (exp === 0) { 
+						if (mantissa.includes('1')) { //denormalized
+							exp = -126;
+							mantissa = '0' + mantissa;
+						} else {
+							return sign * 0;
+						}
+					} else if (exp === 255) {
+						if (mantissa.includes('1')) { 
+							return NaN;
+						} else {
+							return sign * Infinity;
+						}
+					} else {
+						exp -= 127;
+						mantissa = '1' + mantissa;
+					}
+					for (i=0; i<mantissa.length; i+=1){
+						f += parseInt(mantissa[i])?Math.pow(2,exp):0;
+						exp--;
+					}
+					return f*sign;
+				}
+				*/
+				
+				function itof(a) {
+					let buffer = new ArrayBuffer(4);
+					let floatView = new Float32Array(buffer);
+					let intView = new Int32Array(buffer);
+					intView[0] = a;
+					return floatView[0];
+				}
+				
+				function ftoi(a) {
+					let buffer = new ArrayBuffer(4);
+					let floatView = new Float32Array(buffer);
+					let intView = new Int32Array(buffer);
+					floatView[0] = a;
+					return intView[0];
+				}
+
+				function getlocalplayer(){
+					return qx(c[n + 60568 + 204 >> 2] | 0) | 0;
+				}
+				
 				function getlocalplayerid(){
-					player = qx(c[n + 60568 + 204 >> 2] | 0) | 0;
-					return c[player >> 2] | 0;
+					return c[getlocalplayer() + 0 >> 2] | 0;
+				}
+				
+				function getlocalplayerangles(isfloat){
+					player = getlocalplayer();
+					let angles = [];
+					if (isfloat){
+						angles = [
+							itof(c[player + 2900 >> 2]),
+							itof(c[player + 2900 + 4 >> 2]),
+							itof(c[player + 2900 + 8 >> 2])
+						];
+					} else {
+						angles = [
+							c[player + 2900 >> 2],
+							c[player + 2900 + 4 >> 2],
+							c[player + 2900 + 8 >> 2]
+						];
+					}
+					return angles;
+				}
+				
+				function getlocalplayerorigin(isfloat){
+					player = getlocalplayer();
+					let origin = [];
+					if (isfloat){
+						origin = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+					} else {
+						origin = [
+							c[player + 2888 >> 2],
+							c[player + 2888 + 4 >> 2],
+							c[player + 2888 + 8 >> 2]
+						];
+					}
+					return origin;
+				}
+				
+				function savelocalcrd(){
+					localcrd = getlocalplayerorigin(true);
+					return;
+				}
+				
+				
+				function iteratingplayers(){
+					let lpid = getlocalplayerid();
+					savelocalcrd();
+					playercrd = [];
+					playerdist = [];
+					for (let i=0; i<31; i+=1){
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						if (player == 0){
+							continue;
+						}
+						if (!(c[player + 4 >> 2] | 0)){
+							continue;
+						}
+						if (c[player + 0 >> 2] | 0 == lpid){
+							continue;
+						}
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd.push(crd);
+						let distance = Math.sqrt(abs(localcrd[0]-crd[0])+abs(localcrd[1]-crd[1])+abs(localcrd[2]-crd[2]));
+						playerdist.push(distance);
+						playerinfo.push([crd, distance]);
+					}
+					return;
 				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
-					Do();
-					//console.log(getlocalplayerid());
+					//Do();
+					iteratingplayers();
+					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
+					//console.log(buff);
 					//Wf();
+					//aimbot();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
