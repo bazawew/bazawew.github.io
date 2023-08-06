@@ -35325,26 +35325,61 @@
 					let origin = [];
 					if (isfloat){
 						origin = [
-							itof(c[player + 2900 >> 2]),
-							itof(c[player + 2900 + 4 >> 2]),
-							itof(c[player + 2900 + 8 >> 2])
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
 						];
 					} else {
 						origin = [
-							c[player + 2900 >> 2],
-							c[player + 2900 + 4 >> 2],
-							c[player + 2900 + 8 >> 2]
+							c[player + 2888 >> 2],
+							c[player + 2888 + 4 >> 2],
+							c[player + 2888 + 8 >> 2]
 						];
 					}
 					return origin;
 				}
 				
+				function savelocalcrd(){
+					localcrd = getlocalplayerorigin(true);
+					return;
+				}
+				
+				
+				function iteratingplayers(){
+					let lpid = getlocalplayerid();
+					savelocalcrd();
+					playercrd = [];
+					playerdist = [];
+					for (let i=0; i<31; i+=1){
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						if (player == 0){
+							continue;
+						}
+						if (!(c[player + 4 >> 2] | 0)){
+							continue;
+						}
+						if (c[player + 0 >> 2] | 0 == lpid){
+							continue;
+						}
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd.push(crd);
+						let distance = Math.sqrt(abs(localcrd[0]-crd[0])+abs(localcrd[1]-crd[1])+abs(localcrd[2]-crd[2]));
+						playerdist.push(distance);
+						playerinfo.push([crd, distance]);
+					}
+					return;
+				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
-					Do();
-					let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
-					console.log(buff);
+					//Do();
+					iteratingplayers();
+					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
+					//console.log(buff);
 					//Wf();
 					//aimbot();
 					a = a | 0;
