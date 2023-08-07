@@ -35367,6 +35367,10 @@
 							//console.log(i.toString() + ' is localplayer');
 							continue;
 						}
+						if ((c[player + 2928 >> 2] | 0) == 0){
+							//no model
+							continue;
+						}
 						let crd = [
 							itof(c[player + 2888 >> 2]),
 							itof(c[player + 2888 + 4 >> 2]),
