@@ -35387,7 +35387,7 @@
 					let sh = window.innerHeight, sw = window.innerWidth;
 					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
 					for (let i = 0; i < 31; i+=1){
-						let removediv = document.getElementById('espbox'+i.toString());
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
 						if (removediv != null){
 							removediv.remove();
 						}
@@ -35401,7 +35401,7 @@
 							drawer2.innerHTML += '0<br>';
 						}
 						let espbox = document.createElement("div");
-						espbox.id = 'espbox' + playerinfo[i][1].toString();
+						espbox.id = 'espbox' + playerinfo[i][1].toString()+'_'+ticker2.toString();
 						espbox.style.height = '70px';
 						espbox.style.width = '40px';
 						espbox.style.color = '#7df5ff';
@@ -35411,7 +35411,8 @@
 						espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
 						espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
 						document.body.appendChild(espbox);
-						console.log(espbox);
+						//console.log(espbox);
+						ticker2 = (ticker2 + 1)%50;
 					}
 				}
 				
