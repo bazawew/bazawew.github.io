@@ -35405,8 +35405,8 @@
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
-							espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
-							espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
+							espbox.style.left = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
+							espbox.style.top = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
 							document.body.appendChild(espbox);
 						} else {
 							drawer2.innerHTML += '0<br>';
