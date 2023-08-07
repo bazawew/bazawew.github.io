@@ -35348,6 +35348,7 @@
 				function iteratingplayers(){
 					let lpid = getlocalplayerid();
 					savelocalcrd();
+					playerinfo = [];
 					playercrd = [];
 					playerdist = [];
 					for (let i=0; i<31; i+=1){
