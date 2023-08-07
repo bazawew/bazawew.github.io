@@ -35386,9 +35386,9 @@
 				}
 				
 				function drawinfo(){
-					drawer1.innerHTML = 'SOLARTEWAKS2\n';
-					drawer1.innerHTML += 'local origin: ' + localcrd[0].toString() + ' ' + localcrd[1].toString() + ' ' + localcrd[2].toString() + '\n';
-					drawer1.innerHTML += 'local viewangles: ' + realviewangles.x.toString() + ' ' + realviewangles.y.toString() + ' ' + realviewangles.z.toString() + '\n';
+					drawer1.innerHTML = 'SOLARTEWAKS2<br>';
+					drawer1.innerHTML += 'local origin: ' + localcrd[0].toString() + ' ' + localcrd[1].toString() + ' ' + localcrd[2].toString() + '<br>';
+					drawer1.innerHTML += 'local viewangles: ' + itof(realviewangles.x).toString() + ' ' + itof(realviewangles.y).toString() + ' ' + itof(realviewangles.z).toString() + '<br>';
 				}
 				
 				function update228(){
