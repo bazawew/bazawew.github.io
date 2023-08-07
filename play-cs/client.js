@@ -35357,11 +35357,11 @@
 							continue;
 						}
 						if (!(c[player + 4 >> 2] | 0)){
-							console.log((i.toString() + ' not player'); 
+							console.log(i.toString() + ' not player'); 
 							continue;
 						}
 						if (i == lpid){
-							console.log((i.toString() + ' is localplayer');
+							console.log(i.toString() + ' is localplayer');
 							continue;
 						}
 						let crd = [
