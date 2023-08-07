@@ -35353,15 +35353,15 @@
 					for (let i=0; i<31; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						if (player == 0){
-							console.log(i.toString() + ' not entity'); 
+							//console.log(i.toString() + ' not entity'); 
 							continue;
 						}
-						if (!(c[player + 4 >> 2] | 0)){
-							console.log(i.toString() + ' not player'); 
+						if (c[player + 4 >> 2] | 0 & 1 == 0){
+							//console.log(i.toString() + ' not player'); 
 							continue;
 						}
 						if (i == lpid){
-							console.log(i.toString() + ' is localplayer');
+							//console.log(i.toString() + ' is localplayer');
 							continue;
 						}
 						let crd = [
@@ -35370,7 +35370,7 @@
 							itof(c[player + 2888 + 8 >> 2])
 						];
 						playercrd.push(crd);
-						let distance = Math.sqrt(abs(localcrd[0]-crd[0])+abs(localcrd[1]-crd[1])+abs(localcrd[2]-crd[2]));
+						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
 						playerdist.push(distance);
 						playerinfo.push([crd, distance]);
 					}
