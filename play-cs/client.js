@@ -35397,20 +35397,20 @@
 						drawer2.innerHTML += playerinfo[i][0].toString() + ' ' + playerinfo[i][1].toString() + '<br>';
 						if (playerinfo[i][3] != 0){
 							drawer2.innerHTML += playerinfo[i][3][0].toString() + '<br>' + playerinfo[i][3][1].toString() + '<br>' + playerinfo[i][3][2].toString() + '<br>';
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + playerinfo[i][1].toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							espbox.style.color = '#7df5ff';
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
+							espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
+							document.body.appendChild(espbox);
 						} else {
 							drawer2.innerHTML += '0<br>';
 						}
-						let espbox = document.createElement("div");
-						espbox.id = 'espbox' + playerinfo[i][1].toString()+'_'+ticker2.toString();
-						espbox.style.height = '70px';
-						espbox.style.width = '40px';
-						espbox.style.color = '#7df5ff';
-						espbox.style.opacity = '0.5';
-						espbox.style.position = 'absolute';
-						espbox.style.zIndex = '300';
-						espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
-						espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
-						document.body.appendChild(espbox);
 						//console.log(espbox);
 					}
 					ticker2 = (ticker2 + 1)%50;
