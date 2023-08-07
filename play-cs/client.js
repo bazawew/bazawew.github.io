@@ -35402,8 +35402,8 @@
 						}
 						let espbox = document.createElement("div");
 						espbox.id = 'espbox' + playerinfo[i][1].toString();
-						espbox.height = '70px';
-						espbox.width = '40px';
+						espbox.style.height = '70px';
+						espbox.style.width = '40px';
 						espbox.style.color = '#7df5ff';
 						espbox.style.opacity = '0.5';
 						espbox.style.position = 'relative';
