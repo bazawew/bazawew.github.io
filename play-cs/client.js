@@ -35351,13 +35351,14 @@
 					playerinfo = [];
 					playercrd = [];
 					playerdist = [];
+					playerdots = [];
 					for (let i=0; i<31; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						if (player == 0){
 							//console.log(i.toString() + ' not entity'); 
 							continue;
 						}
-						if (c[player + 4 >> 2] | 0 & 1 == 0){
+						if ((c[player + 4 >> 2] | 0) % 2 == 0){
 							//console.log(i.toString() + ' not player'); 
 							continue;
 						}
@@ -35373,8 +35374,11 @@
 						playercrd.push(crd);
 						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
 						playerdist.push(distance);
-						playerinfo.push([crd, distance]);
+						let dot = w2s(crd);
+						playerdots.push(dot);
+						playerinfo.push([distance, i, crd, dot]);
 					}
+					console.log(playerinfo);
 					return;
 				}
 
