@@ -35413,7 +35413,7 @@
 						}
 						//console.log(espbox);
 					}
-					ticker2 = (ticker2 + 1)%50;
+					ticker2 = (ticker2 + 1)%1;
 				}
 				
 				function drawinfo(){
