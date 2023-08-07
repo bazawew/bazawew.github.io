@@ -35354,7 +35354,7 @@
 					playerdist = [];
 					playerdots = [];
 					for (let i=0; i<31; i+=1){
-						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0; //gEngfuncs.GetEntityByIndex
 						if (player == 0){
 							//console.log(i.toString() + ' not entity'); 
 							continue;
@@ -35388,6 +35388,7 @@
 				}
 				
 				function drawesp(){
+					let lpid = getlocalplayerid();
 					let sh = window.innerHeight, sw = window.innerWidth;
 					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
 					for (let i = 0; i < 31; i+=1){
@@ -35400,18 +35401,25 @@
 					for (let i = 0; i < playerinfo.length; i+=1){
 						drawer2.innerHTML += playerinfo[i][0].toString() + ' ' + playerinfo[i][1].toString() + '<br>';
 						if (playerinfo[i][3] != 0){
-							drawer2.innerHTML += playerinfo[i][3][0].toString() + '<br>' + playerinfo[i][3][1].toString() + '<br>' + playerinfo[i][3][2].toString() + '<br>';
 							let espbox = document.createElement("div");
-							espbox.id = 'espbox' + playerinfo[i][1].toString()+'_'+ticker2.toString();
+							let iid = playerinfo[i][1];
+							espbox.id = 'espbox' + iid.toString()+'_'+ticker2.toString();
 							espbox.style.height = '70px';
 							espbox.style.width = '40px';
-							espbox.style.backgroundColor = '#7df5ff';
+							if (g_TeamInfo[iid].teamnumber == lpid){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (g_TeamInfo[iid].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								continue;
+							}
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
 							espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][0] - 20).toString() + 'px';
 							espbox.style.top = Math.floor(centerh - centerh*playerinfo[i][3][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
+							drawer2.innerHTML += playerinfo[i][3][0].toString() + '<br>' + playerinfo[i][3][1].toString() + '<br>' + playerinfo[i][3][2].toString() + '<br>';
 						} else {
 							drawer2.innerHTML += '0<br>';
 						}
@@ -42745,7 +42753,7 @@
 					a = a | 0;
 					b = b | 0;
 					d = d | 0;
-					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1;
+					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1; //gHUD
 					return 1
 				}
 
