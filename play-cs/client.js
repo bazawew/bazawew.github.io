@@ -35385,7 +35385,7 @@
 				
 				function drawesp(){
 					drawer2.innerHTML = '';
-					for (int i = 0; i < playerinfo.length; i+=1){
+					for (let i = 0; i < playerinfo.length; i+=1){
 						drawer2.innerHTML += playerinfo[i][0].toString() + ' ' + playerinfo[i][1].toString() + <br>;
 						if (playerinfo[i][3] != 0){
 							drawer2.innerHTML += playerinfo[i][3][0].toString() + '<br>' + playerinfo[i][3][1].toString() + <br> + playerinfo[i][3][2].toString() + <br>;
