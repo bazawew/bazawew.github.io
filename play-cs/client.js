@@ -35339,15 +35339,16 @@
 					return origin;
 				}
 				
-				function savelocalcrd(){
+				function savelocal(){
 					localcrd = getlocalplayerorigin(true);
+					localangles = getlocalplayerangles(true);
 					return;
 				}
 				
 				
 				function iteratingplayers(){
 					let lpid = getlocalplayerid();
-					savelocalcrd();
+					savelocal();
 					playerinfo = [];
 					playercrd = [];
 					playerdist = [];
@@ -35386,9 +35387,11 @@
 				}
 				
 				function drawinfo(){
-					drawer1.innerHTML = 'SOLARTEWAKS2<br>';
-					drawer1.innerHTML += 'local origin: ' + localcrd[0].toString() + ' ' + localcrd[1].toString() + ' ' + localcrd[2].toString() + '<br>';
-					drawer1.innerHTML += 'local viewangles: ' + itof(realviewangles.x).toString() + ' ' + itof(realviewangles.y).toString() + ' ' + itof(realviewangles.z).toString() + '<br>';
+					drawer1.innerHTML = 'SOLARTWEAKS2<br>';
+					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString();
+					drawer1.innerHTML += 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
+					drawer1.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
+					drawer1.innerHTML += 'local viewangles:<br>' + itof(realviewangles.x).toString() + '<br>' + itof(realviewangles.y).toString() + '<br>' + itof(realviewangles.z).toString() + '<br>';
 				}
 				
 				function update228(){
