@@ -35410,6 +35410,7 @@
 						espbox.style.zIndex = '300';
 						espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
 						espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
+						document.body.appendChild(espbox);
 					}
 				}
 				
