@@ -35406,14 +35406,14 @@
 						espbox.style.width = '40px';
 						espbox.style.color = '#7df5ff';
 						espbox.style.opacity = '0.5';
-						espbox.style.position = 'relative';
+						espbox.style.position = 'absolute';
 						espbox.style.zIndex = '300';
 						espbox.style.top = Math.floor(centerh + centerh*playerinfo[i][3][0] - 35).toString() + 'px';
 						espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][1] - 20).toString() + 'px';
 						document.body.appendChild(espbox);
 						//console.log(espbox);
-						ticker2 = (ticker2 + 1)%50;
 					}
+					ticker2 = (ticker2 + 1)%50;
 				}
 				
 				function drawinfo(){
