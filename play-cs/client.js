@@ -35353,12 +35353,15 @@
 					for (let i=0; i<31; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						if (player == 0){
+							console.log(i.toString() + ' not entity'); 
 							continue;
 						}
 						if (!(c[player + 4 >> 2] | 0)){
+							console.log((i.toString() + ' not player'); 
 							continue;
 						}
-						if (c[player + 0 >> 2] | 0 == lpid){
+						if (i == lpid){
+							console.log((i.toString() + ' is localplayer');
 							continue;
 						}
 						let crd = [
