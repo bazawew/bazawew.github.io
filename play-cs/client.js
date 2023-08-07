@@ -35381,11 +35381,26 @@
 					console.log(playerinfo);
 					return;
 				}
+				
+				function drawesp(){
+				}
+				
+				function drawinfo(){
+					drawer1.innerHTML = 'SOLARTEWAKS2\n';
+					drawer1.innerHTML += 'local origin: ' + localcrd[0].toString() + ' ' + localcrd[1].toString() + ' ' + localcrd[2].toString() + '\n';
+					drawer1.innerHTML += 'local viewangles: ' + realviewangles.x.toString() + ' ' + realviewangles.y.toString() + ' ' + realviewangles.z.toString() + '\n';
+				}
+				
+				function update228(){
+					iteratingplayers();
+					drawinfo();
+					drawesp();
+				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
 					//Do();
-					iteratingplayers();
+					update228();
 					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
 					//console.log(buff);
 					//Wf();
