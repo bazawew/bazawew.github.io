@@ -35379,7 +35379,7 @@
 						playerdots.push(dot);
 						playerinfo.push([distance, i, crd, dot]);
 					}
-					console.log(playerinfo);
+					//console.log(playerinfo);
 					return;
 				}
 				
