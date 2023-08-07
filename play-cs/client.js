@@ -35401,7 +35401,7 @@
 							espbox.id = 'espbox' + playerinfo[i][1].toString()+'_'+ticker2.toString();
 							espbox.style.height = '70px';
 							espbox.style.width = '40px';
-							espbox.style.color = '#7df5ff';
+							espbox.style.backgroundColor = '#7df5ff';
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
@@ -35413,7 +35413,7 @@
 						}
 						//console.log(espbox);
 					}
-					ticker2 = (ticker2 + 1)%1000;
+					ticker2 = (ticker2 + 1)%50;
 				}
 				
 				function drawinfo(){
