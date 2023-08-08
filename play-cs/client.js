@@ -35345,10 +35345,25 @@
 					return;
 				}
 				
+				function saveextra(){
+					playerextra = [];
+					let iid = getlocalplayerid();
+					if(Object.keys(g_PlayerExtraInfo).length == 0){
+						return;
+					}
+					for (let key in g_PlayerExtraInfo) {
+						let player = g_PlayerExtraInfo[key];
+						if (player.id == iid) {
+							continue;
+						}
+						playerextra.push([player.id, player.name, player.status]);
+					}
+				}				
 				
 				function iteratingplayers(){
 					let lpid = getlocalplayerid();
 					savelocal();
+					saveextra();
 					playercrd = [];
 					playerdist = [];
 					playerdots = [];
@@ -35356,6 +35371,23 @@
 					if (Object.keys(g_TeamInfo).length == 0 || g_TeamInfo.length == 0){
 						return;
 					}
+					for (let j=0; j<playerextra.length; j+=1){
+						let i = playerextra[j][0];
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd[i] = crd;
+						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
+						playerdist[i] = distance;
+						let dot = w2s(crd);
+						playerdots[i] = dot;
+						playerlist[i] = [distance, crd, dot];
+					}
+					
+					/*
 					for (let i=1; i<=32; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						if(g_TeamInfo[i].name == ''){
@@ -35396,6 +35428,8 @@
 						playerdots[i] = dot;
 						playerlist[i] = [distance, crd, dot];
 					}
+					*/
+					
 					return;
 				}
 				
@@ -35428,8 +35462,8 @@
 								continue;
 							}
 							let isDead = false;
-							for (let key in g_PlayerExtraInfo) {
-								let player = g_PlayerExtraInfo[key];
+							for (let j=0; j<playerextra.length; j+=1){
+								let player = playerextra[j];
 								if (player.id == i.toString()){
 									if (player.status == 'Dead'){
 										isDead = true;
