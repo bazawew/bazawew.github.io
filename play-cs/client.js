@@ -35410,7 +35410,7 @@
 							removediv.remove();
 						}
 						
-						if (playerlist[i] == 0){
+						if (playerlist.length === undefined || playerlist.length == 0 || playerlist[i] == 0){
 							continue;
 						}
 						
