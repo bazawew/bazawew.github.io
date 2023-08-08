@@ -35353,6 +35353,9 @@
 					playerdist = [];
 					playerdots = [];
 					playerlist = [];
+					if (g_TeamInfo.length == 0){
+						return;
+					}
 					for (let i=1; i<=32; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						if(g_TeamInfo[i].name == ''){
