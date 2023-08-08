@@ -35349,26 +35349,36 @@
 				function iteratingplayers(){
 					let lpid = getlocalplayerid();
 					savelocal();
-					playerinfo = [];
 					playercrd = [];
 					playerdist = [];
 					playerdots = [];
-					for (let i=0; i<31; i+=1){
-						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0; //gEngfuncs.GetEntityByIndex
-						if (player == 0){
-							//console.log(i.toString() + ' not entity'); 
-							continue;
-						}
-						if ((c[player + 4 >> 2] | 0) % 2 == 0){
-							//console.log(i.toString() + ' not player'); 
-							continue;
+					playerlist = [];
+					for (let i=1; i<=32; i+=1){
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						if(g_TeamInfo[i].name == ''){
+							if (player == 0){
+								//console.log(i.toString() + ' not entity'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}
+							if ((c[player + 4 >> 2] | 0) % 2 == 0){
+								//console.log(i.toString() + ' not player'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}	
 						}
 						if (i == lpid){
 							//console.log(i.toString() + ' is localplayer');
-							continue;
-						}
-						if ((c[player + 2928 >> 2] | 0) == 0){
-							//no model
+							playercrd[i] = 0;
+							playerdist[i] = 0;
+							playerdots[i] = 0;
+							playerlist[i] = 0;
 							continue;
 						}
 						let crd = [
@@ -35376,14 +35386,13 @@
 							itof(c[player + 2888 + 4 >> 2]),
 							itof(c[player + 2888 + 8 >> 2])
 						];
-						playercrd.push(crd);
+						playercrd[i] = crd;
 						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
-						playerdist.push(distance);
+						playerdist[i] = distance;
 						let dot = w2s(crd);
-						playerdots.push(dot);
-						playerinfo.push([distance, i, crd, dot]);
+						playerdots[i] = dot;
+						playerlist[i] = [distance, crd, dot];
 					}
-					//console.log(playerinfo);
 					return;
 				}
 				
@@ -35391,39 +35400,53 @@
 					let lpid = getlocalplayerid();
 					let sh = window.innerHeight, sw = window.innerWidth;
 					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
-					for (let i = 0; i < 31; i+=1){
+					drawer2.innerHTML = '';
+					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
 						if (removediv != null){
 							removediv.remove();
 						}
-					}
-					drawer2.innerHTML = '';
-					for (let i = 0; i < playerinfo.length; i+=1){
-						drawer2.innerHTML += playerinfo[i][0].toString() + ' ' + playerinfo[i][1].toString() + '<br>';
-						if (playerinfo[i][3] != 0){
+						
+						if (playerlist[i] == 0){
+							continue;
+						}
+						
+						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
+						if (playerdots[i] != 0){
 							let espbox = document.createElement("div");
-							let iid = playerinfo[i][1];
-							espbox.id = 'espbox' + iid.toString()+'_'+ticker2.toString();
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
 							espbox.style.height = '70px';
 							espbox.style.width = '40px';
-							if (g_TeamInfo[iid].teamnumber == lpid){
+							if (g_TeamInfo[i].teamnumber == g_TeamInfo[lpid].teamnumber){
 								espbox.style.backgroundColor = '#7df5ff';
-							} else if (g_TeamInfo[iid].teamnumber != 0) {
+							} else if (g_TeamInfo[i].teamnumber != 0) {
 								espbox.style.backgroundColor = '#850303';
 							} else {
+								continue;
+							}
+							let isDead = false;
+							for (let key in g_PlayerExtraInfo) {
+								let player = g_PlayerExtraInfo[key];
+								if (player.id == i.toString()){
+									if (player.status == 'Dead'){
+										isDead = true;
+									}
+									break;
+								}
+							}
+							if(isDead){
 								continue;
 							}
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
-							espbox.style.left = Math.floor(centerw + centerw*playerinfo[i][3][0] - 20).toString() + 'px';
-							espbox.style.top = Math.floor(centerh - centerh*playerinfo[i][3][1] - 35).toString() + 'px';
+							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
-							drawer2.innerHTML += playerinfo[i][3][0].toString() + '<br>' + playerinfo[i][3][1].toString() + '<br>' + playerinfo[i][3][2].toString() + '<br>';
+							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							drawer2.innerHTML += '0<br>';
 						}
-						//console.log(espbox);
 					}
 					ticker2 = (ticker2 + 1)%1;
 				}
