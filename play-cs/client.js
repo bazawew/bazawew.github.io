@@ -35464,8 +35464,8 @@
 							let isDead = false;
 							for (let j=0; j<playerextra.length; j+=1){
 								let player = playerextra[j];
-								if (player.id == i.toString()){
-									if (player.status == 'Dead'){
+								if (player[0] == i.toString()){
+									if (player[2] == 'Dead'){
 										isDead = true;
 									}
 									break;
