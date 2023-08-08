@@ -35356,7 +35356,7 @@
 						if (player.id == iid) {
 							continue;
 						}
-						playerextra.push([player.id, player.name, player.status]);
+						playerextra.push(player);
 					}
 				}				
 				
@@ -35372,7 +35372,7 @@
 						return;
 					}
 					for (let j=0; j<playerextra.length; j+=1){
-						let i = playerextra[j][0];
+						let i = parseInt(playerextra[j].id);
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
 						let crd = [
 							itof(c[player + 2888 >> 2]),
@@ -35438,6 +35438,7 @@
 					let sh = window.innerHeight, sw = window.innerWidth;
 					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
 					drawer2.innerHTML = '';
+					/*
 					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
 						if (removediv != null){
@@ -35472,6 +35473,43 @@
 								}
 							}
 							if(isDead){
+								continue;
+							}
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							document.body.appendChild(espbox);
+							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
+						} else {
+							drawer2.innerHTML += '0<br>';
+						}
+					}
+					*/
+					for (let j=0; j<playerextra.length; j+=1){
+						let i = parseInt(playerextra[j].id);
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
+						if (removediv != null){
+							removediv.remove();
+						}
+						
+						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
+						if (playerdots[i] != 0){
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (playerextra[j].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								espbox.remove();
+								continue;
+							}
+							if(playerextra[j].status == 'Dead'){
+								espbox.remove();
 								continue;
 							}
 							espbox.style.opacity = '0.5';
