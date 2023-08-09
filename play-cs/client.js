@@ -35443,7 +35443,7 @@
 					let lpid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
-					let centerh = Math.round(sh/2), centerw = Math.round(sw/2);
+					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
 					drawer2.innerHTML = '';
 					/*
 					for (let i = 1; i <= 32; i+=1){
@@ -35502,7 +35502,7 @@
 						}
 					}
 					*/
-					ctx.clearRect(0, 0, sw, sh);
+					overlay.clearRect(0, 0, sw, sh);
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35540,15 +35540,15 @@
 								continue;
 							}
 							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
-								ctx.fillStyle = 'rgba(125, 245, 255, 0.5)';
+								overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
-								ctx.fillStyle = 'rgba(133, 3, 3, 0.5)';
+								overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								continue;
 							}
 							let xcrd = Math.round(centerw + centerw*playerdots[i][0] - 20);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1] - 35);
-							ctx.fillRect(xcrd, ycrd, 40, 70);
+							overlay.fillRect(xcrd, ycrd, 40, 70);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							//drawer2.innerHTML += '0<br>';
