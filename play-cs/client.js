@@ -35356,6 +35356,9 @@
 						if (player.id == iid) {
 							continue;
 						}
+						if (player.name === undefined) {
+							continue;
+						}
 						playerextra.push(player);
 					}
 				}				
