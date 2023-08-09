@@ -35387,7 +35387,18 @@
 						playerdist[i] = distance;
 						let dot = 0;
 						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
-							dot = w2s(crd);
+							dot = [];
+							dot[0] = w2s(crd);
+							dot[1] = w2s([
+								crd[0],
+								crd[1],
+								crd[2] + 40.0
+							]);
+							dot[2] = w2s([
+								crd[0],
+								crd[1],
+								crd[2] - 40.0
+							]);
 						}
 						playerdots[i] = dot;
 						playerlist[i] = [distance, crd, dot];
@@ -35441,16 +35452,10 @@
 				
 				function drawesp(){
 					drawer2.innerHTML = '';
-					if (Module.canvas !== undefined) {
-						drawer2.innerHTML += 'updating resolution<br>'
-						overlayelement.width = Module.canvas.width;
-						overlayelement.height = Module.canvas.height;
-					}
 					let lpid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
-					drawer2.innerHTML = '';
 					/*
 					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
@@ -35513,7 +35518,7 @@
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
 						drawer2.innerHTML += playerextra[j].name + ' ' + i.toString() + '<br>';
-						if (playerdots[i] != 0){
+						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
 							/*
 							let espbox = document.createElement("div");
 							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
@@ -35552,9 +35557,11 @@
 							} else {
 								continue;
 							}
-							let xcrd = Math.round(centerw + centerw*playerdots[i][0] - 40);
-							let ycrd = Math.round(centerh - centerh*playerdots[i][1] - 70);
-							overlay.fillRect(xcrd, ycrd, 80, 140);
+							let boxheight = Math.round(Math.abs(centerh*platerdots[i][1][1] - centerh*platerdots[i][2][1]));
+							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
+							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
+							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
+							overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							//drawer2.innerHTML += '0<br>';
