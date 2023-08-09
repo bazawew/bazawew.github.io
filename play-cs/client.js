@@ -35564,6 +35564,7 @@
 							overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
+							drawer2.innerHTML += 'блинкуете, батюшка<br>';
 							//drawer2.innerHTML += '0<br>';
 						}
 					}
