@@ -35440,8 +35440,10 @@
 				}
 				
 				function drawesp(){
-					overlayelement.width = Module.canvas.width;
-					overlayelement.height = Module.canvas.height;
+					if (Module.canvas !== undefined) {
+						overlayelement.width = Module.canvas.width;
+						overlayelement.height = Module.canvas.height;
+					}
 					let lpid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
