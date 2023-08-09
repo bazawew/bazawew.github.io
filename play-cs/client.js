@@ -35440,6 +35440,8 @@
 				}
 				
 				function drawesp(){
+					overlayelement.width = Module.canvas.width;
+					overlayelement.height = Module.canvas.height;
 					let lpid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
@@ -35548,7 +35550,7 @@
 							}
 							let xcrd = Math.round(centerw + centerw*playerdots[i][0] - 20);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1] - 35);
-							overlay.fillRect(xcrd, ycrd, 40, 70);
+							overlay.fillRect(xcrd, ycrd, 80, 140);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							//drawer2.innerHTML += '0<br>';
