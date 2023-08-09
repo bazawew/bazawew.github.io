@@ -35439,7 +35439,7 @@
 				function drawesp(){
 					let lpid = getlocalplayerid();
 					let sh = window.innerHeight, sw = window.innerWidth;
-					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
+					let centerh = Math.round(sh/2), centerw = Math.round(sw/2);
 					drawer2.innerHTML = '';
 					/*
 					for (let i = 1; i <= 32; i+=1){
@@ -35512,19 +35512,23 @@
 								espbox.remove();
 								continue;
 							}
-							if(playerextra[j].status == 'Dead'){
+							if (playerextra[j].status == 'Dead'){
+								espbox.remove();
+								continue;
+							}
+							if (playercrd[i] == [0, 0, 0]){
 								espbox.remove();
 								continue;
 							}
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
-							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
-							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							espbox.style.left = Math.round(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
-							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
+							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
-							drawer2.innerHTML += '0<br>';
+							//drawer2.innerHTML += '0<br>';
 						}
 					}
 					ticker2 = (ticker2 + 1)%1;
