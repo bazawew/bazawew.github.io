@@ -35385,7 +35385,10 @@
 						playercrd[i] = crd;
 						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
 						playerdist[i] = distance;
-						let dot = w2s(crd);
+						let dot = 0;
+						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
+							dot = w2s(crd);
+						}
 						playerdots[i] = dot;
 						playerlist[i] = [distance, crd, dot];
 					}
@@ -35513,10 +35516,6 @@
 								continue;
 							}
 							if (playerextra[j].status == 'Dead'){
-								espbox.remove();
-								continue;
-							}
-							if (playercrd[i] == [0, 0, 0]){
 								espbox.remove();
 								continue;
 							}
