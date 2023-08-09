@@ -35441,7 +35441,8 @@
 				
 				function drawesp(){
 					let lpid = getlocalplayerid();
-					let sh = window.innerHeight, sw = window.innerWidth;
+					//let sh = window.innerHeight, sw = window.innerWidth;
+					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerh = Math.round(sh/2), centerw = Math.round(sw/2);
 					drawer2.innerHTML = '';
 					/*
@@ -35493,16 +35494,21 @@
 						}
 					}
 					*/
+					/*
 					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
 						if (removediv != null){
 							removediv.remove();
 						}
 					}
+					*/
+					ctx.clearRect(0, 0, sw, sh);
+					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
 						drawer2.innerHTML += playerextra[j].name + ' ' + i.toString() + '<br>';
 						if (playerdots[i] != 0){
+							/*
 							let espbox = document.createElement("div");
 							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
 							espbox.style.height = '70px';
@@ -35519,12 +35525,30 @@
 								espbox.remove();
 								continue;
 							}
+							if (Math.abs(playerdots[i][0]) >= 1 || Math.abs(playerdots[i][1]) >= 1){
+								espbox.remove();
+								continue;
+							}
 							espbox.style.opacity = '0.5';
 							espbox.style.position = 'absolute';
 							espbox.style.zIndex = '300';
 							espbox.style.left = Math.round(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
 							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
+							*/
+							if (playerextra[j].status == 'Dead'){
+								continue;
+							}
+							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+								ctx.fillStyle = 'rgba(125, 245, 255, 0.5)';
+							} else if (playerextra[j].teamnumber != 0) {
+								ctx.fillStyle = 'rgba(133, 3, 3, 0.5)';
+							} else {
+								continue;
+							}
+							let xcrd = Math.round(centerw + centerw*playerdots[i][0] - 20);
+							let ycrd = Math.round(centerh - centerh*playerdots[i][1] - 35);
+							ctx.fillRect(xcrd, ycrd, 40, 70);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							//drawer2.innerHTML += '0<br>';
