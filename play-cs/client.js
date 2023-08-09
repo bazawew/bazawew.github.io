@@ -35557,7 +35557,7 @@
 							} else {
 								continue;
 							}
-							let boxheight = Math.round(Math.abs(centerh*platerdots[i][1][1] - centerh*platerdots[i][2][1]));
+							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
