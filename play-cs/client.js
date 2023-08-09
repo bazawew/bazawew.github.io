@@ -35498,7 +35498,7 @@
 					}
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
-						drawer2.innerHTML += playerdist[i].toString() + playerextra[j].name + ' ' + i.toString() + '<br>';
+						drawer2.innerHTML += playerextra[j].name + ' ' + i.toString() + '<br>';
 						if (playerdots[i] != 0){
 							let espbox = document.createElement("div");
 							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
