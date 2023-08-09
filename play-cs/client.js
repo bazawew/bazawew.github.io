@@ -35325,25 +35325,228 @@
 					let origin = [];
 					if (isfloat){
 						origin = [
-							itof(c[player + 2900 >> 2]),
-							itof(c[player + 2900 + 4 >> 2]),
-							itof(c[player + 2900 + 8 >> 2])
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
 						];
 					} else {
 						origin = [
-							c[player + 2900 >> 2],
-							c[player + 2900 + 4 >> 2],
-							c[player + 2900 + 8 >> 2]
+							c[player + 2888 >> 2],
+							c[player + 2888 + 4 >> 2],
+							c[player + 2888 + 8 >> 2]
 						];
 					}
 					return origin;
 				}
 				
+				function savelocal(){
+					localcrd = getlocalplayerorigin(true);
+					localangles = getlocalplayerangles(true);
+					return;
+				}
+				
+				function saveextra(){
+					playerextra = [];
+					let iid = getlocalplayerid();
+					if(Object.keys(g_PlayerExtraInfo).length == 0){
+						return;
+					}
+					for (let key in g_PlayerExtraInfo) {
+						let player = g_PlayerExtraInfo[key];
+						if (player.id == iid) {
+							continue;
+						}
+						playerextra.push(player);
+					}
+				}				
+				
+				function iteratingplayers(){
+					let lpid = getlocalplayerid();
+					savelocal();
+					saveextra();
+					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					if (Object.keys(g_TeamInfo).length == 0 || g_TeamInfo.length == 0){
+						return;
+					}
+					for (let j=0; j<playerextra.length; j+=1){
+						let i = parseInt(playerextra[j].id);
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd[i] = crd;
+						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
+						playerdist[i] = distance;
+						let dot = w2s(crd);
+						playerdots[i] = dot;
+						playerlist[i] = [distance, crd, dot];
+					}
+					
+					/*
+					for (let i=1; i<=32; i+=1){
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						if(g_TeamInfo[i].name == ''){
+							if (player == 0){
+								//console.log(i.toString() + ' not entity'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}
+							if ((c[player + 4 >> 2] | 0) % 2 == 0){
+								//console.log(i.toString() + ' not player'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}	
+						}
+						if (i == lpid){
+							//console.log(i.toString() + ' is localplayer');
+							playercrd[i] = 0;
+							playerdist[i] = 0;
+							playerdots[i] = 0;
+							playerlist[i] = 0;
+							continue;
+						}
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd[i] = crd;
+						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
+						playerdist[i] = distance;
+						let dot = w2s(crd);
+						playerdots[i] = dot;
+						playerlist[i] = [distance, crd, dot];
+					}
+					*/
+					
+					return;
+				}
+				
+				function drawesp(){
+					let lpid = getlocalplayerid();
+					let sh = window.innerHeight, sw = window.innerWidth;
+					let centerh = Math.floor(sh/2), centerw = Math.floor(sw/2);
+					drawer2.innerHTML = '';
+					/*
+					for (let i = 1; i <= 32; i+=1){
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
+						if (removediv != null){
+							removediv.remove();
+						}
+						
+						if (playerlist.length === undefined || playerlist.length == 0 || playerlist[i] == 0){
+							continue;
+						}
+						
+						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
+						if (playerdots[i] != 0){
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							if (g_TeamInfo[i].teamnumber == g_TeamInfo[lpid].teamnumber){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (g_TeamInfo[i].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								continue;
+							}
+							let isDead = false;
+							for (let j=0; j<playerextra.length; j+=1){
+								let player = playerextra[j];
+								if (player[0] == i.toString()){
+									if (player[2] == 'Dead'){
+										isDead = true;
+									}
+									break;
+								}
+							}
+							if(isDead){
+								continue;
+							}
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							document.body.appendChild(espbox);
+							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
+						} else {
+							drawer2.innerHTML += '0<br>';
+						}
+					}
+					*/
+					for (let i = 1; i <= 32; i+=1){
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
+						if (removediv != null){
+							removediv.remove();
+						}
+					}
+					for (let j=0; j<playerextra.length; j+=1){
+						
+						drawer2.innerHTML += playerdist[i].toString() + playerextra[j].name + ' ' + i.toString() + '<br>';
+						if (playerdots[i] != 0){
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (playerextra[j].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								espbox.remove();
+								continue;
+							}
+							if(playerextra[j].status == 'Dead'){
+								espbox.remove();
+								continue;
+							}
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							document.body.appendChild(espbox);
+							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
+						} else {
+							drawer2.innerHTML += '0<br>';
+						}
+					}
+					ticker2 = (ticker2 + 1)%1;
+				}
+				
+				function drawinfo(){
+					drawer1.innerHTML = 'SOLARTWEAKS2<br>';
+					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
+					drawer1.innerHTML += 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
+					drawer1.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
+					drawer1.innerHTML += 'local viewangles:<br>' + itof(realviewangles.x).toString() + '<br>' + itof(realviewangles.y).toString() + '<br>' + itof(realviewangles.z).toString() + '<br>';
+				}
+				
+				function update228(){
+					iteratingplayers();
+					drawinfo();
+					drawesp();
+				}
 
 				function jn(a, b, d) {
 					//console.log('updateclientdata16');
-					Do();
-					console.log(getlocalplayerangles(true));
+					//Do();
+					update228();
+					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
+					//console.log(buff);
 					//Wf();
 					//aimbot();
 					a = a | 0;
@@ -42649,7 +42852,7 @@
 					a = a | 0;
 					b = b | 0;
 					d = d | 0;
-					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1;
+					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1; //gHUD
 					return 1
 				}
 
