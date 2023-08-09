@@ -35487,14 +35487,15 @@
 						}
 					}
 					*/
-					for (let j=0; j<playerextra.length; j+=1){
-						let i = parseInt(playerextra[j].id);
+					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
 						if (removediv != null){
 							removediv.remove();
 						}
+					}
+					for (let j=0; j<playerextra.length; j+=1){
 						
-						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
+						drawer2.innerHTML += playerdist[i].toString() + playerextra[j].name + ' ' + i.toString() + '<br>';
 						if (playerdots[i] != 0){
 							let espbox = document.createElement("div");
 							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
