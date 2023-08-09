@@ -35440,7 +35440,9 @@
 				}
 				
 				function drawesp(){
+					drawer2.innerHTML = '';
 					if (Module.canvas !== undefined) {
+						drawer2.innerHTML += 'updating resolution<br>'
 						overlayelement.width = Module.canvas.width;
 						overlayelement.height = Module.canvas.height;
 					}
