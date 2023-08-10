@@ -35388,11 +35388,12 @@
 						let dot = 0;
 						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
 							dot = [];
-							dot[0] = w2s(crd);
+							//dot[0] = w2s(crd);
+							dot[0] = [228, 228, 228];
 							dot[1] = w2s([
 								crd[0],
 								crd[1],
-								crd[2] + 40.0
+								crd[2] + 30.0
 							]);
 							dot[2] = w2s([
 								crd[0],
@@ -35513,7 +35514,9 @@
 						}
 					}
 					*/
-					overlay.clearRect(0, 0, sw, sh);
+					if (ticker2 == 0){
+						overlay.clearRect(0, 0, sw, sh);
+					}
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35564,11 +35567,10 @@
 							overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
-							drawer2.innerHTML += 'блинкуете, батюшка<br>';
 							//drawer2.innerHTML += '0<br>';
 						}
 					}
-					ticker2 = (ticker2 + 1)%1;
+					ticker2 = (ticker2 + 1)%2;
 				}
 				
 				function drawinfo(){
