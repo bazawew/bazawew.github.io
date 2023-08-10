@@ -35457,6 +35457,8 @@
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+					let espboxlist = [];
+					
 					/*
 					for (let i = 1; i <= 32; i+=1){
 						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
@@ -35514,9 +35516,6 @@
 						}
 					}
 					*/
-					if (ticker2 == 0){
-						overlay.clearRect(0, 0, sw, sh);
-					}
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35564,13 +35563,23 @@
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
-							overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
+							espboxlist.push([xcrd, ycrd, boxwidth, boxheight]);
+							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
 							//drawer2.innerHTML += '0<br>';
 						}
 					}
-					ticker2 = (ticker2 + 1)%2;
+					
+					if (ticker2 == 0){
+						overlay.clearRect(0, 0, sw, sh);
+					}
+					
+					for (let j = 0; j < espboxlist.length; j++){
+						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
+					}
+					
+					ticker2 = (ticker2 + 1)%1;
 				}
 				
 				function drawinfo(){
