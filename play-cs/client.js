@@ -35552,10 +35552,12 @@
 							if (playerextra[j].status == 'Dead'){
 								continue;
 							}
+							let isTeammate = true;
 							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
-								overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
+								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
-								overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
+								isTeammate = false;
+								//overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								continue;
 							}
@@ -35563,7 +35565,7 @@
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
-							espboxlist.push([xcrd, ycrd, boxwidth, boxheight]);
+							espboxlist.push([xcrd, ycrd, boxwidth, boxheight, isTeammate]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
@@ -35576,6 +35578,11 @@
 					}
 					
 					for (let j = 0; j < espboxlist.length; j++){
+						if(espboxlist[j][4]){
+							overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
+						} else {
+							overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
+						}
 						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
 					}
 					
