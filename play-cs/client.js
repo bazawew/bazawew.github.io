@@ -35610,7 +35610,6 @@
 					drawer1.innerHTML += 'local entity id: ' + uid.toString() + '<br>';
 					drawer3.innerHTML = 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
 					drawer3.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
-					let va = getviewangles();
 					drawer3.innerHTML += 'local viewangles:<br>' + viewangles[0].toString() + '<br>' + viewangles[1].toString() + '<br>' + viewangles[2].toString() + '<br>';
 				}
 				
