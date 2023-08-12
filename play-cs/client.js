@@ -35339,7 +35339,20 @@
 					return origin;
 				}
 				
+				function getlocalplayerviewangles(isfloat){
+					let ang = getViewAngles();
+					if (!isfloat) {
+						return angles;
+					}
+					return [
+						itof(ang[0]),
+						itof(ang[1]),
+						itof(ang[2])
+					];
+				}
+				
 				function savelocal(){
+					viewangles = getlocalplayerviewangles(true);
 					localcrd = getlocalplayerorigin(true);
 					localangles = getlocalplayerangles(true);
 					return;
@@ -35347,19 +35360,21 @@
 				
 				function saveextra(){
 					playerextra = [];
-					let iid = getlocalplayerid();
+					playerextralist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					let uid = getlocalplayerid();
 					if(Object.keys(g_PlayerExtraInfo).length == 0){
 						return;
 					}
 					for (let key in g_PlayerExtraInfo) {
 						let player = g_PlayerExtraInfo[key];
-						if (player.id == iid) {
+						if (player.id == uid) {
 							continue;
 						}
 						if (player.name === undefined) {
 							continue;
 						}
 						playerextra.push(player);
+						playerextralist[player.id] = player;
 					}
 				}				
 				
@@ -35388,8 +35403,7 @@
 						let dot = 0;
 						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
 							dot = [];
-							//dot[0] = w2s(crd);
-							dot[0] = [228, 228, 228];
+							dot[0] = w2s(crd);
 							dot[1] = w2s([
 								crd[0],
 								crd[1],
@@ -35590,11 +35604,14 @@
 				}
 				
 				function drawinfo(){
-					drawer1.innerHTML = 'SOLARTWEAKS2<br>';
-					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-					drawer1.innerHTML += 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
-					drawer1.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
-					drawer1.innerHTML += 'local viewangles:<br>' + itof(realviewangles.x).toString() + '<br>' + itof(realviewangles.y).toString() + '<br>' + itof(realviewangles.z).toString() + '<br>';
+					let uid = getlocalplayerid();
+					drawer1.innerHTML = 'SOLAR TWEAKS 2<br>';
+					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
+					drawer1.innerHTML += 'local entity id: ' + uid.toString() + '<br>';
+					drawer3.innerHTML = 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
+					drawer3.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
+					let va = getviewangles();
+					drawer3.innerHTML += 'local viewangles:<br>' + viewangles[0].toString() + '<br>' + viewangles[1].toString() + '<br>' + viewangles[2].toString() + '<br>';
 				}
 				
 				function update228(){
@@ -37242,7 +37259,7 @@
 					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
 					if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
 						c[n + 61604 >> 2] = 1; //cam_thirdperson
-						c[n + 61592 + 4 >> 2] = realviewangles.y; //cam_ofs
+						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];a //cam_ofs
 						c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
 						g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 					}
