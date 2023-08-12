@@ -35340,15 +35340,16 @@
 				}
 				
 				function getlocalplayerviewangles(isfloat){
-					let ang = getViewAngles();
+					let ang = getViewAngles2();
 					if (!isfloat) {
-						return angles;
+						return ang;
 					}
-					return [
+					let ang2 = [
 						itof(ang[0]),
 						itof(ang[1]),
 						itof(ang[2])
 					];
+					return ang2;
 				}
 				
 				function savelocal(){
@@ -35386,9 +35387,6 @@
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					if (Object.keys(g_TeamInfo).length == 0 || g_TeamInfo.length == 0){
-						return;
-					}
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
@@ -35567,7 +35565,7 @@
 								continue;
 							}
 							let isTeammate = true;
-							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+							if (playerextra[j].teamnumber == playerextralist[lpid].teamnumber){
 								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
 								isTeammate = false;
