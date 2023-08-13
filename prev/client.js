@@ -35354,14 +35354,14 @@
 					}
 					for (let key in g_PlayerExtraInfo) {
 						let player = g_PlayerExtraInfo[key];
-						if (player.id == iid) {
-							continue;
-						}
 						if (player.name === undefined) {
 							continue;
 						}
-						playerextra.push(player);
 						playerextralist[player.id] = player;
+						if (player.id == iid) {
+							continue;
+						}
+						playerextra.push(player);
 					}
 				}				
 				
