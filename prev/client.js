@@ -35347,6 +35347,7 @@
 				
 				function saveextra(){
 					playerextra = [];
+					playerextralist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					let iid = getlocalplayerid();
 					if(Object.keys(g_PlayerExtraInfo).length == 0){
 						return;
@@ -35360,20 +35361,17 @@
 							continue;
 						}
 						playerextra.push(player);
+						playerextralist[player.id] = player;
 					}
 				}				
 				
 				function iteratingplayers(){
-					let lpid = getlocalplayerid();
 					savelocal();
 					saveextra();
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					if (Object.keys(g_TeamInfo).length == 0 || g_TeamInfo.length == 0){
-						return;
-					}
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
@@ -35553,7 +35551,7 @@
 								continue;
 							}
 							let isTeammate = true;
-							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+							if (playerextra[j].teamnumber == playerextralist[lpid].teamnumber){
 								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
 								isTeammate = false;
