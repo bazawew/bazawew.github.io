@@ -35581,7 +35581,7 @@
 							} else {
 								continue;
 							}
-							if (playercrd[i] == deadcrd[i]) {
+							if (Math.round(playercrd[i][0]) == Math.round(deadcrd[i][0]) && Math.round(playercrd[i][1]) == Math.round(deadcrd[i][1]) & Math.round(playercrd[i][2]) == Math.round(deadcrd[i][2])) {
 								espfillstyle = 'rgba(255, 255, 255, 0.5)';
 							}
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
@@ -35609,6 +35609,7 @@
 					for (let j = 0; j < espboxlist.length; j++){
 						overlay.fillStyle = espboxlist[j][4];
 						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
+						overlay.fillStyle = '#000';
 						overlay.fillText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
 						overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
 					}
