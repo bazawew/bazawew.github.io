@@ -35625,9 +35625,9 @@
 					drawer1.innerHTML = 'SOLAR TWEAKS 2<br>';
 					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
 					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-					drawer3.innerHTML = 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
-					drawer3.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
-					drawer3.innerHTML += 'local viewangles:<br>' + localviewangles[0].toString() + '<br>' + localviewangles[1].toString() + '<br>' + localviewangles[2].toString() + '<br>';
+					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + ' ';
+					drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + ' ';
+					drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + ' ';
 				}
 				
 				function update228(){
