@@ -35620,7 +35620,6 @@
 					//console.log('updateclientdata16');
 					//Do();
 					update228();
-					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
 					//console.log(buff);
 					//Wf();
 					//aimbot();
@@ -37255,7 +37254,7 @@
 					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
 					if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
 						c[n + 61604 >> 2] = 1; //cam_thirdperson
-						c[n + 61592 + 4 >> 2] = realviewangles.y; //cam_ofs
+						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
 						c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
 						g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 					}
