@@ -35531,7 +35531,6 @@
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
 						drawer2.innerHTML += playerextra[j].name + ' ' + i.toString() + '<br>';
-						drawer2.innerHTML += playercrd[i][0].toString() + ' ' + playercrd[i][1].toString() + ' ' + playercrd[i][2].toString() + '<br>';
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
 							/*
 							let espbox = document.createElement("div");
@@ -35561,40 +35560,23 @@
 							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
 							*/
-							
-							if (playercrd[i] == deadcrd[i]){
-								//continue;
-							}
-							
 							if (playerextra[j].status == 'Dead'){
-								deadcrd[i] = playercrd[i];
 								continue;
 							}
-							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0]){
-								deadcrd[i] = [0, 0, 0];
-							}
-							let espfillstyle = 'zxc'
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
-								espfillstyle = 'rgba(125, 245, 255, 0.5)';
+							let isTeammate = true;
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber){
+								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
-								espfillstyle = 'rgba(133, 3, 3, 0.5)';
+								isTeammate = false;
+								//overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								continue;
 							}
-							if (playercrd[i] == deadcrd[i]) {
-								espfillstyle = 'rgba(255, 255, 255, 0.5)';
-							}
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
-							let espx = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
-							let espy = Math.round(centerh - centerh*playerdots[i][1][1]);
-							let pname = playerextra[j].name;
-							let pnamex = espx;
-							let pnamey = espy;
-							let pcrd = playercrd[i][0].toString() + ' ' + playercrd[i][1].toString() + ' ' + playercrd[i][2].toString();
-							let pcrdx = espx;
-							let pcrdy = espy + boxheight;
-							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pcrd, pcrdx, pcrdy]);
+							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
+							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
+							espboxlist.push([xcrd, ycrd, boxwidth, boxheight, isTeammate]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
@@ -35607,10 +35589,12 @@
 					}
 					
 					for (let j = 0; j < espboxlist.length; j++){
-						overlay.fillStyle = espboxlist[j][4];
+						if(espboxlist[j][4]){
+							overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
+						} else {
+							overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
+						}
 						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
-						overlay.strokeText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
-						overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
 					}
 					
 					ticker2 = (ticker2 + 1)%1;
