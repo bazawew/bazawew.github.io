@@ -35341,7 +35341,6 @@
 				
 				function getlocalplayerviewangles(isfloat){
 					let angles = getviewang();
-					let angles = [];
 					if (isfloat){
 						angles = [
 							itof(angles[0]),
