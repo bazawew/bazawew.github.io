@@ -35533,7 +35533,7 @@
 						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
 						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
 						drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
-						drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
+						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
 							drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
 						}
@@ -35568,7 +35568,7 @@
 							*/
 							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
-								//continue;
+								continue;
 							}
 							
 							if (playerextra[j].status == 'Dead'){
@@ -35586,9 +35586,11 @@
 							} else {
 								continue;
 							}
+							/*
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()) {
 								espfillstyle = 'rgba(255, 255, 255, 0.5)';
 							}
+							*/
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let espx = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
@@ -35624,7 +35626,7 @@
 				
 				function drawinfo(){
 					let uid = getlocalplayerid();
-					drawer1.innerHTML = 'SOLAR TWEAKS 2<br>';
+					drawer1.innerHTML = '~snusware<br>';
 					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
 					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
 					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
