@@ -35302,7 +35302,7 @@
 				}
 				
 				function getlocalplayerangles(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let angles = [];
 					if (isfloat){
 						angles = [
@@ -35321,7 +35321,7 @@
 				}
 				
 				function getlocalplayerorigin(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let origin = [];
 					if (isfloat){
 						origin = [
@@ -35339,16 +35339,30 @@
 					return origin;
 				}
 				
+				function getlocalplayerviewangles(isfloat){
+					let angles = getviewang();
+					let angles = [];
+					if (isfloat){
+						angles = [
+							itof(angles[0]),
+							itof(angles[1]),
+							itof(angles[2])
+						];
+					}
+					return angles;
+				}
+				
 				function savelocal(){
 					localcrd = getlocalplayerorigin(true);
 					localangles = getlocalplayerangles(true);
+					localviewangles = getlocalplayerviewangles(true);
 					return;
 				}
 				
 				function saveextra(){
 					playerextra = [];
 					playerextralist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					let iid = getlocalplayerid();
+					let uid = getlocalplayerid();
 					if(Object.keys(g_PlayerExtraInfo).length == 0){
 						return;
 					}
@@ -35358,7 +35372,7 @@
 							continue;
 						}
 						playerextralist[player.id] = player;
-						if (player.id == iid) {
+						if (player.id == uid) {
 							continue;
 						}
 						playerextra.push(player);
@@ -35451,7 +35465,7 @@
 				
 				function drawesp(){
 					drawer2.innerHTML = '';
-					let lpid = getlocalplayerid();
+					let uid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
@@ -35551,7 +35565,7 @@
 								continue;
 							}
 							let isTeammate = true;
-							if (playerextra[j].teamnumber == playerextralist[lpid].teamnumber){
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber){
 								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
 								isTeammate = false;
@@ -35594,7 +35608,7 @@
 					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
 					drawer3.innerHTML = 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
 					drawer3.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
-					drawer3.innerHTML += 'local viewangles:<br>' + itof(realviewangles.x).toString() + '<br>' + itof(realviewangles.y).toString() + '<br>' + itof(realviewangles.z).toString() + '<br>';
+					drawer3.innerHTML += 'local viewangles:<br>' + localviewangles[0].toString() + '<br>' + localviewangles[1].toString() + '<br>' + localviewangles[2].toString() + '<br>';
 				}
 				
 				function update228(){
