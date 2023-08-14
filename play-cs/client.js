@@ -35302,7 +35302,7 @@
 				}
 				
 				function getlocalplayerangles(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let angles = [];
 					if (isfloat){
 						angles = [
@@ -35321,7 +35321,7 @@
 				}
 				
 				function getlocalplayerorigin(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let origin = [];
 					if (isfloat){
 						origin = [
@@ -35340,22 +35340,21 @@
 				}
 				
 				function getlocalplayerviewangles(isfloat){
-					let ang = getViewAngles2();
-					if (!isfloat) {
-						return ang;
+					let angles = getviewang();
+					if (isfloat){
+						angles = [
+							itof(angles[0]),
+							itof(angles[1]),
+							itof(angles[2])
+						];
 					}
-					let ang2 = [
-						itof(ang[0]),
-						itof(ang[1]),
-						itof(ang[2])
-					];
-					return ang2;
+					return angles;
 				}
 				
 				function savelocal(){
-					viewangles = getlocalplayerviewangles(true);
 					localcrd = getlocalplayerorigin(true);
 					localangles = getlocalplayerangles(true);
+					localviewangles = getlocalplayerviewangles(true);
 					return;
 				}
 				
@@ -35368,19 +35367,18 @@
 					}
 					for (let key in g_PlayerExtraInfo) {
 						let player = g_PlayerExtraInfo[key];
-						if (player.id == uid) {
-							continue;
-						}
 						if (player.name === undefined) {
 							continue;
 						}
-						playerextra.push(player);
 						playerextralist[player.id] = player;
+						if (player.id == uid) {
+							continue;
+						}
+						playerextra.push(player);
 					}
 				}				
 				
 				function iteratingplayers(){
-					let lpid = getlocalplayerid();
 					savelocal();
 					saveextra();
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -35401,7 +35399,8 @@
 						let dot = 0;
 						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
 							dot = [];
-							dot[0] = w2s(crd);
+							//dot[0] = w2s(crd);
+							dot[0] = [228, 228, 228];
 							dot[1] = w2s([
 								crd[0],
 								crd[1],
@@ -35465,7 +35464,7 @@
 				
 				function drawesp(){
 					drawer2.innerHTML = '';
-					let lpid = getlocalplayerid();
+					let uid = getlocalplayerid();
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
@@ -35565,7 +35564,7 @@
 								continue;
 							}
 							let isTeammate = true;
-							if (playerextra[j].teamnumber == playerextralist[lpid].teamnumber){
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber){
 								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
 								isTeammate = false;
@@ -35605,10 +35604,10 @@
 					let uid = getlocalplayerid();
 					drawer1.innerHTML = 'SOLAR TWEAKS 2<br>';
 					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
-					drawer1.innerHTML += 'local entity id: ' + uid.toString() + '<br>';
+					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
 					drawer3.innerHTML = 'local model origin:<br>' + localcrd[0].toString() + '<br>' + localcrd[1].toString() + '<br>' + localcrd[2].toString() + '<br>';
 					drawer3.innerHTML += 'local model angles:<br>' + localangles[0].toString() + '<br>' + localangles[1].toString() + '<br>' + localangles[2].toString() + '<br>';
-					drawer3.innerHTML += 'local viewangles:<br>' + viewangles[0].toString() + '<br>' + viewangles[1].toString() + '<br>' + viewangles[2].toString() + '<br>';
+					drawer3.innerHTML += 'local viewangles:<br>' + localviewangles[0].toString() + '<br>' + localviewangles[1].toString() + '<br>' + localviewangles[2].toString() + '<br>';
 				}
 				
 				function update228(){
@@ -35621,7 +35620,6 @@
 					//console.log('updateclientdata16');
 					//Do();
 					update228();
-					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
 					//console.log(buff);
 					//Wf();
 					//aimbot();
@@ -37256,7 +37254,7 @@
 					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
 					if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
 						c[n + 61604 >> 2] = 1; //cam_thirdperson
-						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];a //cam_ofs
+						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
 						c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
 						g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 					}
