@@ -35530,10 +35530,12 @@
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
+						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
+						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
 						drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
-						drawer2.innerHTML += Math.round(playercrd[i][0]).toString() + ' ' + Math.round(playercrd[i][1]).toString() + ' ' + Math.round(playercrd[i][2]).toString() + '<br>';
+						drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
-							drawer2.innerHTML += Math.round(deadcrd[i][0]).toString() + ' ' + Math.round(deadcrd[i][1]).toString() + ' ' + Math.round(deadcrd[i][2]).toString() + '<br>';
+							drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
 						}
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
 							/*
@@ -35565,7 +35567,7 @@
 							document.body.appendChild(espbox);
 							*/
 							
-							if (Math.round(playercrd[i][0]) == Math.round(deadcrd[i][0]) && Math.round(playercrd[i][1]) == Math.round(deadcrd[i][1]) & Math.round(playercrd[i][2]) == Math.round(deadcrd[i][2])){
+							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
 								//continue;
 							}
 							
@@ -35573,11 +35575,10 @@
 								deadcrd[i] = playercrd[i];
 								continue;
 							}
-							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0] && playercrd[i] != [0, 0, 0]){
-								console.log(playerextra[j].name.toString() + ' ' + playercrd[i].toString() + ' ' + deadcrd[i].toString());
-								deadcrd[i] = [0, 0, 0];
+							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
+								deadcrd[i] = zeroarr;
 							}
-							let espfillstyle = 'zxc'
+							let espfillstyle = 'zxc';
 							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
 								espfillstyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
@@ -35585,7 +35586,7 @@
 							} else {
 								continue;
 							}
-							if (Math.round(playercrd[i][0]) == Math.round(deadcrd[i][0]) && Math.round(playercrd[i][1]) == Math.round(deadcrd[i][1]) & Math.round(playercrd[i][2]) == Math.round(deadcrd[i][2])) {
+							if (roundedplayercrd.toString() == roundeddeadcrd.toString()) {
 								espfillstyle = 'rgba(255, 255, 255, 0.5)';
 							}
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
@@ -35595,7 +35596,7 @@
 							let pname = playerextra[j].name;
 							let pnamex = espx;
 							let pnamey = espy;
-							let pcrd = Math.round(playercrd[i][0]).toString() + ' ' + Math.round(playercrd[i][1]).toString() + ' ' + Math.round(playercrd[i][2]).toString();
+							let pcrd = roundedplayercrd.toString();
 							let pcrdx = espx;
 							let pcrdy = espy + boxheight;
 							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pcrd, pcrdx, pcrdy]);
