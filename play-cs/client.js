@@ -35576,7 +35576,7 @@
 								continue;
 							}
 							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
-								deadcrd[i] = zeroarr;
+								deadcrd[i] = [0,0,0];
 							}
 							let espfillstyle = 'zxc';
 							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
