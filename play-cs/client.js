@@ -35560,30 +35560,34 @@
 							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
 							*/
+							
 							if (playercrd[i] == deadcrd[i]){
-								continue;
+								//continue;
 							}
+							
 							if (playerextra[j].status == 'Dead'){
 								deadcrd[i] = playercrd[i];
 								continue;
 							}
-							if (deadcrd[i] != [0, 0, 0]){
+							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0]){
 								deadcrd[i] = [0, 0, 0];
 							}
-							let isTeammate = true;
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber){
-								//overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
+							let espfillstyle = 'zxc'
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+								espfillstyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
-								isTeammate = false;
-								//overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
+								espfillstyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								continue;
+							}
+							if (playercrd[i] == deadcrd[i]) {
+								espfillstyle = 'rgba(255, 255, 255, 0.5)';
 							}
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let xcrd = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
 							let ycrd = Math.round(centerh - centerh*playerdots[i][1][1]);
-							espboxlist.push([xcrd, ycrd, boxwidth, boxheight, isTeammate]);
+							espboxlist.push([xcrd, ycrd, boxwidth, boxheight, espfillstyle]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
 						} else {
@@ -35596,11 +35600,7 @@
 					}
 					
 					for (let j = 0; j < espboxlist.length; j++){
-						if(espboxlist[j][4]){
-							overlay.fillStyle = 'rgba(125, 245, 255, 0.5)';
-						} else {
-							overlay.fillStyle = 'rgba(133, 3, 3, 0.5)';
-						}
+						overlay.fillStyle = espboxlist[j][4];
 						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
 					}
 					
