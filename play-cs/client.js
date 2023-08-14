@@ -35574,6 +35574,7 @@
 								continue;
 							}
 							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0] && playercrd[i] != [0, 0, 0]){
+								console.log(playerextra[j].name.toString() + ' ' + playercrd[i].toString() + ' ' + deadcrd[i].toString());
 								deadcrd[i] = [0, 0, 0];
 							}
 							let espfillstyle = 'zxc'
