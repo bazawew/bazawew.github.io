@@ -35573,7 +35573,7 @@
 								deadcrd[i] = playercrd[i];
 								continue;
 							}
-							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0]){
+							if (deadcrd[i] != playercrd[i] && deadcrd[i] != [0, 0, 0] && playercrd[i] != [0, 0, 0]){
 								deadcrd[i] = [0, 0, 0];
 							}
 							let espfillstyle = 'zxc'
@@ -35625,9 +35625,9 @@
 					drawer1.innerHTML = 'SOLAR TWEAKS 2<br>';
 					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
 					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + ' ';
-					drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + ' ';
-					drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + ' ';
+					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
+					drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
+					drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
 				}
 				
 				function update228(){
