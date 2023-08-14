@@ -35532,6 +35532,9 @@
 						let i = parseInt(playerextra[j].id);
 						drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
 						drawer2.innerHTML += Math.round(playercrd[i][0]).toString() + ' ' + Math.round(playercrd[i][1]).toString() + ' ' + Math.round(playercrd[i][2]).toString() + '<br>';
+						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
+							drawer2.innerHTML += Math.round(deadcrd[i][0]).toString() + ' ' + Math.round(deadcrd[i][1]).toString() + ' ' + Math.round(deadcrd[i][2]).toString() + '<br>';
+						}
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
 							/*
 							let espbox = document.createElement("div");
@@ -35562,7 +35565,7 @@
 							document.body.appendChild(espbox);
 							*/
 							
-							if (playercrd[i] == deadcrd[i]){
+							if (Math.round(playercrd[i][0]) == Math.round(deadcrd[i][0]) && Math.round(playercrd[i][1]) == Math.round(deadcrd[i][1]) & Math.round(playercrd[i][2]) == Math.round(deadcrd[i][2])){
 								//continue;
 							}
 							
