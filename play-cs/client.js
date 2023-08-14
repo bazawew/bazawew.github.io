@@ -35560,8 +35560,15 @@
 							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
 							document.body.appendChild(espbox);
 							*/
-							if (playerextra[j].status == 'Dead'){
+							if (playercrd[i] == deadcrd[i]){
 								continue;
+							}
+							if (playerextra[j].status == 'Dead'){
+								deadcrd[i] = playercrd[i];
+								continue;
+							}
+							if (deadcrd[i] != [0, 0, 0]){
+								deadcrd[i] = [0, 0, 0];
 							}
 							let isTeammate = true;
 							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber){
