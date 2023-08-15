@@ -35598,7 +35598,7 @@
 							let pname = playerextra[j].name;
 							let pnamex = Math.round(centerw + centerw*playerdots[i][1][0]);
 							let pnamey = espy;
-							let pdist = Math.round(playerdist[i]).toString() + 'f';
+							let pdist = Math.round(playerdist[i]/65.0*1.8).toString() + ' m'; //примерно рост перса 1.8 метров и 65 юнитов (ну по факту 73 ну кому не все равно)
 							let pdistx = pnamex;
 							let pdisty = espy - 50; //42px font size
 							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
