@@ -35600,7 +35600,7 @@
 							let pnamey = espy;
 							let pdist = Math.round(playerdist[i]/65.0*1.8).toString() + ' m'; //примерно рост перса 1.8 метров и 65 юнитов (ну по факту 73 ну кому не все равно)
 							let pdistx = pnamex;
-							let pdisty = espy - 50; //42px font size
+							let pdisty = espy - 42; //38px font size
 							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
