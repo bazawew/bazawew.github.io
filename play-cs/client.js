@@ -35598,8 +35598,8 @@
 							let pname = playerextra[j].name;
 							let pnamex = Math.round(centerw + centerw*playerdots[i][1][0]);
 							let pnamey = espy;
-							let pdist = playerdist[i].toString() + 'f';
-							let pdistx = espx;
+							let pdist = Math.round(playerdist[i]).toString() + 'f';
+							let pdistx = pnamex;
 							let pdisty = espy - 50; //42px font size
 							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
