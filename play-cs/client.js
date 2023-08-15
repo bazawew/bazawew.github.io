@@ -35535,7 +35535,7 @@
 						drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
 						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
-							drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
+							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
 						}
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
 							/*
@@ -35596,11 +35596,11 @@
 							let espx = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
 							let espy = Math.round(centerh - centerh*playerdots[i][1][1]);
 							let pname = playerextra[j].name;
-							let pnamex = espx;
+							let pnamex = Math.round(centerw + centerw*playerdots[i][1][0]);
 							let pnamey = espy;
-							let pcrd = roundedplayercrd.toString();
-							let pcrdx = espx;
-							let pcrdy = espy + boxheight;
+							let pdist = playerdist[i].toString() + 'f';
+							let pdistx = espx;
+							let pdisty = espy - 50; //42px font size
 							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pcrd, pcrdx, pcrdy]);
 							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
 							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
@@ -35617,8 +35617,18 @@
 						overlay.fillStyle = espboxlist[j][4];
 						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
 						overlay.fillStyle = '#000';
+						overlay.strokeStyle = '#fff';
+						overlay.textAlign = 'center';
+						overlay.textBaseline = 'bottom';
 						overlay.fillText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
+						overlay.strokeText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
 						overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+						overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+						/*
+						overlay.textBaseline = 'top';
+						overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+						overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+						*/
 					}
 					
 					ticker2 = (ticker2 + 1)%1;
@@ -35626,7 +35636,7 @@
 				
 				function drawinfo(){
 					let uid = getlocalplayerid();
-					drawer1.innerHTML = '~snusware<br>';
+					drawer1.innerHTML = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
 					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
 					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
 					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
