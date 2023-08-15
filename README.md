@@ -1,2 +1,3 @@
 # bazawew.github.io
-![image](https://github.com/bazawew/bazawew.github.io/assets/106189440/8a61ddbb-9710-407c-80a4-0c642d638556)
+![Snapshot_230815053414](https://github.com/bazawew/bazawew.github.io/assets/106189440/f387a40f-88c4-4d72-92fd-34df2fa21db8)
+
