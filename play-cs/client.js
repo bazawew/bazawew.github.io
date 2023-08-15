@@ -35394,7 +35394,7 @@
 							itof(c[player + 2888 + 8 >> 2])
 						];
 						playercrd[i] = crd;
-						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
+						let distance = Math.sqrt((localcrd[0]-crd[0])**2+(localcrd[1]-crd[1])**2+(localcrd[2]-crd[2])**2);
 						playerdist[i] = distance;
 						let dot = 0;
 						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
