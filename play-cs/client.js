@@ -35611,6 +35611,7 @@
 				}
 				
 				function drawoverlay() {
+					let sw = overlayelement.width, sh = overlayelement.height;
 					if (ticker2 == 0){
 						overlay.clearRect(0, 0, sw, sh);
 					}
