@@ -5812,41 +5812,42 @@
 						k = 0;
 					k = i;
 					i = i + 16 | 0;
-					switch(~~+g[(c[n + 61544 >> 2] | 0) + 12 >> 2] | 0) {
+					switch(~~+g[(c[n + 61544 >> 2] | 0) + 12 >> 2] | 0) { //cam_command->value
 						case 1:
 							{
-								Do();
+								Do(); //__Z17CAM_ToThirdPersonv
 								break
 							}
 						case 2:
 							{
-								c[n + 61604 >> 2] = 0;
-								qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0);
+								c[n + 61604 >> 2] = 0; //cam_thirdperson
+								qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0); //gEngfuncs.Cvar_SetValue( "cam_command", 0 )
 								break
 							}
 						default:
 							{}
 					}
-					if(c[n + 61604 >> 2] | 0) {
-						a = c[(c[n + 61556 >> 2] | 0) + 12 >> 2] | 0;
-						d = c[(c[n + 61552 >> 2] | 0) + 12 >> 2] | 0;
-						e = +g[(c[n + 61560 >> 2] | 0) + 12 >> 2];
+					if(c[n + 61604 >> 2] | 0) { //cam_thirdperson == true
+						a = c[(c[n + 61556 >> 2] | 0) + 12 >> 2] | 0; //camAngles[pitch] = cam_idealpitch->value
+						d = c[(c[n + 61552 >> 2] | 0) + 12 >> 2] | 0; //camAngles[yaw] = cam_idealyaw->value;
+						e = +g[(c[n + 61560 >> 2] | 0) + 12 >> 2];    //dist = cam_idealdist->value;
 						do
-							if(!((c[n + 61608 >> 2] | 0) == 0 | (c[n + 61616 >> 2] | 0) != 0)) {
-								h = c[n + 61628 >> 2] | 0;
-								if((h | 0) > (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) {
-									b = (c[l >> 2] = d, +g[l >> 2]);
-									f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2];
-									if(b < f) {
-										d = c[n + 61628 >> 2] | 0;
-										j = b + +((d - (qx(c[n + 60568 + 128 >> 2] | 0) | 0) | 0) / 2 | 0 | 0) * .5;
-										f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2];
-										d = (g[l >> 2] = j, c[l >> 2] | 0)
+							if(!((c[n + 61608 >> 2] | 0) == 0 | (c[n + 61616 >> 2] | 0) != 0)) { //cam_mousemove == true && cam_distancemove == false
+								h = c[n + 61628 >> 2] | 0; //cam_mouse.x
+								if((h | 0) > (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) { //cam_mouse.x > gEngfuncs.GetWindowCenterX()
+									b = (c[l >> 2] = d, +g[l >> 2]); //camAngles[yaw]
+									f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2]; //c_maxyaw->value
+									if(b < f) { //camAngles[yaw] < c_maxyaw->value
+										d = c[n + 61628 >> 2] | 0; //cam_mouse.x
+										j = b + +((d - (qx(c[n + 60568 + 128 >> 2] | 0) | 0) | 0) / 2 | 0 | 0) * .5; //j = camAngles[yaw] + ((cam_mouse.x-gEngfuncs.GetWindowCenterX())/2/2;
+										f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2]; //c_maxyaw->value
+										d = (g[l >> 2] = j, c[l >> 2] | 0) //camAngles[yaw] = j
 									}
-									if((c[l >> 2] = d, +g[l >> 2]) > f) d = (g[l >> 2] = f, c[l >> 2] | 0)
+									if((c[l >> 2] = d, +g[l >> 2]) > f) //camAngles[yaw] > c_maxyaw->value
+										d = (g[l >> 2] = f, c[l >> 2] | 0) //camAngles[yaw] = c_maxyaw->value //camAngles[yaw] = max(camAngles[yaw], c_maxyaw->value)
 								} else {
-									h = c[n + 61628 >> 2] | 0;
-									if((h | 0) < (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) {
+									h = c[n + 61628 >> 2] | 0; //cam_mouse.x
+									if((h | 0) < (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) { //cam_mouse.x < gEngfuncs.GetWindowCenterX()
 										f = (c[l >> 2] = d, +g[l >> 2]);
 										b = +g[(c[n + 61580 >> 2] | 0) + 12 >> 2];
 										if(f > b) {
@@ -35468,7 +35469,6 @@
 					//let sh = window.innerHeight, sw = window.innerWidth;
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
-					let espboxlist = [];
 					
 					/*
 					for (let i = 1; i <= 32; i+=1){
@@ -35608,27 +35608,33 @@
 							//drawer2.innerHTML += '0<br>';
 						}
 					}
-					
+				}
+				
+				function drawoverlay() {
 					if (ticker2 == 0){
 						overlay.clearRect(0, 0, sw, sh);
 					}
 					
-					for (let j = 0; j < espboxlist.length; j++){
-						overlay.fillStyle = espboxlist[j][4];
-						overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
-						overlay.fillStyle = '#000';
-						overlay.strokeStyle = '#fff';
-						overlay.textAlign = 'center';
-						overlay.textBaseline = 'bottom';
-						overlay.fillText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
-						overlay.strokeText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
-						overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-						overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-						/*
-						overlay.textBaseline = 'top';
-						overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-						overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-						*/
+					espboxlist = [];
+					if (setcfg.esp) {
+						drawesp();
+						for (let j = 0; j < espboxlist.length; j++){
+							overlay.fillStyle = espboxlist[j][4];
+							overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
+							overlay.fillStyle = '#000';
+							overlay.strokeStyle = '#fff';
+							overlay.textAlign = 'center';
+							overlay.textBaseline = 'bottom';
+							overlay.fillText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
+							overlay.strokeText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
+							overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+							overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+							/*
+							overlay.textBaseline = 'top';
+							overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+							overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
+							*/
+						}
 					}
 					
 					ticker2 = (ticker2 + 1)%1;
@@ -35647,7 +35653,7 @@
 				function update228(){
 					iteratingplayers();
 					drawinfo();
-					drawesp();
+					drawoverlay();
 				}
 
 				function jn(a, b, d) {
@@ -37266,23 +37272,20 @@
 					return
 				}
 
-				function Do() {
-					//console.log('tpvopened');
+				function Do() { //__Z17CAM_ToThirdPersonv
 					var a = 0;
 					a = i;
 					i = i + 16 | 0;
 					/*
-					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) { //gEngfuncs
-						console.log('1stifopened');
-						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
-						if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
-							console.log('2ndifopened');
-							c[n + 61604 >> 2] = 1; //cam_thirdperson
-							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
-							c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
-							g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
+					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) {        //gEngfuncs.GetMaxClients() <= 1
+						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0);             //  gEngfuncs.GetViewAngles()
+						if(!(c[n + 61604 >> 2] | 0)) {                      //  cam_thirdperson == false
+							c[n + 61604 >> 2] = 1;                          //    cam_thirdperson = true
+							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];          //    cam_ofs[yaw] = viewangles[yaw]
+							c[n + 61592 >> 2] = c[a >> 2];                  //    cam_ofs[pitch] = viewangles[pitch]
+							g[n + 61592 + 8 >> 2] = 30.0                    //    cam_ofs[dist] = 30.0
 						}
-						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0)
+						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0) //  gEngfuncs.Cvar_SetValue( "cam_command", 0 )
 					}
 					*/
 					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
