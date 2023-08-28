@@ -4596,7 +4596,7 @@
 					return a | 0
 				}
 
-				function af(d, e, f) {
+				function af(d, e, f) { //__ZN24CGameStudioModelRenderer17_StudioDrawPlayerEiP14entity_state_s
 					d = d | 0;
 					e = e | 0;
 					f = f | 0;
@@ -4613,18 +4613,18 @@
 						t = 0;
 					r = i;
 					i = i + 3040 | 0;
-					c[d + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
-					eu(c[n + 64816 + 40 >> 2] | 0, d + 36 | 0, d + 8 | 0, d + 16 | 0);
+					c[d + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //m_pCurrentEntity = IEngineStudio.GetCurrentEntity();
+					eu(c[n + 64816 + 40 >> 2] | 0, d + 36 | 0, d + 8 | 0, d + 16 | 0); //
 					ut(c[n + 64816 + 48 >> 2] | 0, d + 16528 | 0, d + 16492 | 0, d + 16504 | 0, d + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, d + 16484 | 0, d + 16488 | 0);
-					h = c[f + 4 >> 2] | 0;
-					c[d + 64 >> 2] = h + -1;
+					h = c[f + 4 >> 2] | 0; //h = pplayer->number
+					c[d + 64 >> 2] = h + -1; //m_nPlayerIndex = pplayer->number - 1;
 					do
-						if((h | 0) >= 1 ? (h | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) {
-							h = c[f + 4 >> 2] | 0;
-							j = c[n + 50528 + 104 >> 2] | 0;
+						if((h | 0) >= 1 ? (h | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) { //m_nPlayerIndex < 0 || m_nPlayerIndex >= gEngfuncs.GetMaxClients()
+							h = c[f + 4 >> 2] | 0; ////h = pplayer->number
+							j = c[n + 50528 + 104 >> 2] | 0; //j = gHUD.cl_minmodels
 							a: do
-								if((j | 0) != 0 ? +g[j + 12 >> 2] != 0.0 : 0) switch(b[n + 116852 + (h * 92 | 0) + 6 >> 1] | 0) {
+								if((j | 0) != 0 ? +g[j + 12 >> 2] != 0.0 : 0) switch(b[n + 116852 + (h * 92 | 0) + 6 >> 1] | 0) { 
 									case 1:
 										{
 											h = c[n + 50528 + 108 >> 2] | 0;
@@ -4660,8 +4660,8 @@
 								} else q = 17;
 							while(0);
 							if((q | 0) == 17) {
-								j = Kv(c[n + 64816 + 124 >> 2] | 0, c[d + 64 >> 2] | 0) | 0;
-								c[d + 56 >> 2] = j;
+								j = Kv(c[n + 64816 + 124 >> 2] | 0, c[d + 64 >> 2] | 0) | 0; //j = IEngineStudio.SetupPlayerModel(m_nPlayerIndex);
+								c[d + 56 >> 2] = j; //m_pRenderModel = IEngineStudio.SetupPlayerModel( m_nPlayerIndex );
 								h = d + 56 | 0
 							}
 							if((j | 0) != 0 ? (k = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0, c[d + 72 >> 2] = k, (k | 0) != 0) : 0) {
@@ -34555,17 +34555,17 @@
 					return
 				}
 
-				function Lm(a) {
+				function Lm(a) { //__ZN20CStudioModelRenderer4InitEv
 					a = a | 0;
-					c[a + 40 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36209 | 0) | 0;
-					c[a + 44 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36221 | 0) | 0;
-					c[a + 48 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36231 | 0) | 0;
-					c[a + 92 >> 2] = qx(c[n + 64816 + 52 >> 2] | 0) | 0;
-					gv(c[n + 64816 + 56 >> 2] | 0, a + 16540 | 0, a + 16544 | 0);
-					c[a + 16556 >> 2] = qx(c[n + 64816 + 64 >> 2] | 0) | 0;
-					c[a + 16560 >> 2] = qx(c[n + 64816 + 68 >> 2] | 0) | 0;
-					c[a + 16552 >> 2] = qx(c[n + 64816 + 72 >> 2] | 0) | 0;
-					c[a + 16548 >> 2] = qx(c[n + 64816 + 76 >> 2] | 0) | 0;
+					c[a + 40 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36209 | 0) | 0; //m_pCvarHiModels = IEngineStudio.GetCvar("cl_himodels");
+					c[a + 44 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36221 | 0) | 0; //m_pCvarDeveloper = IEngineStudio.GetCvar("developer");
+					c[a + 48 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36231 | 0) | 0; //m_pCvarDrawEntities = IEngineStudio.GetCvar("r_drawentities");
+					c[a + 92 >> 2] = qx(c[n + 64816 + 52 >> 2] | 0) | 0;                //m_pChromeSprite = IEngineStudio.GetChromeSprite();
+					gv(c[n + 64816 + 56 >> 2] | 0, a + 16540 | 0, a + 16544 | 0);       //IEngineStudio.GetModelCounters(&m_pStudioModelCount, &m_pModelsDrawn);
+					c[a + 16556 >> 2] = qx(c[n + 64816 + 64 >> 2] | 0) | 0;             //m_pbonetransform = (float (*)[MAXSTUDIOBONES][3][4])IEngineStudio.StudioGetBoneTransform();
+					c[a + 16560 >> 2] = qx(c[n + 64816 + 68 >> 2] | 0) | 0;             //m_plighttransform = (float (*)[MAXSTUDIOBONES][3][4])IEngineStudio.StudioGetLightTransform();
+					c[a + 16552 >> 2] = qx(c[n + 64816 + 72 >> 2] | 0) | 0;             //m_paliastransform = (float (*)[3][4])IEngineStudio.StudioGetAliasTransform();
+					c[a + 16548 >> 2] = qx(c[n + 64816 + 76 >> 2] | 0) | 0;             //m_protationmatrix = (float (*)[3][4])IEngineStudio.StudioGetRotationMatrix();
 					return
 				}
 
@@ -35532,7 +35532,7 @@
 						let i = parseInt(playerextra[j].id);
 						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
 						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
-						drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
+						if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
 						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
 							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
@@ -35617,7 +35617,7 @@
 					}
 					
 					espboxlist = [];
-					if (setcfg.esp) {
+					if (setcfg.espenabled) {
 						drawesp();
 						for (let j = 0; j < espboxlist.length; j++){
 							overlay.fillStyle = espboxlist[j][4];
@@ -35642,13 +35642,20 @@
 				}
 				
 				function drawinfo(){
-					let uid = getlocalplayerid();
-					drawer1.innerHTML = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
-					drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
-					drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-					drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
-					drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
-					drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
+					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
+
+					if (setcfg.showinfoblocks){
+						let uid = getlocalplayerid();
+						drawer1.innerHTML = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
+						drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
+						drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
+						drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
+						drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
+						drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+					} else {
+						drawer1.innerHTML = "";
+					}
 				}
 				
 				function update228(){
@@ -35658,12 +35665,7 @@
 				}
 
 				function jn(a, b, d) {
-					//console.log('updateclientdata16');
-					//Do();
 					update228();
-					//console.log(buff);
-					//Wf();
-					//aimbot();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
