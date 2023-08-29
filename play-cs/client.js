@@ -35642,20 +35642,29 @@
 				}
 				
 				function drawinfo(){
+					console.log('zxc1');
 					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
-					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
-
+					console.log('zxc2');
+					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none")
+					console.log('zxc3');
 					if (setcfg.showinfoblocks){
+						console.log('zxc4');
 						let uid = getlocalplayerid();
-						drawer1.innerHTML = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
-						drawer1.innerHTML += 'Hi, ' + playerextralist[uid].name + '!<br>';
-						drawer1.innerHTML += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-						drawer1.innerHTML += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
-						drawer1.innerHTML += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
-						drawer1.innerHTML += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+						let d1text = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
+						console.log('zxc5');
+						d1text += 'Hi, ' + playerextralist[uid].name + '!<br>';
+						d1text += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
+						d1text += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
+						d1text += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
+						d1text += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+						console.log('zxc6');
+						drawer1.innerHTML = d1text;
+						console.log('zxc7');
 					} else {
+						console.log('zxc8');
 						drawer1.innerHTML = "";
 					}
+					console.log('zxc9');
 				}
 				
 				function update228(){
