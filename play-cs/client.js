@@ -35646,15 +35646,16 @@
 					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
 					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
 					*/
-					if (drawer1.style.display != 'block' && setcfg.showinfoblocks) {
-						drawer1.style.display = 'block';
-						drawer2.style.display = 'block';
-						drawer3.style.display = 'block';
+					let drawers = document.getElementsByClassName("infoblock");
+					if (drawers[0].style.display != 'block' && setcfg.showinfoblocks) {
+						drawers[0].style.display = 'block';
+						drawers[1].style.display = 'block';
+						drawers[2].style.display = 'block';
 					} 
-					else if (drawer1.style.display != 'none' && !setcfg.showinfoblocks) {
-						drawer1.style.display = 'none';
-						drawer2.style.display = 'none';
-						drawer3.style.display = 'none';
+					else if (drawers[0].style.display != 'none' && !setcfg.showinfoblocks) {
+						drawers[0].style.display = 'none';
+						drawers[1].style.display = 'none';
+						drawers[2].style.display = 'none';
 					}
 					
 					if (setcfg.showinfoblocks){
