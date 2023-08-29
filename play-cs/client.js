@@ -35646,12 +35646,12 @@
 					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
 					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
 					*/
-					if (drawer1.style.display == 'none' && setcfg.showinfoblocks) {
+					if (drawer1.style.display != 'block' && setcfg.showinfoblocks) {
 						drawer1.style.display = 'block';
 						drawer2.style.display = 'block';
 						drawer3.style.display = 'block';
 					} 
-					else if (drawer1.style.display == 'block' && setcfg.showinfoblocks) {
+					else if (drawer1.style.display != 'none' && !setcfg.showinfoblocks) {
 						drawer1.style.display = 'none';
 						drawer2.style.display = 'none';
 						drawer3.style.display = 'none';
