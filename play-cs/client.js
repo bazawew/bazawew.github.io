@@ -35642,29 +35642,33 @@
 				}
 				
 				function drawinfo(){
-					console.log('zxc1');
+					/* жкуери крашыт сносим КЕМ
 					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
-					console.log('zxc2');
-					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none")
-					console.log('zxc3');
+					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
+					*/
+					if (drawer1.style.display == 'none' && setcfg.showinfoblocks) {
+						drawer1.style.display = 'block';
+						drawer2.style.display = 'block';
+						drawer3.style.display = 'block';
+					} 
+					else if (drawer1.style.display == 'block' && setcfg.showinfoblocks) {
+						drawer1.style.display = 'none';
+						drawer2.style.display = 'none';
+						drawer3.style.display = 'none';
+					}
+					
 					if (setcfg.showinfoblocks){
-						console.log('zxc4');
 						let uid = getlocalplayerid();
 						let d1text = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
-						console.log('zxc5');
 						d1text += 'Hi, ' + playerextralist[uid].name + '!<br>';
 						d1text += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
 						d1text += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
 						d1text += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
 						d1text += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
-						console.log('zxc6');
 						drawer1.innerHTML = d1text;
-						console.log('zxc7');
 					} else {
-						console.log('zxc8');
 						drawer1.innerHTML = "";
 					}
-					console.log('zxc9');
 				}
 				
 				function update228(){
