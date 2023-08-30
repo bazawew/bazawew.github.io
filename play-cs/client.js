@@ -35418,22 +35418,23 @@
 						}
 						playerdots[i] = dot;
 						
-						let weaponmodelid = c[player + 688 + 180 >> 2];
+						let weaponmodelid = c[player + 688 + 180 >> 2]; //player->curstate->weaponmodel
 						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; //GetModelByIndex
 						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0; //Mod_Extradata
 						
-						let weaponchars = [];
+						let hdrname = '';
 						for (let jk = 0; jk < 64; jk+=1){
-							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
+							let achar = a[weaponxtrdt + 8 + jk >> 0];
+							if (achar == 0) break;
+							hdrname += String.fromCharCode(achar);
 						}
-						let weaponname = String.fromCharCode(weaponchars);
-						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
-						playerweapon[i] = weaponname;
-						playerweapon2[i] = weaponname2;
+						
+						playerweapon[i] = weaponmodelid;
+						playerweapon2[i] = hdrname;
 						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
-						playerlist[i] = [distance, crd, dot, hp, weaponname, weaponname2];
+						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname];
 					}
 					
 					/*
@@ -35626,7 +35627,7 @@
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
 							
-							let weaponid = playerweapon[i];
+							let weaponid = playerweapon[i].toString();
 							let weaponidx = pnamex;
 							let weaponidy = espy + boxheight;
 							let weaponid2 = playerweapon2[i];
@@ -35702,26 +35703,14 @@
 						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
 						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
 						
-						let hdrid = c[weaponxtrdt + 0 >> 2];
-						let hdrv = c[weaponxtrdt + 4 >> 2];
-						
-						let hdrchars = [];
+						let hdrname = '';
 						for (let jk = 0; jk < 64; jk+=1){
-							hdrchars.push(a[weaponxtrdt + 8 + jk >> 0]);
+							let achar = a[weaponxtrdt + 8 + jk >> 0];
+							if (achar == 0) break;
+							hdrname += String.fromCharCode(achar);
 						}
-						let hdrname = String.fromCharCode(hdrchars);
-						let hdrxxx = c[weaponxtrdt + 8 >> 2].toString();
-						
-						//hc(n + 158134 | 0, b | 0, 64) //strncpy( szViewModelName, pWeaponModel->name, sizeof( szViewModelName ) );
-						
-						let weaponchars = [];
-						for (let jk = 0; jk < 64; jk+=1){
-							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
-						}
-						let weaponname = String.fromCharCode(weaponchars);
-						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
-						d1text += 'lwmodel hdrinfo: ' + hdrid.toString() + ' ' + hdrv.toString() + ' ' + hdrchars.toString() + ' ' + hdrname + ' ' + hdrxxx + '<br>';
-						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + weaponchars.toString() + ' ' + weaponname + ' ' + weaponname2 + '<br>';
+
+						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' hdrname + '<br>';
 						
 						drawer1.innerHTML = d1text;
 					} else {
