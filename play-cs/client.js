@@ -35557,7 +35557,8 @@
 						let i = parseInt(playerextra[j].id);
 						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
 						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
-						if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
+						let d2text = '';
+						if (setcfg.showinfoblocks) d2text = playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
 						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
 							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
@@ -35593,11 +35594,13 @@
 							*/
 							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
 								continue;
 							}
 							
 							if (playerextra[j].status == 'Dead'){
 								deadcrd[i] = playercrd[i];
+								drawer2.innerHTML += d2text;
 								continue;
 							}
 							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
@@ -35609,6 +35612,7 @@
 							} else if (playerextra[j].teamnumber != 0) {
 								espfillstyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
+								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + ' team ' + d2text;
 								continue;
 							}
 							/*
@@ -35616,6 +35620,8 @@
 								espfillstyle = 'rgba(255, 255, 255, 0.5)';
 							}
 							*/
+							drawer2.innerHTML += d2text;
+							
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
 							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
 							let espx = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
