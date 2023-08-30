@@ -35710,7 +35710,7 @@
 							hdrname += String.fromCharCode(achar);
 						}
 
-						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' hdrname + '<br>';
+						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + hdrname + '<br>';
 						
 						drawer1.innerHTML = d1text;
 					} else {
