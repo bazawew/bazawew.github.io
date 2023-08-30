@@ -5489,7 +5489,7 @@
 					return 1
 				}
 
-				function df(a) {
+				function df(a) { //__ZN20CStudioModelRenderer16StudioSetupBonesEv
 					a = a | 0;
 					var b = 0,
 						e = 0,
@@ -35391,7 +35391,7 @@
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
-						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0; //GetEntityByIndex
 						let crd = [
 							itof(c[player + 2888 >> 2]),
 							itof(c[player + 2888 + 4 >> 2]),
@@ -35419,11 +35419,11 @@
 						playerdots[i] = dot;
 						
 						let weaponmodelid = c[player + 688 + 180 >> 2];
-						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
-						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; //GetModelByIndex
+						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0; //Mod_Extradata
 						
 						let weaponchars = [];
-						for (let jk = 0; jk < 64; jk++){
+						for (let jk = 0; jk < 64; jk+=1){
 							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
 						}
 						let weaponname = String.fromCharCode(weaponchars);
@@ -35701,16 +35701,27 @@
 						let weaponmodelid = c[localplayerentity + 688 + 180 >> 2];
 						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
 						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+						
+						let hdrid = c[weaponxtrdt + 0 >> 2];
+						let hdrv = c[weaponxtrdt + 4 >> 2];
+						
+						let hdrchars = [];
+						for (let jk = 0; jk < 64; jk+=1){
+							hdrchars.push(a[weaponxtrdt + 8 + jk >> 0]);
+						}
+						let hdrname = String.fromCharCode(hdrchars);
+						let hdrxxx = c[weaponxtrdt + 8 >> 2].toString();
+						
 						//hc(n + 158134 | 0, b | 0, 64) //strncpy( szViewModelName, pWeaponModel->name, sizeof( szViewModelName ) );
 						
 						let weaponchars = [];
-						for (let jk = 0; jk < 64; jk++){
+						for (let jk = 0; jk < 64; jk+=1){
 							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
 						}
 						let weaponname = String.fromCharCode(weaponchars);
 						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
-						
-						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + weaponname2 + ' ' + weaponname + '<br>';
+						d1text += 'lwmodel hdrinfo: ' + hdrid.toString() + ' ' + hdrv.toString() + ' ' + hdrchars.toString() + ' ' + hdrname + ' ' + hdrxxx + '<br>';
+						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + weaponchars.toString() + ' ' + weaponname + ' ' + weaponname2 + '<br>';
 						
 						drawer1.innerHTML = d1text;
 					} else {
@@ -38846,7 +38857,7 @@
 					return
 				}
 
-				function jq(a, b, d) {
+				function jq(a, b, d) { //__ZN24CGameStudioModelRenderer15LookupAnimationEP16mstudioseqdesc_ti
 					a = a | 0;
 					b = b | 0;
 					d = d | 0;
