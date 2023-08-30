@@ -35663,7 +35663,7 @@
 							//overlay.fillText(weaponid, weaponidx, weaponidy);
 							//overlay.strokeText(weaponid, weaponidx, weaponidy);
 							if (isWeaponDefault) {
-								overlay.font = '100px cstrikemodel';
+								overlay.font = '100px csdmodel';
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y+30);
 								overlay.strokeText(weaponid2, weaponid2x, weaponid2y+30);
 								overlay.font = '38px stratum2bold';
