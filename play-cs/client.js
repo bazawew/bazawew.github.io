@@ -35433,7 +35433,7 @@
 						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
-						playerlist[i] = [distance, crd, dot, weapon, hp];
+						playerlist[i] = [distance, crd, dot, hp, weaponname, weaponname2];
 					}
 					
 					/*
