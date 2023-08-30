@@ -35644,7 +35644,7 @@
 							
 							//espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
 							
-							overlay.font = '38px stratum2bold';
+							overlay.font = '38px verdanabold';
 							
 							overlay.fillStyle = espfillstyle;
 							overlay.fillRect(espx, espy,boxwidth, boxheight);
@@ -35666,7 +35666,7 @@
 								overlay.font = '100px csdmodel';
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y+30);
 								overlay.strokeText(weaponid2, weaponid2x, weaponid2y+30);
-								overlay.font = '38px stratum2bold';
+								overlay.font = '38px verdanabold';
 							} else {
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
 								overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
