@@ -35705,12 +35705,12 @@
 						
 						let weaponchars = [];
 						for (let jk = 0; jk < 64; jk++){
-							weaponchars.push(a[weaponmodel + jk >> 0]);
+							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
 						}
 						let weaponname = String.fromCharCode(weaponchars);
 						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
 						
-						d1text += 'local weapon: ' weaponmodelid + ' ' + weaponname2 + ' ' + weaponname + '<br>';
+						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + weaponname2 + ' ' + weaponname + '<br>';
 						
 						drawer1.innerHTML = d1text;
 					} else {
