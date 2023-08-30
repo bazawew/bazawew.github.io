@@ -35388,6 +35388,7 @@
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35425,16 +35426,20 @@
 						let hdrname = '';
 						for (let jk = 0; jk < 64; jk+=1){
 							let achar = a[weaponxtrdt + 8 + jk >> 0];
-							if (achar == 0) break;
+							if (achar == 0 || (jk == 0 && achar == 51)) break;
 							hdrname += String.fromCharCode(achar);
 						}
 						
+						let weaponsymbol = modelToCSLetter[hdrname];
+						if (weaponsymbol === undefined) weaponsymbol = '';
+						
 						playerweapon[i] = weaponmodelid;
 						playerweapon2[i] = hdrname;
+						playerweapon3[i] = weaponsymbol;
 						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
-						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname];
+						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35627,14 +35632,19 @@
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
 							
+							/*
 							let weaponid = playerweapon[i].toString();
 							let weaponidx = pnamex;
-							let weaponidy = espy + boxheight;
-							let weaponid2 = playerweapon2[i];
+							let weaponidy = espy + boxheight;*/
+							
+							let isWeaponDefault = playerweapon3[i] != '';
+							let weaponid2 = isWeaponDefault ? playerweapon3[i] : playerweapon2[i];
 							let weaponid2x = pnamex;
-							let weaponid2y = espy + boxheight + 42;
+							let weaponid2y = espy + boxheight; //espy + boxheight + 42;
 							
 							//espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
+							
+							overlay.font = '38px stratum2bold';
 							
 							overlay.fillStyle = espfillstyle;
 							overlay.fillRect(espx, espy,boxwidth, boxheight);
@@ -35650,10 +35660,16 @@
 							//overlay.strokeText(hp, hpx, hpy);
 							
 							overlay.textBaseline = 'top';
-							overlay.fillText(weaponid, weaponidx, weaponidy);
-							overlay.strokeText(weaponid, weaponidx, weaponidy);
-							overlay.fillText(weaponid2, weaponid2x, weaponid2y);
-							overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
+							//overlay.fillText(weaponid, weaponidx, weaponidy);
+							//overlay.strokeText(weaponid, weaponidx, weaponidy);
+							if (isWeaponDefault) {
+								overlay.font = '38px cstrikemodel';
+								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
+								overlay.font = '38px stratum2bold';
+							} else {
+								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
+								overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
+							}
 						}
 					}
 				}
@@ -35707,6 +35723,10 @@
 						for (let jk = 0; jk < 64; jk+=1){
 							let achar = a[weaponxtrdt + 8 + jk >> 0];
 							if (achar == 0) break;
+							if (jk == 0 && achar != 112) {
+								hdrname = '?';
+								break;
+							}
 							hdrname += String.fromCharCode(achar);
 						}
 
