@@ -21779,7 +21779,7 @@
 					return
 				}
 
-				function Rh(b, d, e, f) {
+				function Rh(b, d, e, f) { //__Z18EV_HLDM_NewExplodeffff
 					b = +b;
 					d = +d;
 					e = +e;
@@ -21804,11 +21804,11 @@
 					h = Gp(j | 0, k + 60 | 0, k + 48 | 0, +f, h | 0, 5, 0, 1.0, .5, 16768) | 0;
 					if(h | 0) {
 						g[h + 24 >> 2] = 90.0;
-						g[h + 852 >> 2] = 37.0;
-						c[h + 832 >> 2] = 155;
-						a[h + 836 >> 0] = -1;
-						a[h + 837 >> 0] = -1;
-						a[h + 838 >> 0] = -1
+						g[h + 852 >> 2] = 37.0; //pTemp->entity.curstate.framerate = 37.0;
+						c[h + 832 >> 2] = 155; //pTemp->entity.curstate.renderamt = 155;
+						a[h + 836 >> 0] = -1; //pTemp->entity.curstate.rendercolor.r = 255;
+						a[h + 837 >> 0] = -1; //pTemp->entity.curstate.rendercolor.g = 255;
+						a[h + 838 >> 0] = -1 //pTemp->entity.curstate.rendercolor.b = 255;
 					}
 					h = Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 12 >> 2] | 0, n + 47994 | 0) | 0;
 					j = c[(c[n + 60568 + 332 >> 2] | 0) + 200 >> 2] | 0;
@@ -32886,7 +32886,7 @@
 					return
 				}
 
-				function Kl(a) {
+				function Kl(a) { //__ZN20CStudioModelRenderer21StudioCalcAttachmentsEv
 					a = a | 0;
 					var b = 0,
 						d = 0,
@@ -32897,8 +32897,8 @@
 					b = c[a + 72 >> 2] | 0;
 					d = c[b + 212 >> 2] | 0;
 					if((d | 0) > 4) {
-						d = c[n + 60568 + 164 >> 2] | 0;
-						c[f >> 2] = c[(c[a + 52 >> 2] | 0) + 2964 >> 2];
+						d = c[n + 60568 + 164 >> 2] | 0; //gEngfuncs.Con_DPrintf
+						c[f >> 2] = c[(c[a + 52 >> 2] | 0) + 2964 >> 2]; //m_pCurrentEntity->model->name
 						gv(d | 0, n + 36157 | 0, f | 0);
 						d = c[a + 72 >> 2] | 0;
 						b = d;
@@ -32983,7 +32983,7 @@
 					return 1
 				}
 
-				function Ol(d, e, f) {
+				function Ol(d, e, f) { //__ZN9CHudRadio5VoiceEib
 					d = d | 0;
 					e = e | 0;
 					f = f | 0;
@@ -33003,8 +33003,8 @@
 								g[i + 64 >> 2] = 40.0;
 								b[i + 52 >> 1] = e;
 								c[i + 40 >> 2] = o + 1;
-								g[i + 820 >> 2] = .6000000238418579;
-								c[i + 828 >> 2] = 5;
+								g[i + 820 >> 2] = .6000000238418579; //temp->entity.curstate.scale = 0.60f;
+								c[i + 828 >> 2] = 5; //temp->entity.curstate.rendermode = kRenderTransAdd;
 								g[i + 4 >> 2] = +g[n + 50528 >> 2] + 60.0
 							}
 						}
@@ -35385,8 +35385,9 @@
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35416,8 +35417,20 @@
 							]);
 						}
 						playerdots[i] = dot;
-						let weapon = c[player + 688 + 180 >> 2];
-						playerweapon[i] = weapon;
+						
+						let weaponmodelid = c[player + 688 + 180 >> 2];
+						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
+						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+						
+						let weaponchars = [];
+						for (let jk = 0; jk < 64; jk++){
+							weaponchars.push(a[weaponmodel + 0 + jk >> 0]);
+						}
+						let weaponname = String.fromCharCode(weaponchars);
+						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
+						playerweapon[i] = weaponname;
+						playerweapon2[i] = weaponname2;
+						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
 						playerlist[i] = [distance, crd, dot, weapon, hp];
@@ -35604,16 +35617,21 @@
 							let pname = playerextra[j].name;
 							let pnamex = Math.round(centerw + centerw*playerdots[i][1][0]);
 							let pnamey = espy;
+							let hp = playerhp[i].toString() + ' hp';
+							let hpx = pnamex;
+							let hpy = espy - 42; //38px font size //espy + boxheight;
+							
 							let pdist = Math.round(playerdist[i]/65.0*1.8).toString() + ' m'; //примерно рост перса 1.8 метров и 65 юнитов (ну по факту 73 ну кому не все равно)
+							
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
 							
-							let weaponid = playerweapon[i].toString();
-							
-							let hp = playerhp[i].toString() + ' hp';
-							let hpx = pnamex;
-							let hpy = espy + boxheight;
-							
+							let weaponid = playerweapon[i];
+							let weaponidx = pnamex;
+							let weaponidy = espy + boxheight;
+							let weaponid2 = playerweapon2[i];
+							let weaponid2x = pnamex;
+							let weaponid2y = espy + boxheight + 42;
 							
 							//espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
 							
@@ -35625,14 +35643,16 @@
 							overlay.textBaseline = 'bottom';
 							overlay.fillText(pname, pnamex, pnamey);
 							overlay.strokeText(pname, pnamex, pnamey);
-							//overlay.fillText(pdist, pdistx, pdisty);
-							//overlay.strokeText(pdist, pdistx, pdisty);
-							overlay.fillText(weaponid, pdistx, pdisty);
-							overlay.strokeText(weaponid, pdistx, pdisty);
+							overlay.fillText(pdist, pdistx, pdisty);
+							overlay.strokeText(pdist, pdistx, pdisty);
+							//overlay.fillText(hp, hpx, hpy);
+							//overlay.strokeText(hp, hpx, hpy);
 							
 							overlay.textBaseline = 'top';
-							overlay.fillText(hp, hpx, hpy);
-							overlay.strokeText(hp, hpx, hpy);
+							overlay.fillText(weaponid, weaponidx, weaponidy);
+							overlay.strokeText(weaponid, weaponidx, weaponidy);
+							overlay.fillText(weaponid2, weaponid2x, weaponid2y);
+							overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
 						}
 					}
 				}
@@ -35676,6 +35696,22 @@
 						d1text += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
 						d1text += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
 						d1text += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+						
+						let localplayerentity = Kv(c[n + 60568 + 212 >> 2] | 0, uid | 0) | 0;
+						let weaponmodelid = c[localplayerentity + 688 + 180 >> 2];
+						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
+						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+						//hc(n + 158134 | 0, b | 0, 64) //strncpy( szViewModelName, pWeaponModel->name, sizeof( szViewModelName ) );
+						
+						let weaponchars = [];
+						for (let jk = 0; jk < 64; jk++){
+							weaponchars.push(a[weaponmodel + jk >> 0]);
+						}
+						let weaponname = String.fromCharCode(weaponchars);
+						let weaponname2 = c[weaponmodel + 0 >> 2].toString();
+						
+						d1text += 'local weapon: ' weaponmodelid + ' ' + weaponname2 + ' ' + weaponname + '<br>';
+						
 						drawer1.innerHTML = d1text;
 					} else {
 						drawer1.innerHTML = "";
@@ -38774,12 +38810,12 @@
 					return
 				}
 
-				function gq(b) {
+				function gq(b) { //__Z28V_FindViewModelByWeaponModeli
 					b = b | 0;
 					var d = 0;
-					b = Kv(c[n + 64816 + 20 >> 2] | 0, b | 0) | 0;
+					b = Kv(c[n + 64816 + 20 >> 2] | 0, b | 0) | 0; //model_t *pWeaponModel = IEngineStudio.GetModelByIndex( iWeaponIndex );
 					if((b | 0) != 0 ? (hc(n + 158134 | 0, b | 0, 64) | 0, d = Fc(n + 158134 | 0, n + 34937 | 0) | 0, (d | 0) != 0) : 0) {
-						a[d + 1 >> 0] = 118;
+						a[d + 1 >> 0] = 118; //szSub[1] = 'v';
 						b = Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 12 >> 2] | 0, n + 158134 | 0) | 0
 					} else b = 0;
 					return b | 0
