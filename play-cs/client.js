@@ -6168,7 +6168,7 @@
 					return
 				}
 
-				function hf(b) {
+				function hf(b) { //__Z21V_CalcSpectatorRefdefP12ref_params_sd
 					b = b | 0;
 					var d = 0,
 						e = 0.0,
@@ -6183,7 +6183,7 @@
 						g[n + 158128 >> 2] = 0.0;
 						Ic(n + 60544 | 0)
 					}
-					d = Kv(c[n + 60568 + 212 >> 2] | 0, c[n + 120844 >> 2] | 0) | 0;
+					d = Kv(c[n + 60568 + 212 >> 2] | 0, c[n + 120844 >> 2] | 0) | 0; //cl_entity_t	 * ent = gEngfuncs.GetEntityByIndex( g_iUser2 );
 					c[b + 228 >> 2] = 0;
 					c[n + 62292 >> 2] = c[b + 100 >> 2];
 					c[n + 62292 + 4 >> 2] = c[b + 100 + 4 >> 2];
@@ -6202,7 +6202,7 @@
 					} else if(d | 0 ? +g[(c[n + 50528 + 4392 >> 2] | 0) + 12 >> 2] == 2.0 : 0) h = 7;
 					a: do
 						if((h | 0) == 7) {
-							e = +g[d + 696 >> 2] - +g[d + 356 >> 2];
+							e = +g[d + 696 >> 2] - +g[d + 356 >> 2]; //float timeDiff = ent->curstate.msg_time - ent->prevstate.msg_time;
 							if(e > 0.0) {
 								i = 1.0 / e * (+g[d + 364 + 4 >> 2] - +g[d + 704 + 4 >> 2]);
 								k = 1.0 / e * (+g[d + 364 + 8 >> 2] - +g[d + 704 + 8 >> 2]);
@@ -6226,8 +6226,8 @@
 							}
 							uk(c[n + 120844 >> 2] | 0, b + 100 | 0, b + 128 | 0);
 							c[b + 140 >> 2] = 1;
-							f = qx(c[n + 60568 + 208 >> 2] | 0) | 0;
-							d = c[d + 868 >> 2] | 0;
+							f = qx(c[n + 60568 + 208 >> 2] | 0) | 0; //cl_entity_t	*gunModel = gEngfuncs.GetViewModel();
+							d = c[d + 868 >> 2] | 0; //ent->curstate.weaponmodel
 							do
 								if((c[n + 63460 >> 2] | 0) != (d | 0)) {
 									c[n + 63460 >> 2] = d;
@@ -19351,7 +19351,7 @@
 					return
 				}
 
-				function mh(a, d) {
+				function mh(a, d) { //__ZN24CGameStudioModelRenderer20SetupClientAnimationEP14entity_state_s
 					a = a | 0;
 					d = d | 0;
 					var e = 0.0,
@@ -19364,15 +19364,15 @@
 						p = 0;
 					l = i;
 					i = i + 16 | 0;
-					k = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
+					k = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //cl_entity_t *ent = IEngineStudio.GetCurrentEntity();
 					if(k | 0) {
-						j = +Gx(c[n + 60568 + 216 >> 2] | 0);
+						j = +Gx(c[n + 60568 + 216 >> 2] | 0); //curtime = gEngfuncs.GetClientTime();
 						e = j - +h[n + 60552 >> 3];
 						if(e >= 0.0) {
 							if(!(e < 1.0)) e = 1.0
-						} else e = 0.0;
-						h[n + 60552 >> 3] = j;
-						g[n + 82920 + 52 >> 2] = 1.0;
+						} else e = 0.0; //dt = bound( 0.0, (curtime - oldtime), 1.0 );
+						h[n + 60552 >> 3] = j; //oldtime = curtime;
+						g[n + 82920 + 52 >> 2] = 1.0; //st->framerate = 1.0;
 						a = c[n + 82920 + 44 >> 2] | 0;
 						f = c[n + 64772 >> 2] | 0;
 						c[n + 82920 + 44 >> 2] = f;
@@ -19396,9 +19396,9 @@
 							b[n + 82920 + 80 >> 1] = b[n + 82920 + 68 >> 1] | 0;
 							c[n + 82920 + 116 >> 2] = c[n + 82920 + 64 >> 2]
 						}
-						f = Kv(c[n + 64816 + 16 >> 2] | 0, c[k + 2964 >> 2] | 0) | 0;
+						f = Kv(c[n + 64816 + 16 >> 2] | 0, c[k + 2964 >> 2] | 0) | 0; //void *pmodel = (studiohdr_t *)IEngineStudio.Mod_Extradata(ent->model);
 						if(f | 0) {
-							ul(f, n + 82920 | 0, l + 4 | 0, l);
+							ul(f, n + 82920 | 0, l + 4 | 0, l); //GetSequenceInfo(pmodel, st, &fr, &gs);
 							a = c[n + 82920 + 44 >> 2] | 0;
 							if((a | 0) < (c[f + 164 >> 2] | 0)) a = c[f + (c[f + 168 >> 2] | 0) + (a * 176 | 0) + 36 >> 2] & 1;
 							else a = 0;
@@ -24944,7 +24944,7 @@
 					return
 				}
 
-				function Di(a) {
+				function Di(a) { //_EV_FireM3
 					a = a | 0;
 					var b = 0,
 						d = 0,
@@ -24953,7 +24953,7 @@
 						h = 0.0;
 					f = i;
 					i = i + 96 | 0;
-					b = c[a + 4 >> 2] | 0;
+					b = c[a + 4 >> 2] | 0; //int    idx = args->entindex;
 					c[f + 60 >> 2] = c[a + 8 >> 2];
 					c[f + 60 + 4 >> 2] = c[a + 12 >> 2];
 					c[f + 60 + 8 >> 2] = c[a + 16 >> 2];
@@ -24980,21 +24980,21 @@
 					}
 					if((e | 0) == 3) {
 						if((c[n + 120844 >> 2] | 0) == (b | 0)) e = 5
-					} else if((e | 0) == 4 ? Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 16 >> 2] | 0, b + -1 | 0) | 0 : 0) e = 5;
+					} else if((e | 0) == 4 ? Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 16 >> 2] | 0, b + -1 | 0) | 0 : 0) e = 5; //return gEngfuncs.pEventAPI->EV_IsLocal( idx - 1 ) ? true : false;
 					if((e | 0) == 5) {
-						c[n + 115840 >> 2] = (c[n + 115840 >> 2] | 0) + 1;
+						c[n + 115840 >> 2] = (c[n + 115840 >> 2] | 0) + 1; //++g_iShotsFired;
 						if(!(+g[(c[n + 50528 + 92 >> 2] | 0) + 12 >> 2] != 0.0) ? (d = qx(c[n + 60568 + 208 >> 2] | 0) | 0, d | 0) : 0) c[d + 748 >> 2] = c[d + 748 >> 2] | 2;
-						e = c[(c[n + 60568 + 336 >> 2] | 0) + 64 >> 2] | 0;
-						gv(e | 0, Ou(c[n + 60568 + 272 >> 2] | 0, 1, 2) | 0, 2)
+						e = c[(c[n + 60568 + 336 >> 2] | 0) + 64 >> 2] | 0; //gEngfuncs.pEventAPI
+						gv(e | 0, Ou(c[n + 60568 + 272 >> 2] | 0, 1, 2) | 0, 2) //gEngfuncs.pEventAPI->EV_WeaponAnimation(Com_RandomLong(M3_SHOOT1, M3_SHOOT2), 2);
 					}
 					d = c[(c[n + 60568 + 336 >> 2] | 0) + 4 >> 2] | 0;
 					e = (Ou(c[n + 60568 + 272 >> 2] | 0, 0, 15) | 0) + 94 | 0;
 					mq(d | 0, b | 0, f + 60 | 0, 1, n + 49400 | 0, 1.0, .800000011920929, 0, e | 0);
-					Aj(a, f + 84 | 0, f + 60 | 0);
+					Aj(a, f + 84 | 0, f + 60 | 0); //EV_GetGunPosition( args, vecSrc, origin );
 					c[f + 72 >> 2] = c[f + 36 >> 2];
 					c[f + 72 + 4 >> 2] = c[f + 36 + 4 >> 2];
 					c[f + 72 + 8 >> 2] = c[f + 36 + 8 >> 2];
-					g[f >> 2] = .07249999791383743;
+					g[f >> 2] = .07249999791383743; //vSpread.x = 0.0725;
 					g[f + 4 >> 2] = .07249999791383743;
 					wf(b, 0, f + 24 | 0, f + 12 | 0, 9, f + 84 | 0, f + 72 | 0, f, 8192.0, 4, 1);
 					i = f;
@@ -35385,6 +35385,8 @@
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35414,7 +35416,11 @@
 							]);
 						}
 						playerdots[i] = dot;
-						playerlist[i] = [distance, crd, dot];
+						let weapon = c[player + 688 + 180 >> 2];
+						playerweapon[i] = weapon;
+						let hp = c[player + 688 + 172 >> 2];
+						playerhp[i] = hp;
+						playerlist[i] = [distance, crd, dot, weapon, hp];
 					}
 					
 					/*
@@ -35601,11 +35607,32 @@
 							let pdist = Math.round(playerdist[i]/65.0*1.8).toString() + ' m'; //примерно рост перса 1.8 метров и 65 юнитов (ну по факту 73 ну кому не все равно)
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
-							espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
-							//overlay.fillRect(xcrd, ycrd, boxwidth, boxheight);
-							//drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
-						} else {
-							//drawer2.innerHTML += '0<br>';
+							
+							let weaponid = playerweapon[i].toString();
+							
+							let hp = playerhp[i].toString() + ' hp';
+							let hpx = pnamex;
+							let hpy = espy + boxheight;
+							
+							
+							//espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
+							
+							overlay.fillStyle = espfillstyle;
+							overlay.fillRect(espx, espy,boxwidth, boxheight);
+							overlay.fillStyle = '#000';
+							overlay.strokeStyle = '#fff';
+							overlay.textAlign = 'center';
+							overlay.textBaseline = 'bottom';
+							overlay.fillText(pname, pnamex, pnamey);
+							overlay.strokeText(pname, pnamex, pnamey);
+							//overlay.fillText(pdist, pdistx, pdisty);
+							//overlay.strokeText(pdist, pdistx, pdisty);
+							overlay.fillText(weaponid, pdistx, pdisty);
+							overlay.strokeText(weaponid, pdistx, pdisty);
+							
+							overlay.textBaseline = 'top';
+							overlay.fillText(hp, hpx, hpy);
+							overlay.strokeText(hp, hpx, hpy);
 						}
 					}
 				}
@@ -35619,23 +35646,6 @@
 					espboxlist = [];
 					if (setcfg.espenabled) {
 						drawesp();
-						for (let j = 0; j < espboxlist.length; j++){
-							overlay.fillStyle = espboxlist[j][4];
-							overlay.fillRect(espboxlist[j][0], espboxlist[j][1], espboxlist[j][2], espboxlist[j][3]);
-							overlay.fillStyle = '#000';
-							overlay.strokeStyle = '#fff';
-							overlay.textAlign = 'center';
-							overlay.textBaseline = 'bottom';
-							overlay.fillText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
-							overlay.strokeText(espboxlist[j][5], espboxlist[j][6], espboxlist[j][7]);
-							overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-							overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-							/*
-							overlay.textBaseline = 'top';
-							overlay.fillText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-							overlay.strokeText(espboxlist[j][8], espboxlist[j][9], espboxlist[j][10]);
-							*/
-						}
 					}
 					
 					ticker2 = (ticker2 + 1)%1;
