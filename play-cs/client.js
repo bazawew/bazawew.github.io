@@ -35430,7 +35430,7 @@
 							hdrname += String.fromCharCode(achar);
 						}
 						
-						let weaponsymbol = modelToCSLetter[hdrname];
+						let weaponsymbol = modelToCSDLetter[hdrname];
 						if (weaponsymbol === undefined) weaponsymbol = '';
 						
 						playerweapon[i] = weaponmodelid;
@@ -35663,8 +35663,9 @@
 							//overlay.fillText(weaponid, weaponidx, weaponidy);
 							//overlay.strokeText(weaponid, weaponidx, weaponidy);
 							if (isWeaponDefault) {
-								overlay.font = '38px cstrikemodel';
+								overlay.font = '50px cstrikemodel';
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
+								overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
 								overlay.font = '38px stratum2bold';
 							} else {
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
