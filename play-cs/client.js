@@ -35663,9 +35663,9 @@
 							//overlay.fillText(weaponid, weaponidx, weaponidy);
 							//overlay.strokeText(weaponid, weaponidx, weaponidy);
 							if (isWeaponDefault) {
-								overlay.font = '50px cstrikemodel';
-								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
-								overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
+								overlay.font = '100px cstrikemodel';
+								overlay.fillText(weaponid2, weaponid2x, weaponid2y+30);
+								overlay.strokeText(weaponid2, weaponid2x, weaponid2y+30);
 								overlay.font = '38px stratum2bold';
 							} else {
 								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
@@ -35717,21 +35717,26 @@
 						
 						let localplayerentity = Kv(c[n + 60568 + 212 >> 2] | 0, uid | 0) | 0;
 						let weaponmodelid = c[localplayerentity + 688 + 180 >> 2];
-						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
-						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
-						
-						let hdrname = '';
-						for (let jk = 0; jk < 64; jk+=1){
-							let achar = a[weaponxtrdt + 8 + jk >> 0];
-							if (achar == 0) break;
-							if (jk == 0 && achar != 112) {
-								hdrname = '?';
-								break;
+						if (weaponmodelid != 0) {
+							let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
+							let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+							
+							let hdrname = '';
+							for (let jk = 0; jk < 64; jk+=1){
+								let achar = a[weaponxtrdt + 8 + jk >> 0];
+								if (achar == 0) break;
+								if (jk == 0 && achar != 112) {
+									hdrname = '?';
+									break;
+								}
+								hdrname += String.fromCharCode(achar);
 							}
-							hdrname += String.fromCharCode(achar);
-						}
 
-						d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + hdrname + '<br>';
+							d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + hdrname + '<br>';
+						} else {
+							d1text += 'local weapon: ' + weaponmodelid.toString() + '<br>';
+						}
+						
 						
 						drawer1.innerHTML = d1text;
 					} else {
