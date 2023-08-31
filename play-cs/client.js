@@ -35488,6 +35488,36 @@
 					return;
 				}
 				
+				function drawStrokedWeapon(text, x, y)
+				{
+					overlay.save();
+					overlay.font = '70px csdmodel';
+					overlay.fillStyle = '#000';
+					overlay.strokeStyle = '#fff';
+					overlay.lineWidth = 6;
+					overlay.lineJoin = "round";
+					overlay.miterLimit = 2;
+					overlay.strokeText(text, x, y+30);
+					overlay.fillText(text, x, y+30);
+					overlay.restore();
+				}
+				
+				function drawStrokedText(text, x, y)
+				{
+					// using the solutions from @Simon Sarris and @Jackalope from
+					// https://stackoverflow.com/questions/7814398/a-glow-effect-on-html5-canvas
+					overlay.save();
+					overlay.font = '30px verdanabold';
+					overlay.fillStyle = '#000';
+					overlay.strokeStyle = '#fff';
+					overlay.lineWidth = 6;
+					overlay.lineJoin = "round";
+					overlay.miterLimit = 2;
+					overlay.strokeText(text, x, y);
+					overlay.fillText(text, x, y);
+					overlay.restore();
+				}
+				
 				function drawesp(){
 					drawer2.innerHTML = '';
 					let uid = getlocalplayerid();
@@ -35648,34 +35678,20 @@
 							let weaponid2x = pnamex;
 							let weaponid2y = espy + boxheight; //espy + boxheight + 42;
 							
-							//espboxlist.push([espx, espy, boxwidth, boxheight, espfillstyle, pname, pnamex, pnamey, pdist, pdistx, pdisty]);
-							
-							overlay.font = '38px verdanabold';
-							
 							overlay.fillStyle = espfillstyle;
 							overlay.fillRect(espx, espy,boxwidth, boxheight);
-							overlay.fillStyle = '#000';
-							overlay.strokeStyle = '#fff';
+							
 							overlay.textAlign = 'center';
+							
 							overlay.textBaseline = 'bottom';
-							overlay.fillText(pname, pnamex, pnamey);
-							overlay.strokeText(pname, pnamex, pnamey);
-							overlay.fillText(pdist, pdistx, pdisty);
-							overlay.strokeText(pdist, pdistx, pdisty);
-							//overlay.fillText(hp, hpx, hpy);
-							//overlay.strokeText(hp, hpx, hpy);
+							drawStrokedText(pname, pnamex, pnamey);
+							drawStrokedText(pdist, pdistx, pdisty);
 							
 							overlay.textBaseline = 'top';
-							//overlay.fillText(weaponid, weaponidx, weaponidy);
-							//overlay.strokeText(weaponid, weaponidx, weaponidy);
 							if (isWeaponDefault) {
-								overlay.font = '100px csdmodel';
-								overlay.fillText(weaponid2, weaponid2x, weaponid2y+30);
-								overlay.strokeText(weaponid2, weaponid2x, weaponid2y+30);
-								overlay.font = '38px verdanabold';
+								drawStrokedWeapon(weaponid2, weaponid2x, weaponid2y);
 							} else {
-								overlay.fillText(weaponid2, weaponid2x, weaponid2y);
-								overlay.strokeText(weaponid2, weaponid2x, weaponid2y);
+								drawStrokedText(weaponid2, weaponid2x, weaponid2y);
 							}
 						}
 					}
