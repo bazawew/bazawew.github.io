@@ -35494,7 +35494,7 @@
 					overlay.font = '70px csdmodel';
 					overlay.fillStyle = '#000';
 					overlay.strokeStyle = '#fff';
-					overlay.lineWidth = 6;
+					overlay.lineWidth = 2;
 					overlay.lineJoin = "round";
 					overlay.miterLimit = 2;
 					overlay.strokeText(text, x, y+30);
@@ -35507,10 +35507,10 @@
 					// using the solutions from @Simon Sarris and @Jackalope from
 					// https://stackoverflow.com/questions/7814398/a-glow-effect-on-html5-canvas
 					overlay.save();
-					overlay.font = '30px verdanabold';
+					overlay.font = '25px verdanabold';
 					overlay.fillStyle = '#000';
 					overlay.strokeStyle = '#fff';
-					overlay.lineWidth = 6;
+					overlay.lineWidth = 2;
 					overlay.lineJoin = "round";
 					overlay.miterLimit = 2;
 					overlay.strokeText(text, x, y);
