@@ -35491,7 +35491,7 @@
 				function drawStrokedWeapon(text, x, y)
 				{
 					overlay.save();
-					overlay.font = '70px csdmodel';
+					overlay.font = '66px csdmodel'; //ровно 66 (канвас аутлайн иссуе)
 					overlay.fillStyle = '#000';
 					overlay.strokeStyle = '#fff';
 					overlay.lineWidth = 2;
@@ -35507,7 +35507,7 @@
 					// using the solutions from @Simon Sarris and @Jackalope from
 					// https://stackoverflow.com/questions/7814398/a-glow-effect-on-html5-canvas
 					overlay.save();
-					overlay.font = '25px verdanabold';
+					overlay.font = '27px verdanabold'; //ровно 27 хд
 					overlay.fillStyle = '#000';
 					overlay.strokeStyle = '#fff';
 					overlay.lineWidth = 2;
