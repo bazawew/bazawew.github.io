@@ -35592,7 +35592,8 @@
 						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
 						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
 						let d2text = '';
-						if (setcfg.showinfoblocks) d2text = playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
+						let rnr = zafixcrd[i] ? 'Rendered' : 'Not Rendered';
+						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
 						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
 							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
@@ -35779,7 +35780,7 @@
 					iteratingplayers();
 					drawinfo();
 					drawoverlay();
-					for (let i = 0; i < 33; i+=1){zafixcrd.push(false);}	
+					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
 				}
 
 				function jn(a, b, d) {
