@@ -7876,7 +7876,7 @@
 					return
 				}
 
-				function sf(b, d, e) {
+				function sf(b, d, e) { //__ZN20CStudioModelRenderer16StudioDrawPlayerEiP14entity_state_s
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -7889,7 +7889,7 @@
 						o = 0;
 					l = i;
 					i = i + 3040 | 0;
-					c[b + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
+					c[b + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //m_pCurrentEntity = IEngineStudio.GetCurrentEntity();
 					eu(c[n + 64816 + 40 >> 2] | 0, b + 36 | 0, b + 8 | 0, b + 16 | 0);
 					ut(c[n + 64816 + 48 >> 2] | 0, b + 16528 | 0, b + 16492 | 0, b + 16504 | 0, b + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, b + 16484 | 0, b + 16488 | 0);
@@ -29506,7 +29506,7 @@
 					return
 				}
 
-				function ck(b, d, e) {
+				function ck(b, d, e) { //__ZN24CGameStudioModelRenderer16StudioDrawPlayerEiP14entity_state_s
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -29523,6 +29523,10 @@
 					} else f = 0;
 					h = Qt(c[(c[b >> 2] | 0) + 112 >> 2] | 0, b | 0, d | 0, e | 0) | 0;
 					if(f) $h(0, e);
+					
+					//dotmant zafix
+					if (!f) zafixcrd[c[e + 4 >> 2]] = true;
+					
 					a: do
 						if(+g[(c[n + 50528 + 68 >> 2] | 0) + 12 >> 2] != 0.0 ? (j = c[b + 96 >> 2] | 0, (j | 0) > 0) : 0) {
 							d = 0;
@@ -31036,7 +31040,7 @@
 					return
 				}
 
-				function Jk(a) {
+				function Jk(a) { //__ZN20CStudioModelRenderer26StudioRenderFinal_SoftwareEv
 					a = a | 0;
 					var b = 0.0,
 						d = 0;
@@ -35507,7 +35511,7 @@
 					// using the solutions from @Simon Sarris and @Jackalope from
 					// https://stackoverflow.com/questions/7814398/a-glow-effect-on-html5-canvas
 					overlay.save();
-					overlay.font = '27px verdanabold'; //ровно 27 хд
+					overlay.font = '27px verdanabold'; //ровно 27 хд (надо было 22)
 					overlay.fillStyle = '#000';
 					overlay.strokeStyle = '#fff';
 					overlay.lineWidth = 2;
@@ -35625,6 +35629,11 @@
 							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
 								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
+								continue;
+							}
+							
+							if (!zafixcrd[i]){
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant2 ' + d2text + roundeddeadcrd.toString() + '<br>';
 								continue;
 							}
 							
@@ -35770,6 +35779,7 @@
 					iteratingplayers();
 					drawinfo();
 					drawoverlay();
+					for (let i = 0; i < 33; i+=1){zafixcrd.push(false);}	
 				}
 
 				function jn(a, b, d) {
