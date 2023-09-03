@@ -35452,25 +35452,41 @@
 						let rpmbones = [[0,0,0]];
 						let bonedots = [[0,0,0]];
 						let pmodel = c[player + 2964 >> 2];
-						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
 						let pmname = '';
+						if (pmodel != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[pmodel + 0 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								pmname += String.fromCharCode(achar);
+							}
+						}
+						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
+						let pmhname = '';
 						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, (i - 1) | 0) | 0; //SetupPlayerModel
-						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
 						let rpmname = '';
+						if (rpmodel != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[rpmodel + 0 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								rpmname += String.fromCharCode(achar);
+							}
+						}
+						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
+						let rpmhname = '';
 						let numbones = 0;
 						let bonematrix = 0;
 						if (pmheader != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
 								let achar = a[pmheader + 8 + jk >> 0];
 								if (achar == 0 || (jk == 0 && achar == 51)) break;
-								pmname += String.fromCharCode(achar);
+								pmhname += String.fromCharCode(achar);
 							}
 						}
 						if (rpmheader != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
 								let achar = a[rpmheader + 8 + jk >> 0];
 								if (achar == 0 || (jk == 0 && achar == 51)) break;
-								rpmname += String.fromCharCode(achar);
+								rpmhname += String.fromCharCode(achar);
 							}
 							numbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
 							bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
@@ -35487,7 +35503,7 @@
 							playerbonedots[i] = bonedots;
 						}
 						
-						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + numbones + ' ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + player + ' hp:' + hp + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' ' + bonematrix + '<br>';
 						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						
