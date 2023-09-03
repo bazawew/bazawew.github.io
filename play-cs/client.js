@@ -35469,7 +35469,7 @@
 							bonedots[jk] = w2s(rpmbones[jk]);
 						}
 						
-						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' ' numbones + ' ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' ' + numbones + ' ' + bonematrix + '<br>';
 						drawer3.innerHTML += rpmbones.toString() + '<br>' + bonedots.toString() + '<br>';
 						
 						playerbones[i] = rpmbones;
