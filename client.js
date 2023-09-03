@@ -4596,7 +4596,7 @@
 					return a | 0
 				}
 
-				function af(d, e, f) {
+				function af(d, e, f) { //__ZN24CGameStudioModelRenderer17_StudioDrawPlayerEiP14entity_state_s
 					d = d | 0;
 					e = e | 0;
 					f = f | 0;
@@ -4613,18 +4613,18 @@
 						t = 0;
 					r = i;
 					i = i + 3040 | 0;
-					c[d + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
-					eu(c[n + 64816 + 40 >> 2] | 0, d + 36 | 0, d + 8 | 0, d + 16 | 0);
+					c[d + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //m_pCurrentEntity = IEngineStudio.GetCurrentEntity();
+					eu(c[n + 64816 + 40 >> 2] | 0, d + 36 | 0, d + 8 | 0, d + 16 | 0); //
 					ut(c[n + 64816 + 48 >> 2] | 0, d + 16528 | 0, d + 16492 | 0, d + 16504 | 0, d + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, d + 16484 | 0, d + 16488 | 0);
-					h = c[f + 4 >> 2] | 0;
-					c[d + 64 >> 2] = h + -1;
+					h = c[f + 4 >> 2] | 0; //h = pplayer->number
+					c[d + 64 >> 2] = h + -1; //m_nPlayerIndex = pplayer->number - 1;
 					do
-						if((h | 0) >= 1 ? (h | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) {
-							h = c[f + 4 >> 2] | 0;
-							j = c[n + 50528 + 104 >> 2] | 0;
+						if((h | 0) >= 1 ? (h | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) { //m_nPlayerIndex < 0 || m_nPlayerIndex >= gEngfuncs.GetMaxClients()
+							h = c[f + 4 >> 2] | 0; ////h = pplayer->number
+							j = c[n + 50528 + 104 >> 2] | 0; //j = gHUD.cl_minmodels
 							a: do
-								if((j | 0) != 0 ? +g[j + 12 >> 2] != 0.0 : 0) switch(b[n + 116852 + (h * 92 | 0) + 6 >> 1] | 0) {
+								if((j | 0) != 0 ? +g[j + 12 >> 2] != 0.0 : 0) switch(b[n + 116852 + (h * 92 | 0) + 6 >> 1] | 0) { 
 									case 1:
 										{
 											h = c[n + 50528 + 108 >> 2] | 0;
@@ -4660,8 +4660,8 @@
 								} else q = 17;
 							while(0);
 							if((q | 0) == 17) {
-								j = Kv(c[n + 64816 + 124 >> 2] | 0, c[d + 64 >> 2] | 0) | 0;
-								c[d + 56 >> 2] = j;
+								j = Kv(c[n + 64816 + 124 >> 2] | 0, c[d + 64 >> 2] | 0) | 0; //j = IEngineStudio.SetupPlayerModel(m_nPlayerIndex);
+								c[d + 56 >> 2] = j; //m_pRenderModel = IEngineStudio.SetupPlayerModel( m_nPlayerIndex );
 								h = d + 56 | 0
 							}
 							if((j | 0) != 0 ? (k = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0, c[d + 72 >> 2] = k, (k | 0) != 0) : 0) {
@@ -5489,7 +5489,7 @@
 					return 1
 				}
 
-				function df(a) {
+				function df(a) { //__ZN20CStudioModelRenderer16StudioSetupBonesEv
 					a = a | 0;
 					var b = 0,
 						e = 0,
@@ -5812,41 +5812,42 @@
 						k = 0;
 					k = i;
 					i = i + 16 | 0;
-					switch(~~+g[(c[n + 61544 >> 2] | 0) + 12 >> 2] | 0) {
+					switch(~~+g[(c[n + 61544 >> 2] | 0) + 12 >> 2] | 0) { //cam_command->value
 						case 1:
 							{
-								Do();
+								Do(); //__Z17CAM_ToThirdPersonv
 								break
 							}
 						case 2:
 							{
-								c[n + 61604 >> 2] = 0;
-								qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0);
+								c[n + 61604 >> 2] = 0; //cam_thirdperson
+								qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0); //gEngfuncs.Cvar_SetValue( "cam_command", 0 )
 								break
 							}
 						default:
 							{}
 					}
-					if(c[n + 61604 >> 2] | 0) {
-						a = c[(c[n + 61556 >> 2] | 0) + 12 >> 2] | 0;
-						d = c[(c[n + 61552 >> 2] | 0) + 12 >> 2] | 0;
-						e = +g[(c[n + 61560 >> 2] | 0) + 12 >> 2];
+					if(c[n + 61604 >> 2] | 0) { //cam_thirdperson == true
+						a = c[(c[n + 61556 >> 2] | 0) + 12 >> 2] | 0; //camAngles[pitch] = cam_idealpitch->value
+						d = c[(c[n + 61552 >> 2] | 0) + 12 >> 2] | 0; //camAngles[yaw] = cam_idealyaw->value;
+						e = +g[(c[n + 61560 >> 2] | 0) + 12 >> 2];    //dist = cam_idealdist->value;
 						do
-							if(!((c[n + 61608 >> 2] | 0) == 0 | (c[n + 61616 >> 2] | 0) != 0)) {
-								h = c[n + 61628 >> 2] | 0;
-								if((h | 0) > (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) {
-									b = (c[l >> 2] = d, +g[l >> 2]);
-									f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2];
-									if(b < f) {
-										d = c[n + 61628 >> 2] | 0;
-										j = b + +((d - (qx(c[n + 60568 + 128 >> 2] | 0) | 0) | 0) / 2 | 0 | 0) * .5;
-										f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2];
-										d = (g[l >> 2] = j, c[l >> 2] | 0)
+							if(!((c[n + 61608 >> 2] | 0) == 0 | (c[n + 61616 >> 2] | 0) != 0)) { //cam_mousemove == true && cam_distancemove == false
+								h = c[n + 61628 >> 2] | 0; //cam_mouse.x
+								if((h | 0) > (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) { //cam_mouse.x > gEngfuncs.GetWindowCenterX()
+									b = (c[l >> 2] = d, +g[l >> 2]); //camAngles[yaw]
+									f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2]; //c_maxyaw->value
+									if(b < f) { //camAngles[yaw] < c_maxyaw->value
+										d = c[n + 61628 >> 2] | 0; //cam_mouse.x
+										j = b + +((d - (qx(c[n + 60568 + 128 >> 2] | 0) | 0) | 0) / 2 | 0 | 0) * .5; //j = camAngles[yaw] + ((cam_mouse.x-gEngfuncs.GetWindowCenterX())/2/2;
+										f = +g[(c[n + 61576 >> 2] | 0) + 12 >> 2]; //c_maxyaw->value
+										d = (g[l >> 2] = j, c[l >> 2] | 0) //camAngles[yaw] = j
 									}
-									if((c[l >> 2] = d, +g[l >> 2]) > f) d = (g[l >> 2] = f, c[l >> 2] | 0)
+									if((c[l >> 2] = d, +g[l >> 2]) > f) //camAngles[yaw] > c_maxyaw->value
+										d = (g[l >> 2] = f, c[l >> 2] | 0) //camAngles[yaw] = c_maxyaw->value //camAngles[yaw] = max(camAngles[yaw], c_maxyaw->value)
 								} else {
-									h = c[n + 61628 >> 2] | 0;
-									if((h | 0) < (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) {
+									h = c[n + 61628 >> 2] | 0; //cam_mouse.x
+									if((h | 0) < (qx(c[n + 60568 + 128 >> 2] | 0) | 0)) { //cam_mouse.x < gEngfuncs.GetWindowCenterX()
 										f = (c[l >> 2] = d, +g[l >> 2]);
 										b = +g[(c[n + 61580 >> 2] | 0) + 12 >> 2];
 										if(f > b) {
@@ -6167,7 +6168,7 @@
 					return
 				}
 
-				function hf(b) {
+				function hf(b) { //__Z21V_CalcSpectatorRefdefP12ref_params_sd
 					b = b | 0;
 					var d = 0,
 						e = 0.0,
@@ -6182,7 +6183,7 @@
 						g[n + 158128 >> 2] = 0.0;
 						Ic(n + 60544 | 0)
 					}
-					d = Kv(c[n + 60568 + 212 >> 2] | 0, c[n + 120844 >> 2] | 0) | 0;
+					d = Kv(c[n + 60568 + 212 >> 2] | 0, c[n + 120844 >> 2] | 0) | 0; //cl_entity_t	 * ent = gEngfuncs.GetEntityByIndex( g_iUser2 );
 					c[b + 228 >> 2] = 0;
 					c[n + 62292 >> 2] = c[b + 100 >> 2];
 					c[n + 62292 + 4 >> 2] = c[b + 100 + 4 >> 2];
@@ -6201,7 +6202,7 @@
 					} else if(d | 0 ? +g[(c[n + 50528 + 4392 >> 2] | 0) + 12 >> 2] == 2.0 : 0) h = 7;
 					a: do
 						if((h | 0) == 7) {
-							e = +g[d + 696 >> 2] - +g[d + 356 >> 2];
+							e = +g[d + 696 >> 2] - +g[d + 356 >> 2]; //float timeDiff = ent->curstate.msg_time - ent->prevstate.msg_time;
 							if(e > 0.0) {
 								i = 1.0 / e * (+g[d + 364 + 4 >> 2] - +g[d + 704 + 4 >> 2]);
 								k = 1.0 / e * (+g[d + 364 + 8 >> 2] - +g[d + 704 + 8 >> 2]);
@@ -6225,8 +6226,8 @@
 							}
 							uk(c[n + 120844 >> 2] | 0, b + 100 | 0, b + 128 | 0);
 							c[b + 140 >> 2] = 1;
-							f = qx(c[n + 60568 + 208 >> 2] | 0) | 0;
-							d = c[d + 868 >> 2] | 0;
+							f = qx(c[n + 60568 + 208 >> 2] | 0) | 0; //cl_entity_t	*gunModel = gEngfuncs.GetViewModel();
+							d = c[d + 868 >> 2] | 0; //ent->curstate.weaponmodel
 							do
 								if((c[n + 63460 >> 2] | 0) != (d | 0)) {
 									c[n + 63460 >> 2] = d;
@@ -7875,7 +7876,7 @@
 					return
 				}
 
-				function sf(b, d, e) {
+				function sf(b, d, e) { //__ZN20CStudioModelRenderer16StudioDrawPlayerEiP14entity_state_s
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -7888,7 +7889,7 @@
 						o = 0;
 					l = i;
 					i = i + 3040 | 0;
-					c[b + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
+					c[b + 52 >> 2] = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //m_pCurrentEntity = IEngineStudio.GetCurrentEntity();
 					eu(c[n + 64816 + 40 >> 2] | 0, b + 36 | 0, b + 8 | 0, b + 16 | 0);
 					ut(c[n + 64816 + 48 >> 2] | 0, b + 16528 | 0, b + 16492 | 0, b + 16504 | 0, b + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, b + 16484 | 0, b + 16488 | 0);
@@ -19350,7 +19351,7 @@
 					return
 				}
 
-				function mh(a, d) {
+				function mh(a, d) { //__ZN24CGameStudioModelRenderer20SetupClientAnimationEP14entity_state_s
 					a = a | 0;
 					d = d | 0;
 					var e = 0.0,
@@ -19363,15 +19364,15 @@
 						p = 0;
 					l = i;
 					i = i + 16 | 0;
-					k = qx(c[n + 64816 + 24 >> 2] | 0) | 0;
+					k = qx(c[n + 64816 + 24 >> 2] | 0) | 0; //cl_entity_t *ent = IEngineStudio.GetCurrentEntity();
 					if(k | 0) {
-						j = +Gx(c[n + 60568 + 216 >> 2] | 0);
+						j = +Gx(c[n + 60568 + 216 >> 2] | 0); //curtime = gEngfuncs.GetClientTime();
 						e = j - +h[n + 60552 >> 3];
 						if(e >= 0.0) {
 							if(!(e < 1.0)) e = 1.0
-						} else e = 0.0;
-						h[n + 60552 >> 3] = j;
-						g[n + 82920 + 52 >> 2] = 1.0;
+						} else e = 0.0; //dt = bound( 0.0, (curtime - oldtime), 1.0 );
+						h[n + 60552 >> 3] = j; //oldtime = curtime;
+						g[n + 82920 + 52 >> 2] = 1.0; //st->framerate = 1.0;
 						a = c[n + 82920 + 44 >> 2] | 0;
 						f = c[n + 64772 >> 2] | 0;
 						c[n + 82920 + 44 >> 2] = f;
@@ -19395,9 +19396,9 @@
 							b[n + 82920 + 80 >> 1] = b[n + 82920 + 68 >> 1] | 0;
 							c[n + 82920 + 116 >> 2] = c[n + 82920 + 64 >> 2]
 						}
-						f = Kv(c[n + 64816 + 16 >> 2] | 0, c[k + 2964 >> 2] | 0) | 0;
+						f = Kv(c[n + 64816 + 16 >> 2] | 0, c[k + 2964 >> 2] | 0) | 0; //void *pmodel = (studiohdr_t *)IEngineStudio.Mod_Extradata(ent->model);
 						if(f | 0) {
-							ul(f, n + 82920 | 0, l + 4 | 0, l);
+							ul(f, n + 82920 | 0, l + 4 | 0, l); //GetSequenceInfo(pmodel, st, &fr, &gs);
 							a = c[n + 82920 + 44 >> 2] | 0;
 							if((a | 0) < (c[f + 164 >> 2] | 0)) a = c[f + (c[f + 168 >> 2] | 0) + (a * 176 | 0) + 36 >> 2] & 1;
 							else a = 0;
@@ -21778,7 +21779,7 @@
 					return
 				}
 
-				function Rh(b, d, e, f) {
+				function Rh(b, d, e, f) { //__Z18EV_HLDM_NewExplodeffff
 					b = +b;
 					d = +d;
 					e = +e;
@@ -21803,11 +21804,11 @@
 					h = Gp(j | 0, k + 60 | 0, k + 48 | 0, +f, h | 0, 5, 0, 1.0, .5, 16768) | 0;
 					if(h | 0) {
 						g[h + 24 >> 2] = 90.0;
-						g[h + 852 >> 2] = 37.0;
-						c[h + 832 >> 2] = 155;
-						a[h + 836 >> 0] = -1;
-						a[h + 837 >> 0] = -1;
-						a[h + 838 >> 0] = -1
+						g[h + 852 >> 2] = 37.0; //pTemp->entity.curstate.framerate = 37.0;
+						c[h + 832 >> 2] = 155; //pTemp->entity.curstate.renderamt = 155;
+						a[h + 836 >> 0] = -1; //pTemp->entity.curstate.rendercolor.r = 255;
+						a[h + 837 >> 0] = -1; //pTemp->entity.curstate.rendercolor.g = 255;
+						a[h + 838 >> 0] = -1 //pTemp->entity.curstate.rendercolor.b = 255;
 					}
 					h = Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 12 >> 2] | 0, n + 47994 | 0) | 0;
 					j = c[(c[n + 60568 + 332 >> 2] | 0) + 200 >> 2] | 0;
@@ -24943,7 +24944,7 @@
 					return
 				}
 
-				function Di(a) {
+				function Di(a) { //_EV_FireM3
 					a = a | 0;
 					var b = 0,
 						d = 0,
@@ -24952,7 +24953,7 @@
 						h = 0.0;
 					f = i;
 					i = i + 96 | 0;
-					b = c[a + 4 >> 2] | 0;
+					b = c[a + 4 >> 2] | 0; //int    idx = args->entindex;
 					c[f + 60 >> 2] = c[a + 8 >> 2];
 					c[f + 60 + 4 >> 2] = c[a + 12 >> 2];
 					c[f + 60 + 8 >> 2] = c[a + 16 >> 2];
@@ -24979,21 +24980,21 @@
 					}
 					if((e | 0) == 3) {
 						if((c[n + 120844 >> 2] | 0) == (b | 0)) e = 5
-					} else if((e | 0) == 4 ? Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 16 >> 2] | 0, b + -1 | 0) | 0 : 0) e = 5;
+					} else if((e | 0) == 4 ? Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 16 >> 2] | 0, b + -1 | 0) | 0 : 0) e = 5; //return gEngfuncs.pEventAPI->EV_IsLocal( idx - 1 ) ? true : false;
 					if((e | 0) == 5) {
-						c[n + 115840 >> 2] = (c[n + 115840 >> 2] | 0) + 1;
+						c[n + 115840 >> 2] = (c[n + 115840 >> 2] | 0) + 1; //++g_iShotsFired;
 						if(!(+g[(c[n + 50528 + 92 >> 2] | 0) + 12 >> 2] != 0.0) ? (d = qx(c[n + 60568 + 208 >> 2] | 0) | 0, d | 0) : 0) c[d + 748 >> 2] = c[d + 748 >> 2] | 2;
-						e = c[(c[n + 60568 + 336 >> 2] | 0) + 64 >> 2] | 0;
-						gv(e | 0, Ou(c[n + 60568 + 272 >> 2] | 0, 1, 2) | 0, 2)
+						e = c[(c[n + 60568 + 336 >> 2] | 0) + 64 >> 2] | 0; //gEngfuncs.pEventAPI
+						gv(e | 0, Ou(c[n + 60568 + 272 >> 2] | 0, 1, 2) | 0, 2) //gEngfuncs.pEventAPI->EV_WeaponAnimation(Com_RandomLong(M3_SHOOT1, M3_SHOOT2), 2);
 					}
 					d = c[(c[n + 60568 + 336 >> 2] | 0) + 4 >> 2] | 0;
 					e = (Ou(c[n + 60568 + 272 >> 2] | 0, 0, 15) | 0) + 94 | 0;
 					mq(d | 0, b | 0, f + 60 | 0, 1, n + 49400 | 0, 1.0, .800000011920929, 0, e | 0);
-					Aj(a, f + 84 | 0, f + 60 | 0);
+					Aj(a, f + 84 | 0, f + 60 | 0); //EV_GetGunPosition( args, vecSrc, origin );
 					c[f + 72 >> 2] = c[f + 36 >> 2];
 					c[f + 72 + 4 >> 2] = c[f + 36 + 4 >> 2];
 					c[f + 72 + 8 >> 2] = c[f + 36 + 8 >> 2];
-					g[f >> 2] = .07249999791383743;
+					g[f >> 2] = .07249999791383743; //vSpread.x = 0.0725;
 					g[f + 4 >> 2] = .07249999791383743;
 					wf(b, 0, f + 24 | 0, f + 12 | 0, 9, f + 84 | 0, f + 72 | 0, f, 8192.0, 4, 1);
 					i = f;
@@ -29505,7 +29506,7 @@
 					return
 				}
 
-				function ck(b, d, e) {
+				function ck(b, d, e) { //__ZN24CGameStudioModelRenderer16StudioDrawPlayerEiP14entity_state_s
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -29522,6 +29523,10 @@
 					} else f = 0;
 					h = Qt(c[(c[b >> 2] | 0) + 112 >> 2] | 0, b | 0, d | 0, e | 0) | 0;
 					if(f) $h(0, e);
+					
+					//dotmant zafix
+					if (!f) zafixcrd[c[e + 4 >> 2]] = true;
+					
 					a: do
 						if(+g[(c[n + 50528 + 68 >> 2] | 0) + 12 >> 2] != 0.0 ? (j = c[b + 96 >> 2] | 0, (j | 0) > 0) : 0) {
 							d = 0;
@@ -31035,7 +31040,7 @@
 					return
 				}
 
-				function Jk(a) {
+				function Jk(a) { //__ZN20CStudioModelRenderer26StudioRenderFinal_SoftwareEv
 					a = a | 0;
 					var b = 0.0,
 						d = 0;
@@ -32885,7 +32890,7 @@
 					return
 				}
 
-				function Kl(a) {
+				function Kl(a) { //__ZN20CStudioModelRenderer21StudioCalcAttachmentsEv
 					a = a | 0;
 					var b = 0,
 						d = 0,
@@ -32896,8 +32901,8 @@
 					b = c[a + 72 >> 2] | 0;
 					d = c[b + 212 >> 2] | 0;
 					if((d | 0) > 4) {
-						d = c[n + 60568 + 164 >> 2] | 0;
-						c[f >> 2] = c[(c[a + 52 >> 2] | 0) + 2964 >> 2];
+						d = c[n + 60568 + 164 >> 2] | 0; //gEngfuncs.Con_DPrintf
+						c[f >> 2] = c[(c[a + 52 >> 2] | 0) + 2964 >> 2]; //m_pCurrentEntity->model->name
 						gv(d | 0, n + 36157 | 0, f | 0);
 						d = c[a + 72 >> 2] | 0;
 						b = d;
@@ -32982,7 +32987,7 @@
 					return 1
 				}
 
-				function Ol(d, e, f) {
+				function Ol(d, e, f) { //__ZN9CHudRadio5VoiceEib
 					d = d | 0;
 					e = e | 0;
 					f = f | 0;
@@ -33002,8 +33007,8 @@
 								g[i + 64 >> 2] = 40.0;
 								b[i + 52 >> 1] = e;
 								c[i + 40 >> 2] = o + 1;
-								g[i + 820 >> 2] = .6000000238418579;
-								c[i + 828 >> 2] = 5;
+								g[i + 820 >> 2] = .6000000238418579; //temp->entity.curstate.scale = 0.60f;
+								c[i + 828 >> 2] = 5; //temp->entity.curstate.rendermode = kRenderTransAdd;
 								g[i + 4 >> 2] = +g[n + 50528 >> 2] + 60.0
 							}
 						}
@@ -34554,17 +34559,17 @@
 					return
 				}
 
-				function Lm(a) {
+				function Lm(a) { //__ZN20CStudioModelRenderer4InitEv
 					a = a | 0;
-					c[a + 40 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36209 | 0) | 0;
-					c[a + 44 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36221 | 0) | 0;
-					c[a + 48 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36231 | 0) | 0;
-					c[a + 92 >> 2] = qx(c[n + 64816 + 52 >> 2] | 0) | 0;
-					gv(c[n + 64816 + 56 >> 2] | 0, a + 16540 | 0, a + 16544 | 0);
-					c[a + 16556 >> 2] = qx(c[n + 64816 + 64 >> 2] | 0) | 0;
-					c[a + 16560 >> 2] = qx(c[n + 64816 + 68 >> 2] | 0) | 0;
-					c[a + 16552 >> 2] = qx(c[n + 64816 + 72 >> 2] | 0) | 0;
-					c[a + 16548 >> 2] = qx(c[n + 64816 + 76 >> 2] | 0) | 0;
+					c[a + 40 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36209 | 0) | 0; //m_pCvarHiModels = IEngineStudio.GetCvar("cl_himodels");
+					c[a + 44 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36221 | 0) | 0; //m_pCvarDeveloper = IEngineStudio.GetCvar("developer");
+					c[a + 48 >> 2] = Kv(c[n + 64816 + 44 >> 2] | 0, n + 36231 | 0) | 0; //m_pCvarDrawEntities = IEngineStudio.GetCvar("r_drawentities");
+					c[a + 92 >> 2] = qx(c[n + 64816 + 52 >> 2] | 0) | 0;                //m_pChromeSprite = IEngineStudio.GetChromeSprite();
+					gv(c[n + 64816 + 56 >> 2] | 0, a + 16540 | 0, a + 16544 | 0);       //IEngineStudio.GetModelCounters(&m_pStudioModelCount, &m_pModelsDrawn);
+					c[a + 16556 >> 2] = qx(c[n + 64816 + 64 >> 2] | 0) | 0;             //m_pbonetransform = (float (*)[MAXSTUDIOBONES][3][4])IEngineStudio.StudioGetBoneTransform();
+					c[a + 16560 >> 2] = qx(c[n + 64816 + 68 >> 2] | 0) | 0;             //m_plighttransform = (float (*)[MAXSTUDIOBONES][3][4])IEngineStudio.StudioGetLightTransform();
+					c[a + 16552 >> 2] = qx(c[n + 64816 + 72 >> 2] | 0) | 0;             //m_paliastransform = (float (*)[3][4])IEngineStudio.StudioGetAliasTransform();
+					c[a + 16548 >> 2] = qx(c[n + 64816 + 76 >> 2] | 0) | 0;             //m_protationmatrix = (float (*)[3][4])IEngineStudio.StudioGetRotationMatrix();
 					return
 				}
 
@@ -35302,7 +35307,7 @@
 				}
 				
 				function getlocalplayerangles(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let angles = [];
 					if (isfloat){
 						angles = [
@@ -35321,7 +35326,7 @@
 				}
 				
 				function getlocalplayerorigin(isfloat){
-					player = getlocalplayer();
+					let player = getlocalplayer();
 					let origin = [];
 					if (isfloat){
 						origin = [
@@ -35339,26 +35344,135 @@
 					return origin;
 				}
 				
-				function savelocalcrd(){
+				function getlocalplayerviewangles(isfloat){
+					let angles = getviewang();
+					if (isfloat){
+						angles = [
+							itof(angles[0]),
+							itof(angles[1]),
+							itof(angles[2])
+						];
+					}
+					return angles;
+				}
+				
+				function savelocal(){
 					localcrd = getlocalplayerorigin(true);
+					localangles = getlocalplayerangles(true);
+					localviewangles = getlocalplayerviewangles(true);
 					return;
 				}
 				
+				function saveextra(){
+					playerextra = [];
+					playerextralist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					let uid = getlocalplayerid();
+					if(Object.keys(g_PlayerExtraInfo).length == 0){
+						return;
+					}
+					for (let key in g_PlayerExtraInfo) {
+						let player = g_PlayerExtraInfo[key];
+						if (player.name === undefined) {
+							continue;
+						}
+						playerextralist[player.id] = player;
+						if (player.id == uid) {
+							continue;
+						}
+						playerextra.push(player);
+					}
+				}				
 				
 				function iteratingplayers(){
-					let lpid = getlocalplayerid();
-					savelocalcrd();
-					playercrd = [];
-					playerdist = [];
-					for (let i=0; i<31; i+=1){
+					savelocal();
+					saveextra();
+					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerweapon3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					for (let j=0; j<playerextra.length; j+=1){
+						let i = parseInt(playerextra[j].id);
+						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0; //GetEntityByIndex
+						let crd = [
+							itof(c[player + 2888 >> 2]),
+							itof(c[player + 2888 + 4 >> 2]),
+							itof(c[player + 2888 + 8 >> 2])
+						];
+						playercrd[i] = crd;
+						let distance = Math.sqrt((localcrd[0]-crd[0])**2+(localcrd[1]-crd[1])**2+(localcrd[2]-crd[2])**2);
+						playerdist[i] = distance;
+						let dot = 0;
+						if (crd[0] != 0 || crd[1] != 0 || crd[2] != 0){
+							dot = [];
+							//dot[0] = w2s(crd);
+							dot[0] = [228, 228, 228];
+							dot[1] = w2s([
+								crd[0],
+								crd[1],
+								crd[2] + 30.0
+							]);
+							dot[2] = w2s([
+								crd[0],
+								crd[1],
+								crd[2] - 40.0
+							]);
+						}
+						playerdots[i] = dot;
+						
+						let weaponmodelid = c[player + 688 + 180 >> 2]; //player->curstate->weaponmodel
+						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; //GetModelByIndex
+						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0; //Mod_Extradata
+						
+						let hdrname = '';
+						for (let jk = 0; jk < 64; jk+=1){
+							let achar = a[weaponxtrdt + 8 + jk >> 0];
+							if (achar == 0 || (jk == 0 && achar == 51)) break;
+							hdrname += String.fromCharCode(achar);
+						}
+						
+						let weaponsymbol = modelToCSDLetter[hdrname];
+						if (weaponsymbol === undefined) weaponsymbol = '';
+						
+						playerweapon[i] = weaponmodelid;
+						playerweapon2[i] = hdrname;
+						playerweapon3[i] = weaponsymbol;
+						
+						let hp = c[player + 688 + 172 >> 2];
+						playerhp[i] = hp;
+						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
+					}
+					
+					/*
+					for (let i=1; i<=32; i+=1){
 						let player = Kv(c[n + 60568 + 212 >> 2] | 0, i | 0) | 0;
-						if (player == 0){
-							continue;
+						if(g_TeamInfo[i].name == ''){
+							if (player == 0){
+								//console.log(i.toString() + ' not entity'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}
+							if ((c[player + 4 >> 2] | 0) % 2 == 0){
+								//console.log(i.toString() + ' not player'); 
+								playercrd[i] = 0;
+								playerdist[i] = 0;
+								playerdots[i] = 0;
+								playerlist[i] = 0;
+								continue;
+							}	
 						}
-						if (!(c[player + 4 >> 2] | 0)){
-							continue;
-						}
-						if (c[player + 0 >> 2] | 0 == lpid){
+						if (i == lpid){
+							//console.log(i.toString() + ' is localplayer');
+							playercrd[i] = 0;
+							playerdist[i] = 0;
+							playerdots[i] = 0;
+							playerlist[i] = 0;
 							continue;
 						}
 						let crd = [
@@ -35366,22 +35480,312 @@
 							itof(c[player + 2888 + 4 >> 2]),
 							itof(c[player + 2888 + 8 >> 2])
 						];
-						playercrd.push(crd);
-						let distance = Math.sqrt(abs(localcrd[0]-crd[0])+abs(localcrd[1]-crd[1])+abs(localcrd[2]-crd[2]));
-						playerdist.push(distance);
-						playerinfo.push([crd, distance]);
+						playercrd[i] = crd;
+						let distance = Math.sqrt(Math.abs(localcrd[0]-crd[0])+Math.abs(localcrd[1]-crd[1])+Math.abs(localcrd[2]-crd[2]));
+						playerdist[i] = distance;
+						let dot = w2s(crd);
+						playerdots[i] = dot;
+						playerlist[i] = [distance, crd, dot];
 					}
+					*/
+					
 					return;
+				}
+				
+				function drawStrokedWeapon(text, x, y)
+				{
+					overlay.save();
+					overlay.font = '66px csdmodel'; //ровно 66 (канвас аутлайн иссуе)
+					overlay.fillStyle = '#000';
+					overlay.strokeStyle = '#fff';
+					overlay.lineWidth = 2;
+					overlay.lineJoin = "round";
+					overlay.miterLimit = 2;
+					overlay.strokeText(text, x, y+30);
+					overlay.fillText(text, x, y+30);
+					overlay.restore();
+				}
+				
+				function drawStrokedText(text, x, y)
+				{
+					// using the solutions from @Simon Sarris and @Jackalope from
+					// https://stackoverflow.com/questions/7814398/a-glow-effect-on-html5-canvas
+					overlay.save();
+					overlay.font = '27px verdanabold'; //ровно 27 хд (надо было 22)
+					overlay.fillStyle = '#000';
+					overlay.strokeStyle = '#fff';
+					overlay.lineWidth = 2;
+					overlay.lineJoin = "round";
+					overlay.miterLimit = 2;
+					overlay.strokeText(text, x, y);
+					overlay.fillText(text, x, y);
+					overlay.restore();
+				}
+				
+				function drawesp(){
+					drawer2.innerHTML = '';
+					let uid = getlocalplayerid();
+					//let sh = window.innerHeight, sw = window.innerWidth;
+					let sw = overlayelement.width, sh = overlayelement.height;
+					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+					
+					/*
+					for (let i = 1; i <= 32; i+=1){
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
+						if (removediv != null){
+							removediv.remove();
+						}
+						
+						if (playerlist.length === undefined || playerlist.length == 0 || playerlist[i] == 0){
+							continue;
+						}
+						
+						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
+						if (playerdots[i] != 0){
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							if (g_TeamInfo[i].teamnumber == g_TeamInfo[lpid].teamnumber){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (g_TeamInfo[i].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								continue;
+							}
+							let isDead = false;
+							for (let j=0; j<playerextra.length; j+=1){
+								let player = playerextra[j];
+								if (player[0] == i.toString()){
+									if (player[2] == 'Dead'){
+										isDead = true;
+									}
+									break;
+								}
+							}
+							if(isDead){
+								continue;
+							}
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							document.body.appendChild(espbox);
+							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
+						} else {
+							drawer2.innerHTML += '0<br>';
+						}
+					}
+					*/
+					/*
+					for (let i = 1; i <= 32; i+=1){
+						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
+						if (removediv != null){
+							removediv.remove();
+						}
+					}
+					*/
+					
+					for (let j=0; j<playerextra.length; j+=1){
+						let i = parseInt(playerextra[j].id);
+						let roundedplayercrd = [Math.round(playercrd[i][0]), Math.round(playercrd[i][1]), Math.round(playercrd[i][2])];
+						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
+						let d2text = '';
+						let rnr = zafixcrd[i] ? 'Rendered' : 'Not Rendered';
+						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>'; 
+						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
+						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
+							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
+						}
+						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
+							/*
+							let espbox = document.createElement("div");
+							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
+							espbox.style.height = '70px';
+							espbox.style.width = '40px';
+							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
+								espbox.style.backgroundColor = '#7df5ff';
+							} else if (playerextra[j].teamnumber != 0) {
+								espbox.style.backgroundColor = '#850303';
+							} else {
+								espbox.remove();
+								continue;
+							}
+							if (playerextra[j].status == 'Dead'){
+								espbox.remove();
+								continue;
+							}
+							if (Math.abs(playerdots[i][0]) >= 1 || Math.abs(playerdots[i][1]) >= 1){
+								espbox.remove();
+								continue;
+							}
+							espbox.style.opacity = '0.5';
+							espbox.style.position = 'absolute';
+							espbox.style.zIndex = '300';
+							espbox.style.left = Math.round(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
+							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
+							document.body.appendChild(espbox);
+							*/
+							
+							if (!zafixcrd[i]){
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant2 ' + d2text + roundeddeadcrd.toString() + '<br>';
+								if(setcfg.
+									continue;
+							}
+							
+							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
+								continue;
+							}
+							
+							if (playerextra[j].status == 'Dead'){
+								deadcrd[i] = playercrd[i];
+								drawer2.innerHTML += d2text;
+								continue;
+							}
+							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
+								deadcrd[i] = [0,0,0];
+							}
+							let espfillstyle = 'zxc';
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+								espfillstyle = 'rgba(125, 245, 255, 0.5)';
+							} else if (playerextra[j].teamnumber != 0) {
+								espfillstyle = 'rgba(133, 3, 3, 0.5)';
+							} else {
+								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
+								continue;
+							}
+							/*
+							if (roundedplayercrd.toString() == roundeddeadcrd.toString()) {
+								espfillstyle = 'rgba(255, 255, 255, 0.5)';
+							}
+							*/
+							drawer2.innerHTML += d2text;
+							
+							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
+							let boxwidth = Math.round(boxheight * 4.0 / 7.0);
+							let espx = Math.round(centerw + centerw*playerdots[i][1][0] - boxwidth / 2.0);
+							let espy = Math.round(centerh - centerh*playerdots[i][1][1]);
+							let pname = playerextra[j].name;
+							let pnamex = Math.round(centerw + centerw*playerdots[i][1][0]);
+							let pnamey = espy;
+							let hp = playerhp[i].toString() + ' hp';
+							let hpx = pnamex;
+							let hpy = espy - 42; //38px font size //espy + boxheight;
+							
+							let pdist = Math.round(playerdist[i]/65.0*1.8).toString() + ' m'; //примерно рост перса 1.8 метров и 65 юнитов (ну по факту 73 ну кому не все равно)
+							
+							let pdistx = pnamex;
+							let pdisty = espy - 42; //38px font size
+							
+							/*
+							let weaponid = playerweapon[i].toString();
+							let weaponidx = pnamex;
+							let weaponidy = espy + boxheight;*/
+							
+							let isWeaponDefault = playerweapon3[i] != '';
+							let weaponid2 = isWeaponDefault ? playerweapon3[i] : playerweapon2[i];
+							let weaponid2x = pnamex;
+							let weaponid2y = espy + boxheight; //espy + boxheight + 42;
+							
+							overlay.fillStyle = espfillstyle;
+							overlay.fillRect(espx, espy,boxwidth, boxheight);
+							
+							overlay.textAlign = 'center';
+							
+							overlay.textBaseline = 'bottom';
+							drawStrokedText(pname, pnamex, pnamey);
+							drawStrokedText(pdist, pdistx, pdisty);
+							
+							overlay.textBaseline = 'top';
+							if (isWeaponDefault) {
+								drawStrokedWeapon(weaponid2, weaponid2x, weaponid2y);
+							} else {
+								drawStrokedText(weaponid2, weaponid2x, weaponid2y);
+							}
+						}
+					}
+				}
+				
+				function drawoverlay() {
+					let sw = overlayelement.width, sh = overlayelement.height;
+					if (ticker2 == 0){
+						overlay.clearRect(0, 0, sw, sh);
+					}
+					
+					espboxlist = [];
+					if (setcfg.espenabled) {
+						drawesp();
+					}
+					
+					ticker2 = (ticker2 + 1)%1;
+				}
+				
+				function drawinfo(){
+					/* жкуери крашыт сносим КЕМ
+					if ($("infoblock").css("display") == 'none' && setcfg.showinfoblocks) $("infoblock").css("display", "block");
+					if ($("infoblock").css("display") == 'block' && !setcfg.showinfoblocks) $("infoblock").css("display", "none");
+					*/
+					let drawers = document.getElementsByClassName("infoblock");
+					if (drawers[0].style.display != 'block' && setcfg.showinfoblocks) {
+						drawers[0].style.display = 'block';
+						drawers[1].style.display = 'block';
+						drawers[2].style.display = 'block';
+					} 
+					else if (drawers[0].style.display != 'none' && !setcfg.showinfoblocks) {
+						drawers[0].style.display = 'none';
+						drawers[1].style.display = 'none';
+						drawers[2].style.display = 'none';
+					}
+					
+					if (setcfg.showinfoblocks){
+						let uid = getlocalplayerid();
+						let d1text = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
+						d1text += 'Hi, ' + playerextralist[uid].name + '!<br>';
+						d1text += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
+						d1text += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
+						d1text += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
+						d1text += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+						
+						let localplayerentity = Kv(c[n + 60568 + 212 >> 2] | 0, uid | 0) | 0;
+						let weaponmodelid = c[localplayerentity + 688 + 180 >> 2];
+						if (weaponmodelid != 0) {
+							let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; 
+							let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
+							
+							let hdrname = '';
+							for (let jk = 0; jk < 64; jk+=1){
+								let achar = a[weaponxtrdt + 8 + jk >> 0];
+								if (achar == 0) break;
+								if (jk == 0 && achar != 112) {
+									hdrname = '?';
+									break;
+								}
+								hdrname += String.fromCharCode(achar);
+							}
+
+							d1text += 'local weapon: ' + weaponmodelid.toString() + ' ' + hdrname + '<br>';
+						} else {
+							d1text += 'local weapon: ' + weaponmodelid.toString() + '<br>';
+						}
+						
+						
+						drawer1.innerHTML = d1text;
+					} else {
+						drawer1.innerHTML = "";
+					}
+				}
+				
+				function update228(){
+					iteratingplayers();
+					drawinfo();
+					drawoverlay();
+					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
 				}
 
 				function jn(a, b, d) {
-					//console.log('updateclientdata16');
-					//Do();
-					iteratingplayers();
-					//let buff = [itof(realviewangles.x), itof(realviewangles.y), itof(realviewangles.z)];
-					//console.log(buff);
-					//Wf();
-					//aimbot();
+					update228();
 					a = a | 0;
 					b = b | 0;
 					d = +d;
@@ -36991,29 +37395,26 @@
 					return
 				}
 
-				function Do() {
-					//console.log('tpvopened');
+				function Do() { //__Z17CAM_ToThirdPersonv
 					var a = 0;
 					a = i;
 					i = i + 16 | 0;
 					/*
-					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) { //gEngfuncs
-						console.log('1stifopened');
-						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
-						if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
-							console.log('2ndifopened');
-							c[n + 61604 >> 2] = 1; //cam_thirdperson
-							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
-							c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
-							g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
+					if((qx(c[n + 60568 + 144 >> 2] | 0) | 0) <= 1) {        //gEngfuncs.GetMaxClients() <= 1
+						Wv(c[n + 60568 + 136 >> 2] | 0, a | 0);             //  gEngfuncs.GetViewAngles()
+						if(!(c[n + 61604 >> 2] | 0)) {                      //  cam_thirdperson == false
+							c[n + 61604 >> 2] = 1;                          //    cam_thirdperson = true
+							c[n + 61592 + 4 >> 2] = c[a + 4 >> 2];          //    cam_ofs[yaw] = viewangles[yaw]
+							c[n + 61592 >> 2] = c[a >> 2];                  //    cam_ofs[pitch] = viewangles[pitch]
+							g[n + 61592 + 8 >> 2] = 30.0                    //    cam_ofs[dist] = 30.0
 						}
-						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0)
+						qv(c[n + 60568 + 148 >> 2] | 0, n + 33449 | 0, 0.0) //  gEngfuncs.Cvar_SetValue( "cam_command", 0 )
 					}
 					*/
 					Wv(c[n + 60568 + 136 >> 2] | 0, a | 0); //gEngfuncs
 					if(!(c[n + 61604 >> 2] | 0)) { //cam_thirdperson
 						c[n + 61604 >> 2] = 1; //cam_thirdperson
-						c[n + 61592 + 4 >> 2] = realviewangles.y; //cam_ofs
+						c[n + 61592 + 4 >> 2] = c[a + 4 >> 2]; //cam_ofs
 						c[n + 61592 >> 2] = c[a >> 2]; //cam_ofs
 						g[n + 61592 + 8 >> 2] = 30.0 //cam_ofs
 					}
@@ -38469,12 +38870,12 @@
 					return
 				}
 
-				function gq(b) {
+				function gq(b) { //__Z28V_FindViewModelByWeaponModeli
 					b = b | 0;
 					var d = 0;
-					b = Kv(c[n + 64816 + 20 >> 2] | 0, b | 0) | 0;
+					b = Kv(c[n + 64816 + 20 >> 2] | 0, b | 0) | 0; //model_t *pWeaponModel = IEngineStudio.GetModelByIndex( iWeaponIndex );
 					if((b | 0) != 0 ? (hc(n + 158134 | 0, b | 0, 64) | 0, d = Fc(n + 158134 | 0, n + 34937 | 0) | 0, (d | 0) != 0) : 0) {
-						a[d + 1 >> 0] = 118;
+						a[d + 1 >> 0] = 118; //szSub[1] = 'v';
 						b = Kv(c[(c[n + 60568 + 336 >> 2] | 0) + 12 >> 2] | 0, n + 158134 | 0) | 0
 					} else b = 0;
 					return b | 0
@@ -38505,7 +38906,7 @@
 					return
 				}
 
-				function jq(a, b, d) {
+				function jq(a, b, d) { //__ZN24CGameStudioModelRenderer15LookupAnimationEP16mstudioseqdesc_ti
 					a = a | 0;
 					b = b | 0;
 					d = d | 0;
@@ -42685,7 +43086,7 @@
 					a = a | 0;
 					b = b | 0;
 					d = d | 0;
-					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1;
+					c[n + 50528 + 6348 >> 2] = c[n + 50528 + 6348 >> 2] | 1; //gHUD
 					return 1
 				}
 
