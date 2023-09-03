@@ -35628,14 +35628,8 @@
 							document.body.appendChild(espbox);
 							*/
 							
-							if (!zafixcrd[i]){
-								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant2 ' + d2text + roundeddeadcrd.toString() + '<br>';
-								if(setcfg.
-									continue;
-							}
-							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
-								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text;
 								continue;
 							}
 							
@@ -35648,7 +35642,22 @@
 								deadcrd[i] = [0,0,0];
 							}
 							let espfillstyle = 'zxc';
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+							if (!zafixcrd[i]){
+								d2text = 'Dormant2 ' + d2text;
+								if (setcfg.dormantesp) {
+									if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+										espfillstyle = 'rgba(210, 255, 255, 0.5)';
+									} else if (playerextra[j].teamnumber != 0) {
+										espfillstyle = 'rgba(255, 210, 210, 0.5)';
+									} else {
+										if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
+										continue;
+									}
+								} else {
+									drawer2.innerHTML += d2text;
+									continue;
+								}
+							} else if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
 								espfillstyle = 'rgba(125, 245, 255, 0.5)';
 							} else if (playerextra[j].teamnumber != 0) {
 								espfillstyle = 'rgba(133, 3, 3, 0.5)';
