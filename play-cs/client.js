@@ -7893,8 +7893,8 @@
 					eu(c[n + 64816 + 40 >> 2] | 0, b + 36 | 0, b + 8 | 0, b + 16 | 0);
 					ut(c[n + 64816 + 48 >> 2] | 0, b + 16528 | 0, b + 16492 | 0, b + 16504 | 0, b + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, b + 16484 | 0, b + 16488 | 0);
-					f = c[e + 4 >> 2] | 0;
-					c[b + 64 >> 2] = f + -1;
+					f = c[e + 4 >> 2] | 0; //pplayer->number
+					c[b + 64 >> 2] = f + -1; //m_nPlayerIndex = pplayer->number - 1;
 					do
 						if(((f | 0) >= 1 ? (f | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) ? (j = Kv(c[n + 64816 + 124 >> 2] | 0, c[b + 64 >> 2] | 0) | 0, c[b + 56 >> 2] = j, (j | 0) != 0) : 0) {
 							j = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0;
@@ -35390,6 +35390,8 @@
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -35443,7 +35445,24 @@
 						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
-						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
+						
+						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, i | 0) | 0; //SetupPlayerModel
+						let numbones = c[Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel | 0) | 0 + 140]; //Mod_Extradata->numbones
+						let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+						let rpmbones = [];
+						let bonedots = [];
+						for (let jk = 0; jk < numbones; jk+=1) {
+							rpmbones[jk] = [
+								c[bonematrix + jk * 48 + 12],
+								c[bonematrix + jk * 48 + 28],
+								c[bonematrix + jk * 48 + 44]
+							];
+							bonedots[jk] = w2s(rpmbones[jk]);
+						}
+						playerbones[i] = rpmbones;
+						playerbonedots[i] = bonedots;
+						
+						playerlist[i] = [distance, crd, dot, hp, rpmbones, bonedots, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35522,70 +35541,21 @@
 					overlay.restore();
 				}
 				
+				function drawSmallText(text, x, y)
+				{
+					overlay.save();
+					overlay.font = '14px verdanabold';
+					overlay.fillStyle = '#f00';
+					overlay.fillText(text, x, y);
+					overlay.restore();
+				}
+				
 				function drawesp(){
 					drawer2.innerHTML = '';
 					let uid = getlocalplayerid();
-					//let sh = window.innerHeight, sw = window.innerWidth;
+
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
-					
-					/*
-					for (let i = 1; i <= 32; i+=1){
-						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
-						if (removediv != null){
-							removediv.remove();
-						}
-						
-						if (playerlist.length === undefined || playerlist.length == 0 || playerlist[i] == 0){
-							continue;
-						}
-						
-						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
-						if (playerdots[i] != 0){
-							let espbox = document.createElement("div");
-							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
-							espbox.style.height = '70px';
-							espbox.style.width = '40px';
-							if (g_TeamInfo[i].teamnumber == g_TeamInfo[lpid].teamnumber){
-								espbox.style.backgroundColor = '#7df5ff';
-							} else if (g_TeamInfo[i].teamnumber != 0) {
-								espbox.style.backgroundColor = '#850303';
-							} else {
-								continue;
-							}
-							let isDead = false;
-							for (let j=0; j<playerextra.length; j+=1){
-								let player = playerextra[j];
-								if (player[0] == i.toString()){
-									if (player[2] == 'Dead'){
-										isDead = true;
-									}
-									break;
-								}
-							}
-							if(isDead){
-								continue;
-							}
-							espbox.style.opacity = '0.5';
-							espbox.style.position = 'absolute';
-							espbox.style.zIndex = '300';
-							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
-							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
-							document.body.appendChild(espbox);
-							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
-						} else {
-							drawer2.innerHTML += '0<br>';
-						}
-					}
-					*/
-					/*
-					for (let i = 1; i <= 32; i+=1){
-						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
-						if (removediv != null){
-							removediv.remove();
-						}
-					}
-					*/
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35594,39 +35564,8 @@
 						let d2text = '';
 						let rnr = zafixcrd[i] ? 'Rendered' : 'Not Rendered';
 						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>'; 
-						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
-						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
-							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
-						}
+
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
-							/*
-							let espbox = document.createElement("div");
-							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
-							espbox.style.height = '70px';
-							espbox.style.width = '40px';
-							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
-								espbox.style.backgroundColor = '#7df5ff';
-							} else if (playerextra[j].teamnumber != 0) {
-								espbox.style.backgroundColor = '#850303';
-							} else {
-								espbox.remove();
-								continue;
-							}
-							if (playerextra[j].status == 'Dead'){
-								espbox.remove();
-								continue;
-							}
-							if (Math.abs(playerdots[i][0]) >= 1 || Math.abs(playerdots[i][1]) >= 1){
-								espbox.remove();
-								continue;
-							}
-							espbox.style.opacity = '0.5';
-							espbox.style.position = 'absolute';
-							espbox.style.zIndex = '300';
-							espbox.style.left = Math.round(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
-							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
-							document.body.appendChild(espbox);
-							*/
 							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
 								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text;
@@ -35642,7 +35581,7 @@
 								deadcrd[i] = [0,0,0];
 							}
 							let espfillstyle = 'zxc';
-							if (!zafixcrd[i]){
+							if (!zafixcrd[i]) {
 								d2text = 'Dormant2 ' + d2text;
 								if (setcfg.dormantesp) {
 									if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
@@ -35665,11 +35604,7 @@
 								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
 								continue;
 							}
-							/*
-							if (roundedplayercrd.toString() == roundeddeadcrd.toString()) {
-								espfillstyle = 'rgba(255, 255, 255, 0.5)';
-							}
-							*/
+							
 							drawer2.innerHTML += d2text;
 							
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
@@ -35712,6 +35647,16 @@
 								drawStrokedWeapon(weaponid2, weaponid2x, weaponid2y);
 							} else {
 								drawStrokedText(weaponid2, weaponid2x, weaponid2y);
+							}
+							
+							overlay.textBaseline = 'middle';
+							if (zafixcrd[i] && setcfg.skeletonesp) {
+								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+									let boneid = jk.toString();
+									let bonex = Math.round(centerw + centerw*playerbonedots[i][0]);
+									let boney = Math.round(centerh - centerh*playerbonedots[i][1]);
+									drawSmallText(boneid, bonex, boney);
+								}
 							}
 						}
 					}
