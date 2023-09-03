@@ -35557,7 +35557,7 @@
 				function drawSmallText(text, x, y)
 				{
 					overlay.save();
-					overlay.font = '14px verdanabold';
+					overlay.font = '42px serif';
 					overlay.fillStyle = '#f00';
 					overlay.fillText(text, x, y);
 					overlay.restore();
@@ -35663,12 +35663,12 @@
 							}
 							
 							overlay.textBaseline = 'middle';
-							if (zafixcrd[i] && setcfg.skeletonesp) {
+							if (zafixcrd[i] && setcfg.skeletonesp && playerbonedots[i] != 0) {
 								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
 									let boneid = jk.toString();
 									let bonex = Math.round(centerw + centerw*playerbonedots[i][0]);
 									let boney = Math.round(centerh - centerh*playerbonedots[i][1]);
-									drawSmallText(boneid, bonex, boney);
+									drawSmallText('♦', bonex, boney);
 								}
 							}
 						}
