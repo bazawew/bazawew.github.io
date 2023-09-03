@@ -17770,7 +17770,7 @@
 					return 1
 				}
 
-				function Yg(b, d, e) {
+				function Yg(b, d, e) { //__Z20UTIL_FindEntityInMapPKcPfS1_
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -17782,7 +17782,7 @@
 						m = 0;
 					m = i;
 					i = i + 1328 | 0;
-					j = Kv(c[n + 60568 + 212 >> 2] | 0, 0) | 0;
+					j = Kv(c[n + 60568 + 212 >> 2] | 0, 0) | 0; //cl_entity_t *	pEnt = gEngfuncs.GetEntityByIndex( 0 );	// get world model
 					a: do
 						if(((j | 0) != 0 ? (h = c[j + 2964 >> 2] | 0, (h | 0) != 0) : 0) ? (f = c[h + 384 >> 2] | 0, (f | 0) != 0) : 0) {
 							b: while(1) {
@@ -35445,19 +35445,21 @@
 						playerweapon2[i] = hdrname;
 						playerweapon3[i] = weaponsymbol;
 						
-						let hp = c[player + 688 + 172 >> 2];
+						let hp = c[player + 2964 >> 2];
 						playerhp[i] = hp;
 						
 						
 						let rpmbones = [[0,0,0]];
 						let bonedots = [[0,0,0]];
-						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, i | 0) | 0; //SetupPlayerModel
-						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel | 0) | 0;
+						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, (i - 1) | 0) | 0; //SetupPlayerModel
+						//let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
+						let pmodel = c[player + 688 + 180 >> 2];
+						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
 						let rpmname = '';
 						let numbones = 0;
 						let bonematrix = 0;
 						if (rpmheader != 0) {
-							for (let jk = 0; jk < 64; jk+=1){
+							for (let jk = 0; jk < 64; jk+=1) {
 								let achar = a[rpmheader + 8 + jk >> 0];
 								if (achar == 0 || (jk == 0 && achar == 51)) break;
 								rpmname += String.fromCharCode(achar);
@@ -35563,7 +35565,7 @@
 				function drawSmallText(text, x, y)
 				{
 					overlay.save();
-					overlay.font = '27px verdanabold';
+					overlay.font = '27px serif';
 					overlay.fillStyle = '#f00';
 					overlay.fillText(text, x, y);
 					overlay.restore();
