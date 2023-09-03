@@ -35478,8 +35478,8 @@
 						}
 						
 						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' ' + numbones + ' ' + bonematrix + '<br>';
-						drawer3.innerHTML += rpmbones[0][0] + '<br>' + rpmbones[0][1] + '<br>' + rpmbones[0][2] + '<br>';
-						drawer3.innerHTML += bonedots[0][0] + '<br>' + bonedots[0][1] + '<br>' + bonedots[0][2] + '<br>';
+						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
+						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						
 						playerlist[i] = [distance, crd, dot, hp, rpmbones, bonedots, weaponmodelid, hdrname, weaponsymbol];
 					}
@@ -35563,7 +35563,7 @@
 				function drawSmallText(text, x, y)
 				{
 					overlay.save();
-					overlay.font = '42px serif';
+					overlay.font = '27px verdanabold';
 					overlay.fillStyle = '#f00';
 					overlay.fillText(text, x, y);
 					overlay.restore();
@@ -35672,10 +35672,10 @@
 							if (setcfg.skeletonesp && playerbonedots[i] != 0) {
 								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
 									if (playerbonedots[i][jk] != 0) {
-										let boneid = jk.toString();
+										let boneid = i.toString()+':'+jk.toString();
 										let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
 										let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-										drawSmallText('♦', bonex, boney);
+										drawSmallText(boneid, bonex, boney);
 									}
 								}
 							}
