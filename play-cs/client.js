@@ -35593,7 +35593,7 @@
 						let roundeddeadcrd = [Math.round(deadcrd[i][0]), Math.round(deadcrd[i][1]), Math.round(deadcrd[i][2])];
 						let d2text = '';
 						let rnr = zafixcrd[i] ? 'Rendered' : 'Not Rendered';
-						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>';
+						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>'; 
 						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
 						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
 							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
@@ -35628,13 +35628,14 @@
 							document.body.appendChild(espbox);
 							*/
 							
-							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
-								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
-								continue;
-							}
-							
 							if (!zafixcrd[i]){
 								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant2 ' + d2text + roundeddeadcrd.toString() + '<br>';
+								if(setcfg.
+									continue;
+							}
+							
+							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
 								continue;
 							}
 							
@@ -35652,7 +35653,7 @@
 							} else if (playerextra[j].teamnumber != 0) {
 								espfillstyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
-								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + ' team ' + d2text;
+								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
 								continue;
 							}
 							/*
