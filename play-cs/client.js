@@ -35445,19 +35445,27 @@
 						playerweapon2[i] = hdrname;
 						playerweapon3[i] = weaponsymbol;
 						
-						let hp = c[player + 2964 >> 2];
+						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
 						
 						
 						let rpmbones = [[0,0,0]];
 						let bonedots = [[0,0,0]];
+						let pmodel = c[player + 2964 >> 2];
+						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
+						let pmname = '';
 						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, (i - 1) | 0) | 0; //SetupPlayerModel
-						//let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
-						let pmodel = c[player + 688 + 180 >> 2];
-						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
+						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
 						let rpmname = '';
 						let numbones = 0;
 						let bonematrix = 0;
+						if (pmheader != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[pmheader + 8 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								pmname += String.fromCharCode(achar);
+							}
+						}
 						if (rpmheader != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
 								let achar = a[rpmheader + 8 + jk >> 0];
@@ -35479,7 +35487,7 @@
 							playerbonedots[i] = bonedots;
 						}
 						
-						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' ' + numbones + ' ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + numbones + ' ' + bonematrix + '<br>';
 						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						
