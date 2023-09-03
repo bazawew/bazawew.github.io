@@ -35449,19 +35449,21 @@
 						playerhp[i] = hp;
 						
 						
-						let rpmbones = [];
-						let bonedots = [];
+						let rpmbones = [[0,0,0]];
+						let bonedots = [[0,0,0]];
 						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, i | 0) | 0; //SetupPlayerModel
 						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel | 0) | 0;
+						let rpmname = '';
+						let numbones = 0;
+						let bonematrix = 0;
 						if (rpmheader != 0) {
-							let rpmname = '';
 							for (let jk = 0; jk < 64; jk+=1){
 								let achar = a[rpmheader + 8 + jk >> 0];
 								if (achar == 0 || (jk == 0 && achar == 51)) break;
 								rpmname += String.fromCharCode(achar);
 							}
-							let numbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
-							let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+							numbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
+							bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
 							for (let jk = 0; jk < numbones; jk+=1) {
 								rpmbones[jk] = [
 									itof(c[bonematrix + jk * 48 + 12 >> 2]),
