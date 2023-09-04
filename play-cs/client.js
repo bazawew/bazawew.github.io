@@ -35473,6 +35473,7 @@
 						}
 						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
 						let rpmhname = '';
+						let othernumbones = 0;
 						let numbones = 0;
 						let bonematrix = 0;
 						if (pmheader != 0) {
@@ -35481,6 +35482,7 @@
 								if (achar == 0 || (jk == 0 && achar == 51)) break;
 								pmhname += String.fromCharCode(achar);
 							}
+							othernumbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
 						}
 						if (rpmheader != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
@@ -35503,7 +35505,7 @@
 							playerbonedots[i] = bonedots;
 						}
 						
-						drawer3.innerHTML += i + ' ' + player + ' hp:' + hp + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
 						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						
