@@ -4665,8 +4665,8 @@
 								h = d + 56 | 0
 							}
 							if((j | 0) != 0 ? (k = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0, c[d + 72 >> 2] = k, (k | 0) != 0) : 0) {
-								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0);
-								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0);
+								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0); //IEngineStudio.StudioSetHeader(m_pStudioHeader);
+								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0); //IEngineStudio.SetRenderModel(m_pRenderModel);
 								h = c[d + 52 >> 2] | 0;
 								j = c[(c[d + 72 >> 2] | 0) + 164 >> 2] | 0;
 								if((c[h + 732 >> 2] | 0) >= (j | 0)) c[h + 732 >> 2] = 0;
@@ -35462,7 +35462,9 @@
 						}
 						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
 						let pmhname = '';
-						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, (i - 1) | 0) | 0; //SetupPlayerModel
+						//instead of i - 1 (idk if it actually helps)
+						let mnplayerindex = c[player + 688 + 4 >> 2] | 0 - 1; //player->curstate->number - 1
+						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, mnplayerindex | 0) | 0; //SetupPlayerModel
 						let rpmname = '';
 						if (rpmodel != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
@@ -35491,6 +35493,8 @@
 								rpmhname += String.fromCharCode(achar);
 							}
 							numbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
+							Wv(c[n + 64816 + 140 >> 2] | 0, rpmheader | 0); //IEngineStudio.StudioSetHeader;
+							Wv(c[n + 64816 + 144 >> 2] | 0, rpmodel | 0); //IEngineStudio.SetRenderModel;
 							bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
 							for (let jk = 0; jk < numbones; jk+=1) {
 								rpmbones[jk] = [
@@ -35505,7 +35509,7 @@
 							playerbonedots[i] = bonedots;
 						}
 						
-						drawer3.innerHTML += i + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + ' ' + mnplayerindex + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
 						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						
