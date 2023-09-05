@@ -35728,16 +35728,18 @@
 							} else {
 								drawStrokedText(weaponid2, weaponid2x, weaponid2y);
 							}
-							
-							overlay.textBaseline = 'middle';
-							if (setcfg.skeletonesp && playerbonedots[i] != 0) {
-								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
-									if (playerbonedots[i][jk] != 0) {
-										let boneid = i.toString()+':'+jk.toString();
-										let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
-										let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-										drawSmallText(boneid, bonex, boney);
-									}
+						}
+						
+						overlay.textAlign = 'center';
+						overlay.textBaseline = 'middle';
+						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
+							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+								if (playerbonedots[i][jk] != 0) {
+									let boneid = i.toString()+':'+jk.toString();
+									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
+									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
+									//drawSmallText(boneid, bonex, boney);
+									drawSmallText('•', bonex, boney);
 								}
 							}
 						}
