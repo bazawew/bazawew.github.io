@@ -4667,6 +4667,32 @@
 							if((j | 0) != 0 ? (k = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0, c[d + 72 >> 2] = k, (k | 0) != 0) : 0) {
 								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0); //IEngineStudio.StudioSetHeader(m_pStudioHeader);
 								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0); //IEngineStudio.SetRenderModel(m_pRenderModel);
+								
+								
+								//bones hook here
+								let pid = c[f + 4 >> 2] | 0; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}
+								let bones = [], bonedots = [];
+								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+								for (let jk = 0; jk < numbones; jk+=1) {
+									rpmbones[jk] = [
+										itof(c[bonematrix + jk * 48 + 12 >> 2]),
+										itof(c[bonematrix + jk * 48 + 28 >> 2]),
+										itof(c[bonematrix + jk * 48 + 44 >> 2])
+									];
+									bonedots[jk] = w2s(rpmbones[jk]);
+								}
+								playerbones[pid] = rpmbones;
+								playerbonedots[pid] = bonedots;
+								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+								
+								
 								h = c[d + 52 >> 2] | 0;
 								j = c[(c[d + 72 >> 2] | 0) + 164 >> 2] | 0;
 								if((c[h + 732 >> 2] | 0) >= (j | 0)) c[h + 732 >> 2] = 0;
@@ -35392,8 +35418,6 @@
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -35448,7 +35472,11 @@
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
 						
-						
+						//this shit is actually not working idk why
+						//it returns the same pointer to bonematrix regardless of a player
+						//setuplayermodel changes nothing
+						//so i hook the CGameStudioModelRenderer::_StudioDrawPlayer
+						/*
 						let rpmbones = [[0,0,0]];
 						let bonedots = [[0,0,0]];
 						let pmodel = c[player + 2964 >> 2];
@@ -35462,9 +35490,9 @@
 						}
 						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
 						let pmhname = '';
-						//instead of i - 1 (idk if it actually helps)
-						let mnplayerindex = c[player + 688 + 4 >> 2] | 0 - 1; //player->curstate->number - 1
-						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, mnplayerindex | 0) | 0; //SetupPlayerModel
+						//instead of i - 1 (idk if it actually helps) (it doesnt)
+						//let mnplayerindex = c[player + 688 + 4 >> 2] | 0 - 1; //player->curstate->number - 1
+						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, i - 1) | 0; //SetupPlayerModel
 						let rpmname = '';
 						if (rpmodel != 0) {
 							for (let jk = 0; jk < 64; jk+=1) {
@@ -35509,11 +35537,12 @@
 							playerbonedots[i] = bonedots;
 						}
 						
-						drawer3.innerHTML += i + ' ' + ' ' + mnplayerindex + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
+						drawer3.innerHTML += i + ' ' + mnplayerindex + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
 						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
+						*/
 						
-						playerlist[i] = [distance, crd, dot, hp, rpmbones, bonedots, weaponmodelid, hdrname, weaponsymbol];
+						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35789,6 +35818,8 @@
 					drawinfo();
 					drawoverlay();
 					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
+					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 				}
 
 				function jn(a, b, d) {
