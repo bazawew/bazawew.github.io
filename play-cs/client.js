@@ -4690,7 +4690,7 @@
 								}
 								playerbones[pid] = bones;
 								playerbonedots[pid] = bonedots;
-								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>' + bones[7] + '<br>' + playercrd[pid] + '<br>';
 								
 								
 								h = c[d + 52 >> 2] | 0;
