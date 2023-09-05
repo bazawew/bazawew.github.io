@@ -4681,14 +4681,14 @@
 								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
 								let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
 								for (let jk = 0; jk < numbones; jk+=1) {
-									rpmbones[jk] = [
+									bones[jk] = [
 										itof(c[bonematrix + jk * 48 + 12 >> 2]),
 										itof(c[bonematrix + jk * 48 + 28 >> 2]),
 										itof(c[bonematrix + jk * 48 + 44 >> 2])
 									];
-									bonedots[jk] = w2s(rpmbones[jk]);
+									bonedots[jk] = w2s(bones[jk]);
 								}
-								playerbones[pid] = rpmbones;
+								playerbones[pid] = bones;
 								playerbonedots[pid] = bonedots;
 								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
 								
