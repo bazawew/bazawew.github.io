@@ -4668,6 +4668,14 @@
 								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0); //IEngineStudio.StudioSetHeader(m_pStudioHeader);
 								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0); //IEngineStudio.SetRenderModel(m_pRenderModel);
 								
+								let pid = c[f + 4 >> 2]; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}
+								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
 								/*
 								//bones hook here
 								let pid = c[f + 4 >> 2]; //pplayer->number
@@ -4756,15 +4764,16 @@
 								
 								
 								//bones hook here
+								/*
 								let pid = c[f + 4 >> 2]; //pplayer->number
 								let headername = '';
 								for (let jk = 0; jk < 64; jk+=1) {
 									let achar = a[k + 8 + jk >> 0];
 									if (achar == 0 || (jk == 0 && achar == 51)) break;
 									headername += String.fromCharCode(achar);
-								}
+								}*/
 								let bones = [], bonedots = [];
-								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								//let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
 								if (numbones > 420) {
 									let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
 									for (let jk = 0; jk < numbones; jk+=1) {
