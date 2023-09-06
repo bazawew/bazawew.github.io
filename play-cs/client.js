@@ -4688,11 +4688,18 @@
 									];
 									bonedots[jk] = w2s(bones[jk]);
 								}
-								playerbones[pid] = bones;
-								playerbonedots[pid] = bonedots;
-								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
-								drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
-								drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined && thepreviousskeleton == 0){
+									/* epicpromove
+									playerbones[pid] = bones;
+									playerbonedots[pid] = bonedots;
+									epicpromove */
+									playerbones[thepreviousskeleton] = bones;
+									playerbonedots[thepreviousskeleton] = bonedots;
+									drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+									drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+									drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+								}
+								thepreviousskeleton = pid;
 								
 								
 								h = c[d + 52 >> 2] | 0;
@@ -35826,6 +35833,7 @@
 					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
 					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					thepreviousskeleton = 0;
 				}
 
 				function jn(a, b, d) {
