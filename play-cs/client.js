@@ -4668,7 +4668,7 @@
 								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0); //IEngineStudio.StudioSetHeader(m_pStudioHeader);
 								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0); //IEngineStudio.SetRenderModel(m_pRenderModel);
 								
-								
+								/*
 								//bones hook here
 								let pid = c[f + 4 >> 2]; //pplayer->number
 								let headername = '';
@@ -4689,10 +4689,9 @@
 									bonedots[jk] = w2s(bones[jk]);
 								}
 								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined && thepreviousskeleton != 0){
-									/* epicpromove
-									playerbones[pid] = bones;
-									playerbonedots[pid] = bonedots;
-									epicpromove */
+									//playerbones[pid] = bones;
+									//playerbonedots[pid] = bonedots;
+									//epicpromove
 									playerbones[thepreviousskeleton] = bones;
 									playerbonedots[thepreviousskeleton] = bonedots;
 									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
@@ -4700,6 +4699,7 @@
 									drawer3.innerHTML += Math.round(playercrd[thepreviousskeleton][0]) + ' ' + Math.round(playercrd[thepreviousskeleton][1]) + ' ' + Math.round(playercrd[thepreviousskeleton][2]) + '<br>';
 								}
 								thepreviousskeleton = pid;
+								*/
 								
 								
 								h = c[d + 52 >> 2] | 0;
@@ -4750,10 +4750,40 @@
 									h = 1;
 									break
 								}
-								c[d + 60 >> 2] = Kv(c[n + 64816 + 28 >> 2] | 0, c[d + 64 >> 2] | 0) | 0;
+								c[d + 60 >> 2] = Kv(c[n + 64816 + 28 >> 2] | 0, c[d + 64 >> 2] | 0) | 0; //m_pPlayerInfo = IEngineStudio.PlayerInfo(m_nPlayerIndex);
 								Wv(c[(c[d >> 2] | 0) + 28 >> 2] | 0, d | 0);
 								Wv(c[(c[d >> 2] | 0) + 36 >> 2] | 0, d | 0);
-								c[(c[d + 60 >> 2] | 0) + 376 >> 2] = c[d + 36 >> 2];
+								
+								
+								//bones hook here
+								let pid = c[f + 4 >> 2]; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}
+								let bones = [], bonedots = [];
+								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+								for (let jk = 0; jk < numbones; jk+=1) {
+									bones[jk] = [
+										itof(c[bonematrix + jk * 48 + 12 >> 2]),
+										itof(c[bonematrix + jk * 48 + 28 >> 2]),
+										itof(c[bonematrix + jk * 48 + 44 >> 2])
+									];
+									bonedots[jk] = w2s(bones[jk]);
+								}
+								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined){
+									playerbones[pid] = bones;
+									playerbonedots[pid] = bonedots;
+									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
+									drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+									drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+								}
+								
+								
+								c[(c[d + 60 >> 2] | 0) + 376 >> 2] = c[d + 36 >> 2]; //m_pPlayerInfo->renderframe = m_nFrameCount;
 								c[d + 60 >> 2] = 0;
 								do
 									if(e & 2 | 0) {
