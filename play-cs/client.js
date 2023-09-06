@@ -4670,7 +4670,7 @@
 								
 								
 								//bones hook here
-								let pid = c[f + 4 >> 2] | 0; //pplayer->number
+								let pid = c[f + 4 >> 2]; //pplayer->number
 								let headername = '';
 								for (let jk = 0; jk < 64; jk+=1) {
 									let achar = a[k + 8 + jk >> 0];
@@ -35705,6 +35705,7 @@
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
 							
+							
 							/*
 							let weaponid = playerweapon[i].toString();
 							let weaponidx = pnamex;
@@ -35722,7 +35723,8 @@
 							
 							overlay.textBaseline = 'bottom';
 							drawStrokedText(pname, pnamex, pnamey);
-							drawStrokedText(pdist, pdistx, pdisty);
+							//drawStrokedText(pdist, pdistx, pdisty);
+							drawStrokedText('id:' + i.toString(), pdistx, pdisty);
 							
 							overlay.textBaseline = 'top';
 							if (isWeaponDefault) {
