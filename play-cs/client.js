@@ -4765,21 +4765,25 @@
 								}
 								let bones = [], bonedots = [];
 								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
-								let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
-								for (let jk = 0; jk < numbones; jk+=1) {
-									bones[jk] = [
-										itof(c[bonematrix + jk * 48 + 12 >> 2]),
-										itof(c[bonematrix + jk * 48 + 28 >> 2]),
-										itof(c[bonematrix + jk * 48 + 44 >> 2])
-									];
-									bonedots[jk] = w2s(bones[jk]);
-								}
-								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined){
-									playerbones[pid] = bones;
-									playerbonedots[pid] = bonedots;
-									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
-									drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
-									drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+								if (numbones > 420) {
+									let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+									for (let jk = 0; jk < numbones; jk+=1) {
+										bones[jk] = [
+											itof(c[bonematrix + jk * 48 + 12 >> 2]),
+											itof(c[bonematrix + jk * 48 + 28 >> 2]),
+											itof(c[bonematrix + jk * 48 + 44 >> 2])
+										];
+										bonedots[jk] = w2s(bones[jk]);
+									}
+									if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined){
+										playerbones[pid] = bones;
+										playerbonedots[pid] = bonedots;
+										drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
+										drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+										drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+									}
+								} else {
+									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ERR too much bones:' + numbones + '<br>';
 								}
 								
 								
