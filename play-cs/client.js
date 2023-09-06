@@ -4695,9 +4695,9 @@
 									epicpromove */
 									playerbones[thepreviousskeleton] = bones;
 									playerbonedots[thepreviousskeleton] = bonedots;
-									drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
 									drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
-									drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+									drawer3.innerHTML += Math.round(playercrd[thepreviousskeleton][0]) + ' ' + Math.round(playercrd[thepreviousskeleton][1]) + ' ' + Math.round(playercrd[thepreviousskeleton][2]) + '<br>';
 								}
 								thepreviousskeleton = pid;
 								
