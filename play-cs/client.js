@@ -35749,8 +35749,11 @@
 									let boneid = i.toString()+':'+jk.toString();
 									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
 									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-									//drawSmallText(boneid, bonex, boney);
-									drawSmallText('•', bonex, boney);
+									if (setcfr.skeletondebug) {
+										drawSmallText(boneid, bonex, boney);
+									} else {
+										drawSmallText('•', bonex, boney);
+									}
 								}
 							}
 						}
