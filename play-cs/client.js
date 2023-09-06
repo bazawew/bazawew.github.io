@@ -4688,7 +4688,7 @@
 									];
 									bonedots[jk] = w2s(bones[jk]);
 								}
-								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined && thepreviousskeleton == 0){
+								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined && thepreviousskeleton != 0){
 									/* epicpromove
 									playerbones[pid] = bones;
 									playerbonedots[pid] = bonedots;
@@ -35749,7 +35749,7 @@
 									let boneid = i.toString()+':'+jk.toString();
 									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
 									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-									if (setcfr.skeletondebug) {
+									if (setcfg.skeletondebug) {
 										drawSmallText(boneid, bonex, boney);
 									} else {
 										drawSmallText('•', bonex, boney);
