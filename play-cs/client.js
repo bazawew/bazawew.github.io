@@ -4690,7 +4690,9 @@
 								}
 								playerbones[pid] = bones;
 								playerbonedots[pid] = bonedots;
-								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>' + bones[7] + '<br>' + playercrd[pid] + '<br>';
+								drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+								drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+								drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
 								
 								
 								h = c[d + 52 >> 2] | 0;
