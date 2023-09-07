@@ -35831,15 +35831,15 @@
 							drawBone(i, 25, 24);
 							drawBone(i, 26, 25);
 							if (playermodelnames[i].includes('leet')) {
-								drawBone(i, 43, 2);
-								drawBone(i, 49, 2);
-								drawBone(i, 44, 43);
-								drawBone(i, 50, 49);
+								drawBone(i, 47, 2);
+								drawBone(i, 53, 2);
+								drawBone(i, 47, 46);
+								drawBone(i, 53, 52);
 							} else if (playermodelnames[i].includes('gign')) {
 								drawBone(i, 45, 2);
 								drawBone(i, 51, 2);
 								drawBone(i, 45, 44);
-								drawBone(i, 48, 47);
+								drawBone(i, 51, 50);
 							}
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
