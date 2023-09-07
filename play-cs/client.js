@@ -35816,20 +35816,22 @@
 						overlay.textAlign = 'center';
 						overlay.textBaseline = 'middle';
 						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
-							drawBone(i, 11, 18);
-							drawBone(i, 10, 11);
-							drawBone(i, 10, 6);
-							drawBone(i, 6, 2);   
-							drawBone(i, 6, 24);
-							drawBone(i, 25, 24);
-							drawBone(i, 26, 25);
 							if (playermodelnames[i].includes('leet')) {
-								drawBone(i, 47, 2);
-								drawBone(i, 53, 2);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 47);
 								drawBone(i, 47, 46);
+								drawBone(i, 1, 53);
 								drawBone(i, 53, 52);
 							} else if (playermodelnames[i].includes('gign')) {
-								/*
 								//right hand
 								drawBone(i, 6, 24);
 								drawBone(i, 24, 25);
@@ -35837,13 +35839,12 @@
 								//left hand
 								drawBone(i, 6, 10);
 								drawBone(i, 10, 11);
-								drawBone(i, 11, 18);
+								drawBone(i, 11, 12);
 								//spine and legs
-								drawBone(i, 6, 2);
-								*/
-								drawBone(i, 2, 45);
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 45);
 								drawBone(i, 45, 44);
-								drawBone(i, 2, 51);
+								drawBone(i, 1, 51);
 								drawBone(i, 51, 50);
 							}
 							if (setcfg.skeletondebug) {
