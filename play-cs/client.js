@@ -35794,8 +35794,8 @@
 							
 							overlay.textBaseline = 'bottom';
 							drawStrokedText(pname, pnamex, pnamey);
-							//drawStrokedText(pdist, pdistx, pdisty);
-							drawStrokedText('id:' + i.toString(), pdistx, pdisty);
+							drawStrokedText(pdist, pdistx, pdisty);
+							//drawStrokedText('id:' + i.toString(), pdistx, pdisty);
 							
 							overlay.textBaseline = 'top';
 							if (isWeaponDefault) {
