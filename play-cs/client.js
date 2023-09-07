@@ -35693,7 +35693,7 @@
 					let joint2y = Math.round(centerh - centerh*playerbonedots[pid][joint2][1]);
 					overlay.save();
 					overlay.strokeStyle = '#fff';
-					overlay.lineWidth = 8;
+					overlay.lineWidth = 5;
 					overlay.lineJoin = "round";
 					overlay.beginPath();
 					overlay.moveTo(joint1x, joint1y);
@@ -35826,18 +35826,18 @@
 							drawBone(i, 11, 18);
 							drawBone(i, 10, 11);
 							drawBone(i, 10, 6);
-							drawBone(i, 6, 0);   
+							drawBone(i, 6, 2);   
 							drawBone(i, 6, 24);
 							drawBone(i, 25, 24);
 							drawBone(i, 26, 25);
 							if (playermodelnames[i].includes('leet')) {
-								drawBone(i, 43, 0);
-								drawBone(i, 49, 0);
+								drawBone(i, 43, 2);
+								drawBone(i, 49, 2);
 								drawBone(i, 44, 43);
 								drawBone(i, 50, 49);
 							} else if (playermodelnames[i].includes('gign')) {
-								drawBone(i, 45, 0);
-								drawBone(i, 51, 0);
+								drawBone(i, 45, 2);
+								drawBone(i, 51, 2);
 								drawBone(i, 45, 44);
 								drawBone(i, 48, 47);
 							}
