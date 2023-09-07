@@ -4675,7 +4675,8 @@
 									if (achar == 0 || (jk == 0 && achar == 51)) break;
 									headername += String.fromCharCode(achar);
 								}
-								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								let numbones = c[k + 140 >> 2] | 0; //m_pStudioHeader->numbones
+								let pbbox = k + (c[k + 160 >> 2] | 0) | 0; //pbbox = m_pStudioHeader + m_pStudioHeader->hitboxindex
 								/*
 								//bones hook here
 								let pid = c[f + 4 >> 2]; //pplayer->number
@@ -4774,15 +4775,22 @@
 								}*/
 								let bones = [], bonedots = [];
 								//let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
-								if (numbones <= 420) {
+								if (numbones <= 9000) {
 									let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
 									for (let jk = 0; jk < numbones; jk+=1) {
+										let bonename = '';
+										for (let jjk = 0; jjk < 32; jjk+=1) {
+											let aachar = a[pbbox + jk * 112 + 0 + jjk >> 0];
+											if (aachar == 0 || (jjk == 0 && aachar == 51)) break;
+											bonename += String.fromCharCode(aachar);
+										}
 										bones[jk] = [
 											itof(c[bonematrix + jk * 48 + 12 >> 2]),
 											itof(c[bonematrix + jk * 48 + 28 >> 2]),
-											itof(c[bonematrix + jk * 48 + 44 >> 2])
+											itof(c[bonematrix + jk * 48 + 44 >> 2]),
 										];
 										bonedots[jk] = w2s(bones[jk]);
+										bones[jk][3] = bonename;
 									}
 									if (bones != 0 && bones !== undefined && bones[8] != 0 && bones[8] !== undefined){
 										playerbones[pid] = bones;
@@ -4793,7 +4801,7 @@
 										playermodelnames[pid] = headername;
 									}
 								} else {
-									drawer3.innerHTML += pid + ' ' + headername + ' ERR too much bones:' + numbones + '<br>';
+									drawer3.innerHTML += pid + ' ' + headername + ' Its over 9000! ' + numbones + ' actually<br>';
 								}
 								
 								
@@ -35677,7 +35685,7 @@
 				function drawSmallText(text, x, y)
 				{
 					overlay.save();
-					overlay.font = '27px serif';
+					overlay.font = '20px arial';
 					overlay.fillStyle = '#f00';
 					overlay.fillText(text, x, y);
 					overlay.restore();
@@ -35694,7 +35702,7 @@
 					overlay.save();
 					overlay.strokeStyle = '#fff';
 					overlay.lineWidth = 5;
-					overlay.lineJoin = "round";
+					overlay.lineCap = "round";
 					overlay.beginPath();
 					overlay.moveTo(joint1x, joint1y);
 					overlay.lineTo(joint2x, joint2y);
@@ -35808,21 +35816,6 @@
 						overlay.textAlign = 'center';
 						overlay.textBaseline = 'middle';
 						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
-							/*
-							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
-								// && jk == 8
-								if (playerbonedots[i][jk] != 0) {
-									let boneid = i.toString()+':'+jk.toString();
-									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
-									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-									if (setcfg.skeletondebug) {
-										drawSmallText(boneid, bonex, boney);
-									} else {
-										drawSmallText('•', bonex, boney);
-									}
-								}
-							}
-							*/
 							drawBone(i, 11, 18);
 							drawBone(i, 10, 11);
 							drawBone(i, 10, 6);
@@ -35836,10 +35829,32 @@
 								drawBone(i, 47, 46);
 								drawBone(i, 53, 52);
 							} else if (playermodelnames[i].includes('gign')) {
-								drawBone(i, 45, 2);
-								drawBone(i, 51, 2);
+								/*
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 18);
+								//spine and legs
+								drawBone(i, 6, 2);
+								*/
+								drawBone(i, 2, 45);
 								drawBone(i, 45, 44);
+								drawBone(i, 2, 51);
 								drawBone(i, 51, 50);
+							}
+							if (setcfg.skeletondebug) {
+								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+									if (playerbonedots[i][jk] != 0) {
+										let name = '['+jk.toString()+']'+playerbones[i][3];
+										let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
+										let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
+										drawSmallText(jk.toString(), bonex, boney);
+									}
+								}
 							}
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
