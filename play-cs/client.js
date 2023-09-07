@@ -4784,12 +4784,13 @@
 										];
 										bonedots[jk] = w2s(bones[jk]);
 									}
-									if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined){
+									if (bones != 0 && bones !== undefined && bones[8] != 0 && bones[8] !== undefined){
 										playerbones[pid] = bones;
 										playerbonedots[pid] = bonedots;
 										drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
-										drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+										drawer3.innerHTML += Math.round(bones[8][0]) + ' ' + Math.round(bones[8][1]) + ' ' + Math.round(bones[8][2]) + '<br>';
 										drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+										playermodelnames[pid] = headername;
 									}
 								} else {
 									drawer3.innerHTML += pid + ' ' + headername + ' ERR too much bones:' + numbones + '<br>';
@@ -35682,12 +35683,30 @@
 					overlay.restore();
 				}
 				
+				function drawBone(pid, joint1, joint2){
+					let centerw = osize[0], centerh = osize[1];
+					let joint1x = Math.round(centerw + centerw*playerbonedots[pid][joint1][0]);
+					let joint1y = Math.round(centerh - centerh*playerbonedots[pid][joint1][1]);
+					let joint2x = Math.round(centerw + centerw*playerbonedots[pid][joint2][0]);
+					let joint2y = Math.round(centerh - centerh*playerbonedots[pid][joint2][1]);
+					overlay.save();
+					overlay.fillStyle = '#fff';
+					overlay.lineWidth = 8;
+					overlay.lineJoin = "round";
+					overlay.beginPath();
+					overlay.moveTo(joint1x, joint1y);
+					overlay.lineTo(joint2x, joint2y);
+					overlay.stroke();
+					overlay.restore();
+				}
+				
 				function drawesp(){
 					drawer2.innerHTML = '';
 					let uid = getlocalplayerid();
 
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+					osize = [centerw, centerh];
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35787,7 +35806,9 @@
 						overlay.textAlign = 'center';
 						overlay.textBaseline = 'middle';
 						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
+							/*
 							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+								// && jk == 8
 								if (playerbonedots[i][jk] != 0) {
 									let boneid = i.toString()+':'+jk.toString();
 									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
@@ -35799,6 +35820,26 @@
 									}
 								}
 							}
+							*/
+							drawBone(i, 11, 18);
+							drawBone(i, 10, 11);
+							drawBone(i, 10, 6);
+							drawBone(i, 6, 0);   
+							drawBone(i, 6, 24);
+							drawBone(i, 25, 24);
+							drawBone(i, 26, 25);
+							if (playermodelnames[i].includes('leet')) {
+								drawBone(i, 43, 0);
+								drawBone(i, 49, 0);
+								drawBone(i, 44, 43);
+								drawBone(i, 50, 49);
+							} else if (playermodelnames[i].includes('gign')) {
+								drawBone(i, 45, 0);
+								drawBone(i, 51, 0);
+								drawBone(i, 45, 44);
+								drawBone(i, 48, 47);
+							}
+							drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][jk][0]), Math.round(centerh - centerh*playerbonedots[i][jk][1]));
 						}
 					}
 				}
@@ -35879,6 +35920,7 @@
 					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
 					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playermodelnames = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					//thepreviousskeleton = 0;
 				}
 
