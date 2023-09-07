@@ -35685,12 +35685,14 @@
 				
 				function drawBone(pid, joint1, joint2){
 					let centerw = osize[0], centerh = osize[1];
+					if (playerbonedots[pid][joint1] == 0 || playerbonedots[pid][joint2] == 0) return;
+					if (playerbonedots[pid][joint1] === undefined || playerbonedots[pid][joint2] === undefined) return;
 					let joint1x = Math.round(centerw + centerw*playerbonedots[pid][joint1][0]);
 					let joint1y = Math.round(centerh - centerh*playerbonedots[pid][joint1][1]);
 					let joint2x = Math.round(centerw + centerw*playerbonedots[pid][joint2][0]);
 					let joint2y = Math.round(centerh - centerh*playerbonedots[pid][joint2][1]);
 					overlay.save();
-					overlay.fillStyle = '#fff';
+					overlay.strokeStyle = '#fff';
 					overlay.lineWidth = 8;
 					overlay.lineJoin = "round";
 					overlay.beginPath();
@@ -35839,7 +35841,9 @@
 								drawBone(i, 45, 44);
 								drawBone(i, 48, 47);
 							}
-							drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][jk][0]), Math.round(centerh - centerh*playerbonedots[i][jk][1]));
+							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
+								drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							}
 						}
 					}
 				}
