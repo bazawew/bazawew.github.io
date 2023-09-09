@@ -35933,10 +35933,49 @@
 					}
 				}
 				
+				function aimbot(){
+					if (setcfg.aimenabled) {
+						let mindist = 9001;
+						let nearpid = -1;
+						let nearheadcrd = 0;
+						let sw = overlayelement.width, sh = overlayelement.height;
+						let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+						for (let j=0; j<playerextra.length; j+=1){
+							let i = parseInt(playerextra[j].id);
+							if (playerbonedots[i][8] != 0) {
+								let headx = Math.round(centerw + centerw*playerbonedots[i][8][0]);
+								let heady = Math.round(centerh - centerh*playerbonedots[i][8][1]);
+								let dist = Math.sqrt((headx-centerw)**2+(heady-centerh)**2);
+								if (dist <= mindist) {
+									mindist = dist;
+									nearpid = i;
+									nearheadcrd = [headx, heady];
+								}
+							}
+						}
+						if (setcfg.aimlock && pushedfuncs.aimlock) {
+							if (nearpid != -1 && nearheadcrd != 0){
+								let selforg = getlocalplayerorigin(true);
+								let porg = playerbones[nearpid][8];
+								let dorg = [
+									porg[0]-selforg[0],
+									porg[1]-selforg[1],
+									porg[2]-selforg[2]
+								];
+								let dist = Math.sqrt(dorg[0]**2 + dorg[1]**2 + dorg[2]**2);
+								let anglex = Math.atan2(dorg[1], dorg[0]) * 180 / Math.PI;
+								let angley = Math.atan2(dorg[3], Math.sqrt(dorg[0]**2 + dorg[1]**2)) * 180 / Math.PI;
+								setviewang([anglex, angley, 0]);
+							}
+						}
+					}
+				}
+				
 				function update228(){
 					iteratingplayers();
 					drawinfo();
 					drawoverlay();
+					aimbot();
 					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
 					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
