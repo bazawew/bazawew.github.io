@@ -35942,9 +35942,9 @@
 						let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
-							if (playerbonedots[i][8] != 0) {
-								let headx = Math.round(centerw + centerw*playerbonedots[i][8][0]);
-								let heady = Math.round(centerh - centerh*playerbonedots[i][8][1]);
+							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
+								let headx = centerw + centerw*playerbonedots[i][8][0];
+								let heady = centerh - centerh*playerbonedots[i][8][1];
 								let dist = Math.sqrt((headx-centerw)**2+(heady-centerh)**2);
 								if (dist <= mindist) {
 									mindist = dist;
