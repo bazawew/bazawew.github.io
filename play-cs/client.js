@@ -35738,6 +35738,7 @@
 								drawer2.innerHTML += d2text;
 								continue;
 							}
+							
 							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
 								deadcrd[i] = [0,0,0];
 							}
@@ -35934,7 +35935,7 @@
 				}
 				
 				function aimbot(){
-					if (setcfg.aimenabled) {
+					if (setcfg.aimbotenabled) {
 						let mindist = 9001;
 						let nearpid = -1;
 						let nearheadcrd = 0;
@@ -35942,6 +35943,9 @@
 						let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
+							let uid = getlocalplayerid();
+							if (playerextra[j].status == 'Dead') continue;
+							if (playerextra[j].teamnumber == 1 - playerextralist[uid].teamnumber) continue;
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								let headx = centerw + centerw*playerbonedots[i][8][0];
 								let heady = centerh - centerh*playerbonedots[i][8][1];
@@ -35954,7 +35958,9 @@
 							}
 						}
 						if (setcfg.aimlock && pushedfuncs.aimlock) {
+							console.log('aimlock');
 							if (nearpid != -1 && nearheadcrd != 0){
+								console.log('successfully locked');
 								let selforg = getlocalplayerorigin(true);
 								let porg = playerbones[nearpid][8];
 								let dorg = [
@@ -35962,10 +35968,12 @@
 									porg[1]-selforg[1],
 									porg[2]-selforg[2]
 								];
-								let dist = Math.sqrt(dorg[0]**2 + dorg[1]**2 + dorg[2]**2);
-								let anglex = Math.atan2(dorg[1], dorg[0]) * 180 / Math.PI;
-								let angley = Math.atan2(dorg[3], Math.sqrt(dorg[0]**2 + dorg[1]**2)) * 180 / Math.PI;
-								setviewang([anglex, angley, 0]);
+								//pitch yaw roll prosto ya koncheniy
+								let tangazh = Math.min(89.0, Math.max(-89.0, Math.atan2(dorg[1], Math.sqrt(dorg[0]**2 + dorg[2] ** 2)) * 180 / Math.PI));
+								let ryskanye = Math.atan2(dorg[2], dorg[0]) * 180 / Math.PI;
+								if (ryskanye < 0) ryskanye += 360;
+								let kren = 0;
+								setviewang([ftoi(tangazh), ftoi(ryskanye), ftoi(kren)]);
 							}
 						}
 					}
