@@ -35960,7 +35960,7 @@
 						if (setcfg.aimlock && pushedfuncs.aimlock) {
 							console.log('aimlock');
 							if (nearpid != -1 && nearheadcrd != 0){
-								console.log('successfully locked');
+								console.log('successfully locked on player ' + nearpid);
 								let selforg = getlocalplayerorigin(true);
 								let porg = playerbones[nearpid][8];
 								let dorg = [
