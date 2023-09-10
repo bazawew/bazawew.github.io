@@ -35756,9 +35756,9 @@
 							if (!zafixcrd[i]) {
 								d2text = 'Dormant2 ' + d2text;
 								if (setcfg.dormantesp) {
-									if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+									if (playerextra[j].teamnumber == playerextralist[uid].teamnumber && !setcfg.ffamode){
 										espfillstyle = 'rgba(125, 255, 255, 0.5)';
-									} else if (playerextra[j].teamnumber != 0) {
+									} else if (playerextra[j].teamnumber == 3 - playerextralist[uid].teamnumber || setcfg.ffamode) {
 										espfillstyle = 'rgba(255, 125, 125, 0.5)';
 									} else {
 										if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
@@ -35768,9 +35768,9 @@
 									drawer2.innerHTML += d2text;
 									continue;
 								}
-							} else if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
+							} else if (playerextra[j].teamnumber == playerextralist[uid].teamnumber && !setcfg.ffamode) {
 								espfillstyle = 'rgba(3, 3, 133, 0.5)';
-							} else if (playerextra[j].teamnumber != 0) {
+							} else if (playerextra[j].teamnumber == 3 - playerextralist[uid].teamnumber || setcfg.ffamode) {
 								espfillstyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
@@ -35955,7 +35955,7 @@
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
 							if (playerextra[j].status == 'Dead') continue;
-							if (playerextra[j].teamnumber != 3 - playerextralist[uid].teamnumber) continue;
+							if (playerextra[j].teamnumber != 3 - playerextralist[uid].teamnumber || setcfg.ffamode) continue;
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								let headx = centerw + centerw*playerbonedots[i][8][0];
 								let heady = centerh - centerh*playerbonedots[i][8][1];
@@ -35987,7 +35987,7 @@
 								if (yaw < 0) yaw += 360;
 								let roll = 0;
 								//setviewang([ftoi(pitch), ftoi(yaw), ftoi(roll)]);
-								serverviewangles = [ftoi(pitch), ftoi(yaw), ftoi(roll)];
+								//serverviewangles = [ftoi(pitch), ftoi(yaw), ftoi(roll)];
 								drawer1.innerHTML += Math.round(dorg[0]) + ' ' + Math.round(dorg[1]) + ' ' + Math.round(dorg[2]) + '<br>';
 								drawer1.innerHTML += nearpid + ': ' + Math.round(pitch) + ' ' + Math.round(yaw) + '<br>';
 								console.log(getlocalplayerviewangles(true));
