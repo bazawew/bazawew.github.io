@@ -35955,7 +35955,7 @@
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
 							if (playerextra[j].status == 'Dead') continue;
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber || [0, 1].every(e => e != playerextra[j].teamnumber)) continue;
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber || [1, 2].every(e => e != playerextra[j].teamnumber)) continue;
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								let headx = centerw + centerw*playerbonedots[i][8][0];
 								let heady = centerh - centerh*playerbonedots[i][8][1];
