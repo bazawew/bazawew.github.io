@@ -35974,6 +35974,8 @@
 								if (ryskanye < 0) ryskanye += 360;
 								let kren = 0;
 								setviewang([ftoi(tangazh), ftoi(ryskanye), ftoi(kren)]);
+								console.log('set x angle '+tangazh+' '+ftoi(tangazh));
+								console.log('set y angle '+ryskanye+' '+ftoi(ryskanye));
 							}
 						}
 					}
