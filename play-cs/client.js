@@ -35955,7 +35955,7 @@
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
 							if (playerextra[j].status == 'Dead') continue;
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber || [1, 2].every(e => e != playerextra[j].teamnumber)) continue;
+							if (playerextra[j].teamnumber != 3 - playerextralist[uid].teamnumber) continue;
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								let headx = centerw + centerw*playerbonedots[i][8][0];
 								let heady = centerh - centerh*playerbonedots[i][8][1];
@@ -35986,7 +35986,8 @@
 								let yaw = Math.atan2(dorg[2], dorg[0]) * 180 / Math.PI;
 								if (yaw < 0) yaw += 360;
 								let roll = 0;
-								setviewang([ftoi(pitch), ftoi(yaw), ftoi(roll)]);
+								//setviewang([ftoi(pitch), ftoi(yaw), ftoi(roll)]);
+								serverviewangles = [ftoi(pitch), ftoi(yaw), ftoi(roll)];
 								drawer1.innerHTML += Math.round(dorg[0]) + ' ' + Math.round(dorg[1]) + ' ' + Math.round(dorg[2]) + '<br>';
 								drawer1.innerHTML += nearpid + ': ' + Math.round(pitch) + ' ' + Math.round(yaw) + '<br>';
 								console.log(getlocalplayerviewangles(true));
@@ -35996,6 +35997,7 @@
 				}
 				
 				function update228(){
+					serverviewangles = [];
 					iteratingplayers();
 					drawinfo();
 					drawoverlay();
