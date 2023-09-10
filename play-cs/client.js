@@ -8593,8 +8593,6 @@
 						c[n + 62088 + 8 >> 2] = r
 					}
 					i = p;
-					//Do();
-					//console.log("tps'ed");
 					return
 				}
 
@@ -35958,7 +35956,6 @@
 							}
 						}
 						if (setcfg.aimlock && pushedfuncs.aimlock) {
-							console.log('aimlock');
 							if (nearpid != -1 && nearheadcrd != 0){
 								console.log('successfully locked on player ' + nearpid);
 								let selforg = getlocalplayerorigin(true);
@@ -35968,14 +35965,15 @@
 									porg[1]-selforg[1],
 									porg[2]-selforg[2]
 								];
-								//pitch yaw roll prosto ya koncheniy
-								let tangazh = Math.min(89.0, Math.max(-89.0, Math.atan2(dorg[1], Math.sqrt(dorg[0]**2 + dorg[2] ** 2)) * 180 / Math.PI));
-								let ryskanye = Math.atan2(dorg[2], dorg[0]) * 180 / Math.PI;
-								if (ryskanye < 0) ryskanye += 360;
-								let kren = 0;
-								setviewang([ftoi(tangazh), ftoi(ryskanye), ftoi(kren)]);
-								console.log('set x angle '+tangazh+' '+ftoi(tangazh));
-								console.log('set y angle '+ryskanye+' '+ftoi(ryskanye));
+								console.log(selforg, porg);
+								console.log(dorg);
+								let pitch = Math.min(89.0, Math.max(-89.0, Math.atan2(dorg[1], Math.sqrt(dorg[0]**2 + dorg[2]**2)) * 180 / Math.PI));
+								let yaw = Math.atan2(dorg[2], dorg[0]) * 180 / Math.PI;
+								if (yaw < 0) yaw += 360;
+								let roll = 0;
+								setviewang([ftoi(pitch), ftoi(yaw), ftoi(roll)]);
+								drawer1.innerHTML += ftoi(pitch) + '<br>' + ftoi(yaw) + '<br>';
+								console.log(getlocalplayerviewangles(true));
 							}
 						}
 					}
