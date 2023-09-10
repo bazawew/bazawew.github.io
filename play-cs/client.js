@@ -31829,14 +31829,14 @@
 					return
 				}
 
-				function bl() {
+				function bl() { //__Z13PM_ViewEntityv
 					var a = 0,
 						b = 0,
 						d = 0,
 						e = 0;
 					d = i;
 					i = i + 128 | 0;
-					bm((c[n + 64500 >> 2] | 0) + 68 | 0, d + 116 | 0, d + 104 | 0, d + 92 | 0);
+					bm((c[n + 64500 >> 2] | 0) + 68 | 0, d + 116 | 0, d + 104 | 0, d + 92 | 0); //__Z12AngleVectorsPKfPfS1_S1_
 					a = c[n + 64500 >> 2] | 0;
 					e = c[a + 56 >> 2] | 0;
 					c[d + 80 >> 2] = e;
@@ -35976,7 +35976,7 @@
 								let porg = playerbones[nearpid][8];
 								let dorg = [
 									porg[0]-selforg[0],
-									porg[2]-selforg[2], //kinda shittiest thing in my life
+									porg[2]-selforg[2]-17.0, //kinda shittiest thing in my life
 									porg[1]-selforg[1]
 								];
 								let pitch = Math.min(89.0, Math.max(-89.0, -Math.atan2(dorg[1], Math.sqrt(dorg[0]**2 + dorg[2]**2)) * 180 / Math.PI));
@@ -40085,7 +40085,7 @@
 					return c | 0
 				}
 
-				function qr(a, b) {
+				function qr(a, b) { //__ZN11CBaseEntity11EyePositionEv
 					a = a | 0;
 					b = b | 0;
 					var d = 0.0,
