@@ -35988,6 +35988,8 @@
 								let roll = 0;
 								//setviewang([ftoi(pitch), ftoi(yaw), ftoi(roll)]);
 								//serverviewangles = [ftoi(pitch), ftoi(yaw), ftoi(roll)];
+								drawer1.innerHTML += Math.round(selforg[0]) + ' ' + Math.round(selforg[1]) + ' ' + Math.round(selforg[2]) + '<br>';
+								drawer1.innerHTML += Math.round(porg[0]) + ' ' + Math.round(porg[1]) + ' ' + Math.round(porg[2]) + '<br>';
 								drawer1.innerHTML += Math.round(dorg[0]) + ' ' + Math.round(dorg[1]) + ' ' + Math.round(dorg[2]) + '<br>';
 								drawer1.innerHTML += nearpid + ': ' + Math.round(pitch) + ' ' + Math.round(yaw) + '<br>';
 								console.log(getlocalplayerviewangles(true));
