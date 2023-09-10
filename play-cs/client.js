@@ -35708,6 +35708,18 @@
 					overlay.restore();
 				}
 				
+				function drawThinLine(x1, y1, x2, y2){
+					overlay.save();
+					overlay.strokeStyle = '#f00';
+					overlay.lineWidth = 2;
+					overlay.lineCap = "round";
+					overlay.beginPath();
+					overlay.moveTo(x1, y1);
+					overlay.lineTo(x2, y2);
+					overlay.stroke();
+					overlay.restore();
+				}
+				
 				function drawesp(){
 					drawer2.innerHTML = '';
 					let uid = getlocalplayerid();
@@ -35939,11 +35951,11 @@
 						let nearheadcrd = 0;
 						let sw = overlayelement.width, sh = overlayelement.height;
 						let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+						let uid = getlocalplayerid();
 						for (let j=0; j<playerextra.length; j+=1){
 							let i = parseInt(playerextra[j].id);
-							let uid = getlocalplayerid();
 							if (playerextra[j].status == 'Dead') continue;
-							if (playerextra[j].teamnumber == 1 - playerextralist[uid].teamnumber) continue;
+							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber || [0, 1].every(e => e != playerextra[j].teamnumber)) continue;
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								let headx = centerw + centerw*playerbonedots[i][8][0];
 								let heady = centerh - centerh*playerbonedots[i][8][1];
@@ -35954,6 +35966,9 @@
 									nearheadcrd = [headx, heady];
 								}
 							}
+						}
+						if (setcfg.drawaimbot) {
+							if (nearpid != -1 && nearheadcrd != 0) drawThinLine(centerw, centerh, nearheadcrd[0], nearheadcrd[1]);
 						}
 						if (setcfg.aimlock && pushedfuncs.aimlock) {
 							if (nearpid != -1 && nearheadcrd != 0){
