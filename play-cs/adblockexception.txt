@@ -1,0 +1,3 @@
+@@||ulogin.ru/js/ulogin.js
+@@||ulogin.ru/version/3.0/img/providers-64-classic.png?version=img.3.0.2
+@@||ulogin.ru/getwidget?widgetid=*
