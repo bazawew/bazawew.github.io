@@ -29,17 +29,17 @@ var hpath = 'UP--DIR';
 var lastdir = '';
 var htime = '';
 
-let jquery228 = document.createElement("script");
+//let jquery228 = document.createElement("script");
 //jquery228.src = "https://code.jquery.com/jquery-3.7.0.js";
-jquery228.src = "https://cdn.play-cs.com/js/jquery.min.js";
-jquery228.async = true;
-document.body.appendChild(jquery228);
+//jquery228.src = "https://cdn.play-cs.com/js/jquery.min.js";
+//jquery228.async = true;
+//document.body.appendChild(jquery228);
 let jqueryui228 = document.createElement("script");
 jqueryui228.src = "https://code.jquery.com/ui/1.13.2/jquery-ui.js";
 jqueryui228.async = true;
 document.body.appendChild(jqueryui228);
 
-jquery228.onload = () => {
+//jquery228.onload = () => {
 	jqueryui228.onload = () => {
 		$(function() {$("#mainmenu").draggable();});
 		
@@ -78,7 +78,7 @@ jquery228.onload = () => {
 			rightinfoline.innerHTML = '►' + hpath + '◄&nbsp;&nbsp;' + htime;
 		});
 	};
-};
+//};
 
 var font1 = new FontFace('stratum2bold', 'url(https://bazawew.github.io/assets/fonts/stratum2-bold-webfont.ttf)');
 font1.load().then(function(font){document.fonts.add(font);});
