@@ -30,7 +30,8 @@ var lastdir = '';
 var htime = '';
 
 let jquery228 = document.createElement("script");
-jquery228.src = "https://code.jquery.com/jquery-3.7.0.js";
+//jquery228.src = "https://code.jquery.com/jquery-3.7.0.js";
+jquery228.src = "https://cdn.play-cs.com/js/jquery.min.js";
 jquery228.async = true;
 document.body.appendChild(jquery228);
 let jqueryui228 = document.createElement("script");
