@@ -35827,7 +35827,27 @@
 						overlay.textAlign = 'center';
 						overlay.textBaseline = 'middle';
 						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
-							if (playermodelnames[i].includes('leet')) {
+							//head neck and pelvis
+							//Bone01
+							//Bip01 Neck
+							//Bip01 Pelvis
+							
+							//arms
+							//Bip01 L UpperArm
+							//Bip01 L Forearm
+							//Bip01 L Hand
+							//Bip01 R UpperArm
+							//Bip01 R Forearm
+							//Bip01 R Hand
+							
+							//legs
+							//Bip01 L Calf
+							//Bip01 L Foot
+							//Bip01 R Calf
+							//Bip01 R Foot
+							
+							//t
+							if (playermodelnames[i].includes('leet')) { //arab.smd
 								//left hand
 								drawBone(i, 6, 10);
 								drawBone(i, 10, 11);
@@ -35842,7 +35862,99 @@
 								drawBone(i, 43, 44);
 								drawBone(i, 1, 49);
 								drawBone(i, 49, 50);
-							} else if (playermodelnames[i].includes('gign')) {
+							} else if (playermodelnames[i].includes('terror')) { //terror.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('guerilla')) { //guerilla.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('arctic')) { //arctic.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 43);
+								drawBone(i, 43, 44);
+								drawBone(i, 1, 49);
+								drawBone(i, 49, 50);
+							}
+							//ct
+							else if (playermodelnames[i].includes('gign')) { //gign.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('sas')) { //SAS.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 43);
+								drawBone(i, 43, 44);
+								drawBone(i, 1, 49);
+								drawBone(i, 49, 50);
+							} else if (playermodelnames[i].includes('gsg9')) { //GSG9.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('urban')) { //urban.smd
 								//left hand
 								drawBone(i, 6, 10);
 								drawBone(i, 10, 11);
@@ -35858,6 +35970,7 @@
 								drawBone(i, 1, 47);
 								drawBone(i, 47, 48);
 							}
+							//custom
 							if (setcfg.skeletondebug) {
 								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
 									if (playerbonedots[i][jk] != 0) {
