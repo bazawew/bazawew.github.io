@@ -3151,7 +3151,7 @@
 						c[n + 145444 + 116 >> 2] = ~~+g[b + 792 >> 2];
 						c[n + 145444 + 124 >> 2] = ~~+g[b + 796 >> 2];
 						c[n + 145444 + 132 >> 2] = ~~+g[b + 800 >> 2];
-						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //GetLocalPlayer()
+						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //gEngfuncs.GetLocalPlayer()
 						if(k | 0) {
 							o = c[n + 145444 + 4 >> 2] | 0; //player.pev
 							c[o + 8 >> 2] = c[f + 340 >> 2]; 
@@ -4665,8 +4665,52 @@
 								h = d + 56 | 0
 							}
 							if((j | 0) != 0 ? (k = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0, c[d + 72 >> 2] = k, (k | 0) != 0) : 0) {
-								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0);
-								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0);
+								Wv(c[n + 64816 + 140 >> 2] | 0, k | 0); //IEngineStudio.StudioSetHeader(m_pStudioHeader);
+								Wv(c[n + 64816 + 144 >> 2] | 0, c[h >> 2] | 0); //IEngineStudio.SetRenderModel(m_pRenderModel);
+								
+								let pid = c[f + 4 >> 2]; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}
+								let numbones = c[k + 140 >> 2] | 0; //m_pStudioHeader->numbones
+								let pbbox = k + (c[k + 160 >> 2] | 0) | 0; //pbbox = m_pStudioHeader + m_pStudioHeader->hitboxindex
+								/*
+								//bones hook here
+								let pid = c[f + 4 >> 2]; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}
+								let bones = [], bonedots = [];
+								let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+								for (let jk = 0; jk < numbones; jk+=1) {
+									bones[jk] = [
+										itof(c[bonematrix + jk * 48 + 12 >> 2]),
+										itof(c[bonematrix + jk * 48 + 28 >> 2]),
+										itof(c[bonematrix + jk * 48 + 44 >> 2])
+									];
+									bonedots[jk] = w2s(bones[jk]);
+								}
+								if (bones != 0 && bones !== undefined && bones[7] != 0 && bones[7] !== undefined && thepreviousskeleton != 0){
+									//playerbones[pid] = bones;
+									//playerbonedots[pid] = bonedots;
+									//epicpromove
+									playerbones[thepreviousskeleton] = bones;
+									playerbonedots[thepreviousskeleton] = bonedots;
+									drawer3.innerHTML += thepreviousskeleton + ' ' + headername + ' ' + numbones + '<br>';
+									drawer3.innerHTML += Math.round(bones[7][0]) + ' ' + Math.round(bones[7][1]) + ' ' + Math.round(bones[7][2]) + '<br>';
+									drawer3.innerHTML += Math.round(playercrd[thepreviousskeleton][0]) + ' ' + Math.round(playercrd[thepreviousskeleton][1]) + ' ' + Math.round(playercrd[thepreviousskeleton][2]) + '<br>';
+								}
+								thepreviousskeleton = pid;
+								*/
+								
+								
 								h = c[d + 52 >> 2] | 0;
 								j = c[(c[d + 72 >> 2] | 0) + 164 >> 2] | 0;
 								if((c[h + 732 >> 2] | 0) >= (j | 0)) c[h + 732 >> 2] = 0;
@@ -4715,10 +4759,53 @@
 									h = 1;
 									break
 								}
-								c[d + 60 >> 2] = Kv(c[n + 64816 + 28 >> 2] | 0, c[d + 64 >> 2] | 0) | 0;
-								Wv(c[(c[d >> 2] | 0) + 28 >> 2] | 0, d | 0);
-								Wv(c[(c[d >> 2] | 0) + 36 >> 2] | 0, d | 0);
-								c[(c[d + 60 >> 2] | 0) + 376 >> 2] = c[d + 36 >> 2];
+								c[d + 60 >> 2] = Kv(c[n + 64816 + 28 >> 2] | 0, c[d + 64 >> 2] | 0) | 0; //m_pPlayerInfo = IEngineStudio.PlayerInfo(m_nPlayerIndex);
+								Wv(c[(c[d >> 2] | 0) + 28 >> 2] | 0, d | 0); //StudioSetupBones()
+								Wv(c[(c[d >> 2] | 0) + 36 >> 2] | 0, d | 0); //StudioSaveBones()
+								
+								
+								//bones hook here
+								/*
+								let pid = c[f + 4 >> 2]; //pplayer->number
+								let headername = '';
+								for (let jk = 0; jk < 64; jk+=1) {
+									let achar = a[k + 8 + jk >> 0];
+									if (achar == 0 || (jk == 0 && achar == 51)) break;
+									headername += String.fromCharCode(achar);
+								}*/
+								let bones = [], bonedots = [];
+								//let numbones = c[k + 140 >> 2] | 0; //Mod_Extradata->numbones
+								if (numbones <= 9000) {
+									let bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+									for (let jk = 0; jk < numbones; jk+=1) {
+										let bonename = '';
+										for (let jjk = 0; jjk < 32; jjk+=1) {
+											let aachar = a[pbbox + jk * 112 + 0 + jjk >> 0];
+											if (aachar == 0 || (jjk == 0 && aachar == 51)) break;
+											bonename += String.fromCharCode(aachar);
+										}
+										bones[jk] = [
+											itof(c[bonematrix + jk * 48 + 12 >> 2]),
+											itof(c[bonematrix + jk * 48 + 28 >> 2]),
+											itof(c[bonematrix + jk * 48 + 44 >> 2]),
+										];
+										bonedots[jk] = w2s(bones[jk]);
+										bones[jk][3] = bonename;
+									}
+									if (bones != 0 && bones !== undefined && bones[8] != 0 && bones[8] !== undefined){
+										playerbones[pid] = bones;
+										playerbonedots[pid] = bonedots;
+										drawer3.innerHTML += pid + ' ' + headername + ' ' + numbones + '<br>';
+										drawer3.innerHTML += Math.round(bones[8][0]) + ' ' + Math.round(bones[8][1]) + ' ' + Math.round(bones[8][2]) + '<br>';
+										drawer3.innerHTML += Math.round(playercrd[pid][0]) + ' ' + Math.round(playercrd[pid][1]) + ' ' + Math.round(playercrd[pid][2]) + '<br>';
+										playermodelnames[pid] = headername;
+									}
+								} else {
+									drawer3.innerHTML += pid + ' ' + headername + ' Its over 9000! ' + numbones + ' actually<br>';
+								}
+								
+								
+								c[(c[d + 60 >> 2] | 0) + 376 >> 2] = c[d + 36 >> 2]; //m_pPlayerInfo->renderframe = m_nFrameCount;
 								c[d + 60 >> 2] = 0;
 								do
 									if(e & 2 | 0) {
@@ -7893,8 +7980,8 @@
 					eu(c[n + 64816 + 40 >> 2] | 0, b + 36 | 0, b + 8 | 0, b + 16 | 0);
 					ut(c[n + 64816 + 48 >> 2] | 0, b + 16528 | 0, b + 16492 | 0, b + 16504 | 0, b + 16516 | 0);
 					gv(c[n + 64816 + 60 >> 2] | 0, b + 16484 | 0, b + 16488 | 0);
-					f = c[e + 4 >> 2] | 0;
-					c[b + 64 >> 2] = f + -1;
+					f = c[e + 4 >> 2] | 0; //pplayer->number
+					c[b + 64 >> 2] = f + -1; //m_nPlayerIndex = pplayer->number - 1;
 					do
 						if(((f | 0) >= 1 ? (f | 0) <= (qx(c[n + 60568 + 144 >> 2] | 0) | 0) : 0) ? (j = Kv(c[n + 64816 + 124 >> 2] | 0, c[b + 64 >> 2] | 0) | 0, c[b + 56 >> 2] = j, (j | 0) != 0) : 0) {
 							j = Kv(c[n + 64816 + 16 >> 2] | 0, j | 0) | 0;
@@ -8506,8 +8593,6 @@
 						c[n + 62088 + 8 >> 2] = r
 					}
 					i = p;
-					//Do();
-					//console.log("tps'ed");
 					return
 				}
 
@@ -17770,7 +17855,7 @@
 					return 1
 				}
 
-				function Yg(b, d, e) {
+				function Yg(b, d, e) { //__Z20UTIL_FindEntityInMapPKcPfS1_
 					b = b | 0;
 					d = d | 0;
 					e = e | 0;
@@ -17782,7 +17867,7 @@
 						m = 0;
 					m = i;
 					i = i + 1328 | 0;
-					j = Kv(c[n + 60568 + 212 >> 2] | 0, 0) | 0;
+					j = Kv(c[n + 60568 + 212 >> 2] | 0, 0) | 0; //cl_entity_t *	pEnt = gEngfuncs.GetEntityByIndex( 0 );	// get world model
 					a: do
 						if(((j | 0) != 0 ? (h = c[j + 2964 >> 2] | 0, (h | 0) != 0) : 0) ? (f = c[h + 384 >> 2] | 0, (f | 0) != 0) : 0) {
 							b: while(1) {
@@ -31744,14 +31829,14 @@
 					return
 				}
 
-				function bl() {
+				function bl() { //__Z13PM_ViewEntityv
 					var a = 0,
 						b = 0,
 						d = 0,
 						e = 0;
 					d = i;
 					i = i + 128 | 0;
-					bm((c[n + 64500 >> 2] | 0) + 68 | 0, d + 116 | 0, d + 104 | 0, d + 92 | 0);
+					bm((c[n + 64500 >> 2] | 0) + 68 | 0, d + 116 | 0, d + 104 | 0, d + 92 | 0); //__Z12AngleVectorsPKfPfS1_S1_
 					a = c[n + 64500 >> 2] | 0;
 					e = c[a + 56 >> 2] | 0;
 					c[d + 80 >> 2] = e;
@@ -35384,11 +35469,14 @@
 				}				
 				
 				function iteratingplayers(){
+					drawer3.innerHTML = '';
+					
 					savelocal();
 					saveextra();
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerangles = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -35423,6 +35511,13 @@
 						}
 						playerdots[i] = dot;
 						
+						let angles = [
+							itof(c[player + 2900 >> 2]),
+							itof(c[player + 2900 + 4 >> 2]),
+							itof(c[player + 2900 + 8 >> 2])
+						];
+						playerangles[i] = angles;
+						
 						let weaponmodelid = c[player + 688 + 180 >> 2]; //player->curstate->weaponmodel
 						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; //GetModelByIndex
 						let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0; //Mod_Extradata
@@ -35443,7 +35538,78 @@
 						
 						let hp = c[player + 688 + 172 >> 2];
 						playerhp[i] = hp;
-						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
+						
+						//this shit is actually not working idk why
+						//it returns the same pointer to bonematrix regardless of a player
+						//setuplayermodel changes nothing
+						//so i hook the CGameStudioModelRenderer::_StudioDrawPlayer
+						/*
+						let rpmbones = [[0,0,0]];
+						let bonedots = [[0,0,0]];
+						let pmodel = c[player + 2964 >> 2];
+						let pmname = '';
+						if (pmodel != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[pmodel + 0 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								pmname += String.fromCharCode(achar);
+							}
+						}
+						let pmheader = Kv(c[n + 64816 + 16 >> 2] | 0, pmodel) | 0; //Mod_Extradata
+						let pmhname = '';
+						//instead of i - 1 (idk if it actually helps) (it doesnt)
+						//let mnplayerindex = c[player + 688 + 4 >> 2] | 0 - 1; //player->curstate->number - 1
+						let rpmodel = Kv(c[n + 64816 + 124 >> 2] | 0, i - 1) | 0; //SetupPlayerModel
+						let rpmname = '';
+						if (rpmodel != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[rpmodel + 0 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								rpmname += String.fromCharCode(achar);
+							}
+						}
+						let rpmheader = Kv(c[n + 64816 + 16 >> 2] | 0, rpmodel) | 0; //Mod_Extradata
+						let rpmhname = '';
+						let othernumbones = 0;
+						let numbones = 0;
+						let bonematrix = 0;
+						if (pmheader != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[pmheader + 8 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								pmhname += String.fromCharCode(achar);
+							}
+							othernumbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
+						}
+						if (rpmheader != 0) {
+							for (let jk = 0; jk < 64; jk+=1) {
+								let achar = a[rpmheader + 8 + jk >> 0];
+								if (achar == 0 || (jk == 0 && achar == 51)) break;
+								rpmhname += String.fromCharCode(achar);
+							}
+							numbones = c[rpmheader + 140 >> 2] | 0; //Mod_Extradata->numbones
+							Wv(c[n + 64816 + 140 >> 2] | 0, rpmheader | 0); //IEngineStudio.StudioSetHeader;
+							Wv(c[n + 64816 + 144 >> 2] | 0, rpmodel | 0); //IEngineStudio.SetRenderModel;
+							bonematrix = qx(c[n + 64816 + 64 >> 2] | 0) | 0; //StudioGetBoneTransform
+							for (let jk = 0; jk < numbones; jk+=1) {
+								rpmbones[jk] = [
+									itof(c[bonematrix + jk * 48 + 12 >> 2]),
+									itof(c[bonematrix + jk * 48 + 28 >> 2]),
+									itof(c[bonematrix + jk * 48 + 44 >> 2])
+								];
+								bonedots[jk] = w2s(rpmbones[jk]);
+							}
+							
+							playerbones[i] = rpmbones;
+							playerbonedots[i] = bonedots;
+						}
+						
+						drawer3.innerHTML += i + ' ' + mnplayerindex + ' ' + rpmodel + ' ' + rpmname + ' (' + pmname + ') ' + rpmhname + ' (' + pmhname + ') ' + numbones + ' (' + othernumbones + ') ' + bonematrix + '<br>';
+						//drawer3.innerHTML += Math.round(rpmbones[0][0]) + ' ' + Math.round(rpmbones[0][1]) + ' ' + Math.round(rpmbones[0][2]) + '<br>';
+						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
+						*/
+						
+						playerlist[i] = [distance, crd, playerdots, angles, hp, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35522,70 +35688,53 @@
 					overlay.restore();
 				}
 				
+				function drawSmallText(text, x, y)
+				{
+					overlay.save();
+					overlay.font = '20px arial';
+					overlay.fillStyle = '#f00';
+					overlay.fillText(text, x, y);
+					overlay.restore();
+				}
+				
+				function drawBone(pid, joint1, joint2){
+					let centerw = osize[0], centerh = osize[1];
+					if (playerbonedots[pid][joint1] == 0 || playerbonedots[pid][joint2] == 0) return;
+					if (playerbonedots[pid][joint1] === undefined || playerbonedots[pid][joint2] === undefined) return;
+					let joint1x = Math.round(centerw + centerw*playerbonedots[pid][joint1][0]);
+					let joint1y = Math.round(centerh - centerh*playerbonedots[pid][joint1][1]);
+					let joint2x = Math.round(centerw + centerw*playerbonedots[pid][joint2][0]);
+					let joint2y = Math.round(centerh - centerh*playerbonedots[pid][joint2][1]);
+					overlay.save();
+					overlay.strokeStyle = '#fff';
+					overlay.lineWidth = 5;
+					overlay.lineCap = "round";
+					overlay.beginPath();
+					overlay.moveTo(joint1x, joint1y);
+					overlay.lineTo(joint2x, joint2y);
+					overlay.stroke();
+					overlay.restore();
+				}
+				
+				function drawThinLine(x1, y1, x2, y2, ss){
+					overlay.save();
+					overlay.strokeStyle = ss;
+					overlay.lineWidth = 2;
+					overlay.lineCap = "round";
+					overlay.beginPath();
+					overlay.moveTo(x1, y1);
+					overlay.lineTo(x2, y2);
+					overlay.stroke();
+					overlay.restore();
+				}
+				
 				function drawesp(){
 					drawer2.innerHTML = '';
 					let uid = getlocalplayerid();
-					//let sh = window.innerHeight, sw = window.innerWidth;
+
 					let sw = overlayelement.width, sh = overlayelement.height;
 					let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
-					
-					/*
-					for (let i = 1; i <= 32; i+=1){
-						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
-						if (removediv != null){
-							removediv.remove();
-						}
-						
-						if (playerlist.length === undefined || playerlist.length == 0 || playerlist[i] == 0){
-							continue;
-						}
-						
-						drawer2.innerHTML += playerdist[i].toString() + ' ' + i.toString() + '<br>';
-						if (playerdots[i] != 0){
-							let espbox = document.createElement("div");
-							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
-							espbox.style.height = '70px';
-							espbox.style.width = '40px';
-							if (g_TeamInfo[i].teamnumber == g_TeamInfo[lpid].teamnumber){
-								espbox.style.backgroundColor = '#7df5ff';
-							} else if (g_TeamInfo[i].teamnumber != 0) {
-								espbox.style.backgroundColor = '#850303';
-							} else {
-								continue;
-							}
-							let isDead = false;
-							for (let j=0; j<playerextra.length; j+=1){
-								let player = playerextra[j];
-								if (player[0] == i.toString()){
-									if (player[2] == 'Dead'){
-										isDead = true;
-									}
-									break;
-								}
-							}
-							if(isDead){
-								continue;
-							}
-							espbox.style.opacity = '0.5';
-							espbox.style.position = 'absolute';
-							espbox.style.zIndex = '300';
-							espbox.style.left = Math.floor(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
-							espbox.style.top = Math.floor(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
-							document.body.appendChild(espbox);
-							drawer2.innerHTML += playerdots[i][0].toString() + '<br>' + playerdots[i][1].toString() + '<br>' + playerdots[i][2].toString() + '<br>';
-						} else {
-							drawer2.innerHTML += '0<br>';
-						}
-					}
-					*/
-					/*
-					for (let i = 1; i <= 32; i+=1){
-						let removediv = document.getElementById('espbox'+i.toString()+'_'+ticker2.toString());
-						if (removediv != null){
-							removediv.remove();
-						}
-					}
-					*/
+					osize = [centerw, centerh];
 					
 					for (let j=0; j<playerextra.length; j+=1){
 						let i = parseInt(playerextra[j].id);
@@ -35594,48 +35743,11 @@
 						let d2text = '';
 						let rnr = zafixcrd[i] ? 'Rendered' : 'Not Rendered';
 						if (setcfg.showinfoblocks) d2text = rnr + ' ' + playerextra[j].status + ' ' + playerextra[j].name + ' ' + i.toString() + '<br>'; 
-						//drawer2.innerHTML += roundedplayercrd.toString() + '<br>';
-						if (playerextra[j].teamnumber != playerextralist[uid].teamnumber) {
-							//drawer2.innerHTML += roundeddeadcrd.toString() + '<br>';
-						}
+
 						if (playerdots[i] != 0 && playerdots[i][0] != 0 && playerdots[i][1] != 0 && playerdots[i][2] != 0){
-							/*
-							let espbox = document.createElement("div");
-							espbox.id = 'espbox' + i.toString()+'_'+ticker2.toString();
-							espbox.style.height = '70px';
-							espbox.style.width = '40px';
-							if (playerextra[j].teamnumber == g_TeamInfo[lpid].teamnumber){
-								espbox.style.backgroundColor = '#7df5ff';
-							} else if (playerextra[j].teamnumber != 0) {
-								espbox.style.backgroundColor = '#850303';
-							} else {
-								espbox.remove();
-								continue;
-							}
-							if (playerextra[j].status == 'Dead'){
-								espbox.remove();
-								continue;
-							}
-							if (Math.abs(playerdots[i][0]) >= 1 || Math.abs(playerdots[i][1]) >= 1){
-								espbox.remove();
-								continue;
-							}
-							espbox.style.opacity = '0.5';
-							espbox.style.position = 'absolute';
-							espbox.style.zIndex = '300';
-							espbox.style.left = Math.round(centerw + centerw*playerdots[i][0] - 20).toString() + 'px';
-							espbox.style.top = Math.round(centerh - centerh*playerdots[i][1] - 35).toString() + 'px';
-							document.body.appendChild(espbox);
-							*/
-							
-							if (!zafixcrd[i]){
-								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant2 ' + d2text + roundeddeadcrd.toString() + '<br>';
-								if(setcfg.
-									continue;
-							}
 							
 							if (roundedplayercrd.toString() == roundeddeadcrd.toString()){
-								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text + roundeddeadcrd.toString() + '<br>';
+								if (setcfg.showinfoblocks) drawer2.innerHTML += 'Dormant ' + d2text;
 								continue;
 							}
 							
@@ -35644,23 +35756,35 @@
 								drawer2.innerHTML += d2text;
 								continue;
 							}
+							
 							if (roundedplayercrd.toString() != roundeddeadcrd.toString() && roundeddeadcrd.toString() != '0,0,0' && roundedplayercrd.toString() != '0,0,0'){
 								deadcrd[i] = [0,0,0];
 							}
 							let espfillstyle = 'zxc';
-							if (playerextra[j].teamnumber == playerextralist[uid].teamnumber) {
-								espfillstyle = 'rgba(125, 245, 255, 0.5)';
-							} else if (playerextra[j].teamnumber != 0) {
+							if (!zafixcrd[i]) {
+								d2text = 'Dormant2 ' + d2text;
+								if (setcfg.dormantesp) {
+									if (playerextra[j].teamnumber == playerextralist[uid].teamnumber && !setcfg.ffamode){
+										espfillstyle = 'rgba(125, 255, 255, 0.5)';
+									} else if (playerextra[j].teamnumber == 3 - playerextralist[uid].teamnumber || setcfg.ffamode) {
+										espfillstyle = 'rgba(255, 125, 125, 0.5)';
+									} else {
+										if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
+										continue;
+									}
+								} else {
+									drawer2.innerHTML += d2text;
+									continue;
+								}
+							} else if (playerextra[j].teamnumber == playerextralist[uid].teamnumber && !setcfg.ffamode) {
+								espfillstyle = 'rgba(3, 3, 133, 0.5)';
+							} else if (playerextra[j].teamnumber == 3 - playerextralist[uid].teamnumber || setcfg.ffamode) {
 								espfillstyle = 'rgba(133, 3, 3, 0.5)';
 							} else {
 								if (setcfg.showinfoblocks) drawer2.innerHTML += playerextra[j].teamnumber + 'team ' + d2text;
 								continue;
 							}
-							/*
-							if (roundedplayercrd.toString() == roundeddeadcrd.toString()) {
-								espfillstyle = 'rgba(255, 255, 255, 0.5)';
-							}
-							*/
+							
 							drawer2.innerHTML += d2text;
 							
 							let boxheight = Math.round(Math.abs(centerh*playerdots[i][1][1] - centerh*playerdots[i][2][1]));
@@ -35678,6 +35802,7 @@
 							
 							let pdistx = pnamex;
 							let pdisty = espy - 42; //38px font size
+							
 							
 							/*
 							let weaponid = playerweapon[i].toString();
@@ -35697,12 +35822,197 @@
 							overlay.textBaseline = 'bottom';
 							drawStrokedText(pname, pnamex, pnamey);
 							drawStrokedText(pdist, pdistx, pdisty);
+							//drawStrokedText('id:' + i.toString(), pdistx, pdisty);
 							
 							overlay.textBaseline = 'top';
 							if (isWeaponDefault) {
 								drawStrokedWeapon(weaponid2, weaponid2x, weaponid2y);
 							} else {
 								drawStrokedText(weaponid2, weaponid2x, weaponid2y);
+							}
+						}
+						
+						overlay.textAlign = 'center';
+						overlay.textBaseline = 'middle';
+						if (setcfg.skeletonesp && playerbonedots[i] != 0) {
+							//head neck and pelvis
+							//Bone01
+							//Bip01 Neck
+							//Bip01 Pelvis
+							
+							//arms
+							//Bip01 L UpperArm
+							//Bip01 L Forearm
+							//Bip01 L Hand
+							//Bip01 R UpperArm
+							//Bip01 R Forearm
+							//Bip01 R Hand
+							
+							//legs
+							//Bip01 L Calf
+							//Bip01 L Foot
+							//Bip01 R Calf
+							//Bip01 R Foot
+							
+							//t
+							if (playermodelnames[i].includes('leet')) { //arab.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 43);
+								drawBone(i, 43, 44);
+								drawBone(i, 1, 49);
+								drawBone(i, 49, 50);
+							} else if (playermodelnames[i].includes('terror')) { //terror.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('guerilla')) { //guerilla.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('arctic')) { //arctic.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 43);
+								drawBone(i, 43, 44);
+								drawBone(i, 1, 49);
+								drawBone(i, 49, 50);
+							}
+							//ct
+							else if (playermodelnames[i].includes('gign')) { //gign.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('sas')) { //SAS.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 25);
+								drawBone(i, 25, 26);
+								drawBone(i, 26, 27);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 43);
+								drawBone(i, 43, 44);
+								drawBone(i, 1, 49);
+								drawBone(i, 49, 50);
+							} else if (playermodelnames[i].includes('gsg9')) { //GSG9.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							} else if (playermodelnames[i].includes('urban')) { //urban.smd
+								//left hand
+								drawBone(i, 6, 10);
+								drawBone(i, 10, 11);
+								drawBone(i, 11, 12);
+								//right hand
+								drawBone(i, 6, 24);
+								drawBone(i, 24, 25);
+								drawBone(i, 25, 26);
+								//spine and legs
+								drawBone(i, 6, 1);
+								drawBone(i, 1, 41);
+								drawBone(i, 41, 42);
+								drawBone(i, 1, 47);
+								drawBone(i, 47, 48);
+							}
+							//custom
+
+							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
+								drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							}
+						}
+						if (setcfg.viewray && playerbonedots[i] != 0) {
+							let angles = playerangles[i];
+							angles[0] *= 9;
+							let puzo = playerbones[i][0];
+							let puzodot = playerbonedots[i][0];
+							//drawSmallText(angles[0].toString() + " " + angles[1].toString() + " " + angles[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							let viewvec = [
+								global.Math.cos(angles[0] * global.Math.PI / 180.0) * global.Math.cos(angles[1] * global.Math.PI / 180.0),
+								global.Math.cos(angles[0] * global.Math.PI / 180.0) * global.Math.sin(angles[1] * global.Math.PI / 180.0),
+								-global.Math.sin(angles[0] * global.Math.PI / 180.0)
+							];
+							let endview = [
+								puzo[0] + viewvec[0] * 200.0,
+								puzo[1] + viewvec[1] * 200.0,
+								puzo[2] + viewvec[2] * 200.0
+							];
+							let enddot = w2s(endview);
+							if (enddot != null && enddot != 0){
+								drawThinLine(puzodot[0], puzodot[1], enddot[0], enddot[1], '#700f81');
+							}
+						}
+						if (setcfg.skeletondebug && playerbonedots[i] != 0) {
+							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+								if (playerbonedots[i][jk] != 0) {
+									let name = '['+jk.toString()+']'+playerbones[i][3];
+									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
+									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
+									drawSmallText(jk.toString(), bonex, boney);
+								}
 							}
 						}
 					}
@@ -35755,7 +36065,7 @@
 							let weaponxtrdt = Kv(c[n + 64816 + 16 >> 2] | 0, weaponmodel | 0) | 0;
 							
 							let hdrname = '';
-							for (let jk = 0; jk < 64; jk+=1){
+							for (let jk = 0; jk < 64; jk+=1) {
 								let achar = a[weaponxtrdt + 8 + jk >> 0];
 								if (achar == 0) break;
 								if (jk == 0 && achar != 112) {
@@ -35777,11 +36087,66 @@
 					}
 				}
 				
+				function aimbot(){
+					if (setcfg.aimbotenabled) {
+						let mindist = 9001;
+						let nearpid = -1;
+						let nearheadcrd = 0;
+						let sw = overlayelement.width, sh = overlayelement.height;
+						let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+						let uid = getlocalplayerid();
+						for (let j=0; j<playerextra.length; j+=1){
+							let i = parseInt(playerextra[j].id);
+							if (playerextra[j].status == 'Dead') continue;
+							if (playerextra[j].teamnumber != 3 - playerextralist[uid].teamnumber && !setcfg.ffamode) continue;
+							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
+								let headx = centerw + centerw*playerbonedots[i][8][0];
+								let heady = centerh - centerh*playerbonedots[i][8][1];
+								let dist = Math.sqrt((headx-centerw)**2+(heady-centerh)**2);
+								if (dist <= mindist) {
+									mindist = dist;
+									nearpid = i;
+									nearheadcrd = [headx, heady];
+								}
+							}
+						}
+						if (setcfg.drawaimbot) {
+							if (nearpid != -1 && nearheadcrd != 0) drawThinLine(centerw, centerh, nearheadcrd[0], nearheadcrd[1], '#f00');
+						}
+						if (setcfg.aimlock && pushedfuncs.aimlock) {
+							if (nearpid != -1 && nearheadcrd != 0){
+								let selforg = getlocalplayerorigin(true);
+								let porg = playerbones[nearpid][8];
+								let dorg = [
+									porg[0]-selforg[0],
+									porg[2]-selforg[2]-17.0, //kinda shittiest thing in my life
+									porg[1]-selforg[1]
+								];
+								let pitch = Math.min(89.0, Math.max(-89.0, -Math.atan2(dorg[1], Math.sqrt(dorg[0]**2 + dorg[2]**2)) * 180 / Math.PI));
+								let yaw = Math.atan2(dorg[2], dorg[0]) * 180 / Math.PI;
+								if (yaw < 0) yaw += 360;
+								let roll = 0;
+								serverviewangles = [ftoi(pitch), ftoi(yaw), ftoi(roll)];
+								drawer1.innerHTML += Math.round(selforg[0]) + ' ' + Math.round(selforg[1]) + ' ' + Math.round(selforg[2]) + '<br>';
+								drawer1.innerHTML += Math.round(porg[0]) + ' ' + Math.round(porg[1]) + ' ' + Math.round(porg[2]) + '<br>';
+								drawer1.innerHTML += Math.round(dorg[0]) + ' ' + Math.round(dorg[1]) + ' ' + Math.round(dorg[2]) + '<br>';
+								drawer1.innerHTML += nearpid + ': ' + Math.round(pitch) + ' ' + Math.round(yaw) + '<br>';
+							}
+						}
+					}
+				}
+				
 				function update228(){
+					serverviewangles = [];
 					iteratingplayers();
 					drawinfo();
 					drawoverlay();
+					aimbot();
 					for (let i = 0; i < 33; i+=1){zafixcrd[i] = false;}	
+					playerbones = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerbonedots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playermodelnames = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					//thepreviousskeleton = 0;
 				}
 
 				function jn(a, b, d) {
@@ -39863,7 +40228,7 @@
 					return c | 0
 				}
 
-				function qr(a, b) {
+				function qr(a, b) { //__ZN11CBaseEntity11EyePositionEv
 					a = a | 0;
 					b = b | 0;
 					var d = 0.0,
