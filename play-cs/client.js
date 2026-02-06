@@ -36001,6 +36001,7 @@
 								puzo[2] + viewvec[2] * 200.0
 							];
 							let enddot = w2s(endview);
+							console.log(i, puzo, endview, viewvec, enddot);
 							if (enddot != null && enddot != 0){
 								drawThinLine(puzodot[0], puzodot[1], enddot[0], enddot[1], '#700f81');
 							}
