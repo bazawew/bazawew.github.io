@@ -3151,7 +3151,7 @@
 						c[n + 145444 + 116 >> 2] = ~~+g[b + 792 >> 2];
 						c[n + 145444 + 124 >> 2] = ~~+g[b + 796 >> 2];
 						c[n + 145444 + 132 >> 2] = ~~+g[b + 800 >> 2];
-						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //GetLocalPlayer()
+						k = qx(c[n + 60568 + 204 >> 2] | 0) | 0; //gEngfuncs.GetLocalPlayer()
 						if(k | 0) {
 							o = c[n + 145444 + 4 >> 2] | 0; //player.pev
 							c[o + 8 >> 2] = c[f + 340 >> 2]; 
@@ -4760,8 +4760,8 @@
 									break
 								}
 								c[d + 60 >> 2] = Kv(c[n + 64816 + 28 >> 2] | 0, c[d + 64 >> 2] | 0) | 0; //m_pPlayerInfo = IEngineStudio.PlayerInfo(m_nPlayerIndex);
-								Wv(c[(c[d >> 2] | 0) + 28 >> 2] | 0, d | 0);
-								Wv(c[(c[d >> 2] | 0) + 36 >> 2] | 0, d | 0);
+								Wv(c[(c[d >> 2] | 0) + 28 >> 2] | 0, d | 0); //StudioSetupBones()
+								Wv(c[(c[d >> 2] | 0) + 36 >> 2] | 0, d | 0); //StudioSaveBones()
 								
 								
 								//bones hook here
@@ -35476,6 +35476,7 @@
 					playercrd = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerdots = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+					playerangles = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerhp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 					playerweapon2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -35509,6 +35510,13 @@
 							]);
 						}
 						playerdots[i] = dot;
+						
+						let angles = [
+							itof(c[player + 2900 >> 2]),
+							itof(c[player + 2900 + 4 >> 2]),
+							itof(c[player + 2900 + 8 >> 2])
+						];
+						playerangles[i] = angles;
 						
 						let weaponmodelid = c[player + 688 + 180 >> 2]; //player->curstate->weaponmodel
 						let weaponmodel = Kv(c[n + 64816 + 20 >> 2] | 0, weaponmodelid | 0) | 0; //GetModelByIndex
@@ -35601,7 +35609,7 @@
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						*/
 						
-						playerlist[i] = [distance, crd, dot, hp, weaponmodelid, hdrname, weaponsymbol];
+						playerlist[i] = [distance, crd, dot, angles, hp, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35971,18 +35979,24 @@
 								drawBone(i, 47, 48);
 							}
 							//custom
-							if (setcfg.skeletondebug) {
-								for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
-									if (playerbonedots[i][jk] != 0) {
-										let name = '['+jk.toString()+']'+playerbones[i][3];
-										let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
-										let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
-										drawSmallText(jk.toString(), bonex, boney);
-									}
-								}
-							}
+
 							if (playerbonedots[i][8] != 0 && playerbonedots[i][8] !== undefined) {
 								drawSmallText('•', Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							}
+						}
+						if (setcfg.viewray && playerbonedots[i] != 0) {
+							let angles = playerangles[i];
+							let head = playerbones[i][8];
+							drawSmallText(head[0].toString() + " " + head[1].toString() + " " + head[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+						}
+						if (setcfg.skeletondebug && playerbonedots[i] != 0) {
+							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
+								if (playerbonedots[i][jk] != 0) {
+									let name = '['+jk.toString()+']'+playerbones[i][3];
+									let bonex = Math.round(centerw + centerw*playerbonedots[i][jk][0]);
+									let boney = Math.round(centerh - centerh*playerbonedots[i][jk][1]);
+									drawSmallText(jk.toString(), bonex, boney);
+								}
 							}
 						}
 					}

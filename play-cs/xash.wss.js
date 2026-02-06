@@ -4,6 +4,7 @@ var setcfg = { //set stands for settings
 	espenabled: true,
 	skeletonesp: true,
 	dormantesp: true,
+	viewray: false,
 	//aimbot
 	aimbotenabled: true,
 	drawaimbot: true,
@@ -389,6 +390,13 @@ dormantesp.innerHTML = '(' + (setcfg.dormantesp ? '•' : '&nbsp;') + ') ' + 'Do
 dormantesp.classList.add('menutab');
 document.getElementById('menu1').appendChild(dormantesp);
 
+let viewray = document.createElement('div');
+viewray.setAttribute('label', 'Dormant ESP');
+viewray.setAttribute('hvar', 'viewray');
+viewray.innerHTML = '(' + (setcfg.viewray ? '•' : '&nbsp;') + ') ' + 'Line of sight';
+viewray.classList.add('menutab');
+document.getElementById('menu1').appendChild(viewray);
+
 //aim
 
 let mtab2 = document.createElement('div');
@@ -512,6 +520,7 @@ var playerextra = [];
 var playercrd = [];
 var playerdist = [];
 var playerdots = [];
+var playerangles = [];
 var playerhp = [];
 var playerbones = [];
 var playerbonedots = [];
