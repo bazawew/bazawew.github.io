@@ -35996,9 +35996,9 @@
 								-global.Math.sin(angles[0] * global.Math.PI / 180.0)
 							];
 							let endview = [
-								puzo[0] + viewvec[0] * viewraysize,
-								puzo[1] + viewvec[1] * viewraysize,
-								puzo[2] + viewvec[2] * viewraysize
+								puzo[0] + viewvec[0] * setcfg.viewraysize,
+								puzo[1] + viewvec[1] * setcfg.viewraysize,
+								puzo[2] + viewvec[2] * setcfg.viewraysize
 							];
 							let enddot = w2s(endview);
 							//console.log(i, puzo, endview, viewvec, enddot);
