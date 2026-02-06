@@ -35987,7 +35987,7 @@
 						if (setcfg.viewray && playerbonedots[i] != 0) {
 							let angles = playerangles[i];
 							let head = playerbones[i][8];
-							drawSmallText(head[0].toString() + " " + head[1].toString() + " " + head[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							drawSmallText(angles[0].toString() + " " + angles[1].toString() + " " + angles[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
 						}
 						if (setcfg.skeletondebug && playerbonedots[i] != 0) {
 							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
