@@ -5,6 +5,7 @@ var setcfg = { //set stands for settings
 	skeletonesp: true,
 	dormantesp: true,
 	viewray: false,
+	viewraysize: 200.0,
 	//aimbot
 	aimbotenabled: true,
 	drawaimbot: true,

@@ -35996,14 +35996,17 @@
 								-global.Math.sin(angles[0] * global.Math.PI / 180.0)
 							];
 							let endview = [
-								puzo[0] + viewvec[0] * 200.0,
-								puzo[1] + viewvec[1] * 200.0,
-								puzo[2] + viewvec[2] * 200.0
+								puzo[0] + viewvec[0] * viewraysize,
+								puzo[1] + viewvec[1] * viewraysize,
+								puzo[2] + viewvec[2] * viewraysize
 							];
 							let enddot = w2s(endview);
-							console.log(i, puzo, endview, viewvec, enddot);
+							//console.log(i, puzo, endview, viewvec, enddot);
 							if (enddot != null && enddot != 0){
-								drawThinLine(puzodot[0], puzodot[1], enddot[0], enddot[1], '#700f81');
+								let sw = overlayelement.width, sh = overlayelement.height;
+								let centerw = Math.round(sw/2), centerh = Math.round(sh/2);
+								
+								drawThinLine(centerw + centerw*puzodot[0], centerh - centerh*puzodot[1], centerw + centerw*enddot[0], centerh - centerh*enddot[1], '#700f81');
 							}
 						}
 						if (setcfg.skeletondebug && playerbonedots[i] != 0) {
