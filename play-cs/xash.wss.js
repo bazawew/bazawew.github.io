@@ -391,7 +391,7 @@ dormantesp.classList.add('menutab');
 document.getElementById('menu1').appendChild(dormantesp);
 
 let viewray = document.createElement('div');
-viewray.setAttribute('label', 'Dormant ESP');
+viewray.setAttribute('label', 'Line of sight');
 viewray.setAttribute('hvar', 'viewray');
 viewray.innerHTML = '(' + (setcfg.viewray ? '•' : '&nbsp;') + ') ' + 'Line of sight';
 viewray.classList.add('menutab');

@@ -35609,7 +35609,7 @@
 						//drawer3.innerHTML += Math.round(bonedots[0][0]) + ' ' + Math.round(bonedots[0][1]) + '<br>';
 						*/
 						
-						playerlist[i] = [distance, crd, dot, angles, hp, weaponmodelid, hdrname, weaponsymbol];
+						playerlist[i] = [distance, crd, playerdots, angles, hp, weaponmodelid, hdrname, weaponsymbol];
 					}
 					
 					/*
@@ -35716,9 +35716,9 @@
 					overlay.restore();
 				}
 				
-				function drawThinLine(x1, y1, x2, y2){
+				function drawThinLine(x1, y1, x2, y2, ss){
 					overlay.save();
-					overlay.strokeStyle = '#f00';
+					overlay.strokeStyle = ss;
 					overlay.lineWidth = 2;
 					overlay.lineCap = "round";
 					overlay.beginPath();
@@ -35986,8 +35986,24 @@
 						}
 						if (setcfg.viewray && playerbonedots[i] != 0) {
 							let angles = playerangles[i];
-							let head = playerbones[i][8];
-							drawSmallText(angles[0].toString() + " " + angles[1].toString() + " " + angles[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							angles[0] *= 9;
+							let puzo = playerbones[i][0];
+							let puzodot = playerbonedots[i][0];
+							//drawSmallText(angles[0].toString() + " " + angles[1].toString() + " " + angles[2].toString(), Math.round(centerw + centerw*playerbonedots[i][8][0]), Math.round(centerh - centerh*playerbonedots[i][8][1]));
+							let viewvec = [
+								global.Math.cos(angles[0] * global.Math.PI / 180.0) * global.Math.cos(angles[1] * global.Math.PI / 180.0),
+								global.Math.cos(angles[0] * global.Math.PI / 180.0) * global.Math.sin(angles[1] * global.Math.PI / 180.0),
+								-global.Math.sin(angles[0] * global.Math.PI / 180.0)
+							];
+							let endview = [
+								puzo[0] + viewvec[0] * 200.0,
+								puzo[1] + viewvec[1] * 200.0,
+								puzo[2] + viewvec[2] * 200.0
+							];
+							let enddot = w2s(endview);
+							if (enddot != null && aenddot != 0){
+								drawThinLine(puzodot[0], puzodot[1], enddot[0], enddot[1], '#700f81');
+							}
 						}
 						if (setcfg.skeletondebug && playerbonedots[i] != 0) {
 							for (let jk = 0; jk < playerbonedots[i].length; jk+=1){
@@ -36095,7 +36111,7 @@
 							}
 						}
 						if (setcfg.drawaimbot) {
-							if (nearpid != -1 && nearheadcrd != 0) drawThinLine(centerw, centerh, nearheadcrd[0], nearheadcrd[1]);
+							if (nearpid != -1 && nearheadcrd != 0) drawThinLine(centerw, centerh, nearheadcrd[0], nearheadcrd[1], '#f00');
 						}
 						if (setcfg.aimlock && pushedfuncs.aimlock) {
 							if (nearpid != -1 && nearheadcrd != 0){
