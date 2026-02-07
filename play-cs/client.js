@@ -36058,9 +36058,9 @@
 						let d1text = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
 						d1text += 'Hi, ' + playerextralist[uid].name + '!<br>';
 						d1text += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-						d1text += 'local model origin: ' + Math.round(localcrd[0]).toString() + ' ' + Math.round(localcrd[1]).toString() + ' ' + Math.round(localcrd[2]).toString() + '<br>';
-						d1text += 'local model angles: ' + Math.round(localangles[0]).toString() + ' ' + Math.round(localangles[1]).toString() + ' ' + Math.round(localangles[2]).toString() + '<br>';
-						d1text += 'local viewangles: ' + Math.round(localviewangles[0]).toString() + ' ' + Math.round(localviewangles[1]).toString() + ' ' + Math.round(localviewangles[2]).toString() + '<br>';
+						d1text += 'local model origin: ' + localcrd[0].toFixed(4) + ' ' + localcrd[1].toFixed(4) + ' ' + Mlocalcrd[2].toFixed(4) + '<br>';
+						d1text += 'local model angles: ' + localangles[0].toFixed(4) + ' ' + localangles[1].toFixed(4) + ' ' + localangles[2].toFixed(4) + '<br>';
+						d1text += 'local viewangles: ' + localviewangles[0].toFixed(4) + ' ' + localviewangles[1].toFixed(4) + ' ' + localviewangles[2].toFixed(4) + '<br>';
 						
 						let localplayerentity = Kv(c[n + 60568 + 212 >> 2] | 0, uid | 0) | 0;
 						let weaponmodelid = c[localplayerentity + 688 + 180 >> 2];
