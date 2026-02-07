@@ -36058,7 +36058,7 @@
 						let d1text = 'play-cs.pwned ( ͡° ͜ʖ ͡°)<br>';
 						d1text += 'Hi, ' + playerextralist[uid].name + '!<br>';
 						d1text += 'local entity id: ' + getlocalplayerid().toString() + '<br>';
-						d1text += 'local model origin: ' + localcrd[0].toFixed(4) + ' ' + localcrd[1].toFixed(4) + ' ' + Mlocalcrd[2].toFixed(4) + '<br>';
+						d1text += 'local model origin: ' + localcrd[0].toFixed(4) + ' ' + localcrd[1].toFixed(4) + ' ' + localcrd[2].toFixed(4) + '<br>';
 						d1text += 'local model angles: ' + localangles[0].toFixed(4) + ' ' + localangles[1].toFixed(4) + ' ' + localangles[2].toFixed(4) + '<br>';
 						d1text += 'local viewangles: ' + localviewangles[0].toFixed(4) + ' ' + localviewangles[1].toFixed(4) + ' ' + localviewangles[2].toFixed(4) + '<br>';
 						
